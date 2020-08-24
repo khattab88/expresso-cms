@@ -70,9 +70,11 @@ app.use((req, res, next) => {
 }); 
 
 
+// ROUTES
+
 /* ROOT ROUTE */
 app.get("/", (req, res) => {
-    res.send("Expresso CMS");
+    res.status(200).render("base");
 });
 
 /* FALLBACK ROUTE */
