@@ -74,7 +74,11 @@ app.use((req, res, next) => {
 
 /* ROOT ROUTE */
 app.get("/", (req, res) => {
-    res.status(200).render("base");
+    res.status(200).render("base", {
+        name: "Expresso",
+        title: "expresso CMS",
+        desc: "CMS system for Expresso project."
+    });
 });
 
 /* FALLBACK ROUTE */
