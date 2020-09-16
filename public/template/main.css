@@ -20645,7 +20645,8 @@
       left: 5% !important;
       top: 50% !important;
       width: 90% !important;
-      transform: translateY(-50%) !important;
+      /* transform: translateY(-50%) !important; */
+      transform: translateY(-160%) !important;
       min-width: 10px !important;
     }
     .popover .btn-icon-vertical .btn-icon-wrapper,
