@@ -8,7 +8,8 @@
     "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production node server.js",
     "debug": "ndb server.js",
-    "dev": "lite-server -c bs-config.json"
+    "dev": "lite-server -c bs-config.json",
+    "watch:sass": "node-sass public/css/style.scss public/css/style.css -watch"
   },
   "author": "",
   "license": "ISC",
@@ -43,6 +44,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.3",
     "ndb": "^1.1.5",
+    "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5"
   }
