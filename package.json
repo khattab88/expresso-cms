@@ -8,7 +8,6 @@
     "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production node server.js",
     "debug": "ndb server.js",
-    "dev": "lite-server -c bs-config.json",
     "watch:sass": "node-sass public/css/style.scss public/css/style.css -watch"
   },
   "author": "",

@@ -10,8 +10,9 @@ html(lang='en')
     meta(name='description' content='Expresso CMS')
     meta(name='msapplication-tap-highlight' content='no')
     link(href='./template/main.css' rel='stylesheet')
-    link(rel='stylesheet' href='./template/bootstrap-overrides.css')
-    link(rel='stylesheet' href='./template/template-overrides.css')
+    link(rel='stylesheet' href='./css/bootstrap-overrides.css')
+    link(rel='stylesheet' href='./css/template-overrides.css')
+
   body
     .app-container.app-theme-white.body-tabs-shadow.fixed-sidebar.fixed-header
       .app-header.header-shadow
@@ -47,17 +48,17 @@ html(lang='en')
                 .widget-content-wrapper
                   .widget-content-left.mr-3.header-user-info
                     .widget-heading.
-                      
-                      Mahmoud Khattab
-                      
+
+                      CMS Admin
+
                     .widget-subheading.
-                      
+
                       Admin
-                      
+
                   .widget-content-left
                     .btn-group
                       a.p-0.btn(data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                        img.rounded-circle(width='42' src='./template/assets/images/anonymous.jpg' alt)
+                        img.rounded-circle(width='42' src='./img/anonymous.jpg' alt)
                         i.fa.fa-angle-down.ml-2.opacity-8
                       .dropdown-menu.dropdown-menu-right(tabindex='-1' role='menu' aria-hidden='true')
                         button.dropdown-item(type='button' tabindex='0') User Account
@@ -90,7 +91,7 @@ html(lang='en')
                 li
                   a.mm-active(href='index.html')
                     i.metismenu-icon.pe-7s-graph2
-                    p Main Dashboard
+                    p Dashboard
                 li.app-sidebar__heading Data
                 li
                   a(href='#')
@@ -140,12 +141,12 @@ html(lang='en')
                         p Admins
         .app-main__outer
           .app-main__inner
-            //  START MAIN 
+            //  START MAIN
             .container-fluid
               .row
                 .col
                   h1 HOME
-            //  END MAIN 
+            //  END MAIN
           .app-wrapper-footer
             .app-footer
               .app-footer__inner
@@ -153,8 +154,8 @@ html(lang='en')
                   ul.nav
                     li.nav-item
                       a.nav-link(href='javascript:void(0);').
-                        
-                        Copyright @ Expresso 2020.
-                        
-        script(src='http://maps.google.com/maps/api/js?sensor=true')
+
+                        Copyright &copy; Expresso 2020.
+
+        //- script(src='http://maps.google.com/maps/api/js?sensor=true')
         script(type='text/javascript' src='./template/assets/scripts/main.js')
