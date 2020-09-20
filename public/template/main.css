@@ -9066,7 +9066,7 @@
   .app-header__logo .logo-src {
     height: 30px;
     width: 130px;
-    /* background: url(assets/images/logo-inverse.png); */
+    background: url(assets/images/logo-inverse.png);
   }
   .app-header__menu,
   .app-header__mobile-menu {
@@ -9866,7 +9866,6 @@
     flex-direction: column;
     display: flex;
     z-index: 12;
-    height: 91vh;
   }
   .app-main .app-main__inner {
     padding: 30px 30px 0;
@@ -20645,8 +20644,7 @@
       left: 5% !important;
       top: 50% !important;
       width: 90% !important;
-      /* transform: translateY(-50%) !important; */
-      transform: translateY(-160%) !important;
+      transform: translateY(-50%) !important;
       min-width: 10px !important;
     }
     .popover .btn-icon-vertical .btn-icon-wrapper,

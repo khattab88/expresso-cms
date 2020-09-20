@@ -1,0 +1,12 @@
+.popover,
+.dropdown-menu {
+    transform: translateY(-160%) !important;
+}
+
+.app-header__logo .logo-src {
+    background: none !important;
+}
+
+.app-main .app-main__outer {
+    height: 91vh;
+}
