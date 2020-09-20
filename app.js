@@ -74,17 +74,20 @@ app.use((req, res, next) => {
 
 /* ROOT ROUTE */
 app.get("/", (req, res) => {
-    res.status(200).render("base", {
-        name: "Expresso",
-        title: "expresso cms",
-        desc: "CMS system for Expresso project."
+    res.status(200).render("dashboard", {
+        title: "Dashboard"
+    });
+});
+
+app.get("/tags", (req, res) => {
+    res.status(200).render("tags", {
+        title: "Tags"
     });
 });
 
 /* FALLBACK ROUTE */
 app.all("*", (req, res, next) => {
     const err = new AppError(`Can't find ${req.originalUrl} on this server!`, 404);
-    
     next(err);
 });
 
