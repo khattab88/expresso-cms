@@ -11,6 +11,7 @@ const hpp = require("hpp");
 
 const AppError = require("./utils/app-error");
 const globalErorrHandler = require("./controllers/error-controller");
+const viewRouter = require("./routes/view-routes");
 
 
 const app = express();
@@ -71,19 +72,8 @@ app.use((req, res, next) => {
 
 
 // ROUTES
+app.use("/", viewRouter);
 
-/* ROOT ROUTE */
-app.get("/", (req, res) => {
-    res.status(200).render("dashboard", {
-        title: "Dashboard"
-    });
-});
-
-app.get("/tags", (req, res) => {
-    res.status(200).render("tags", {
-        title: "Tags"
-    });
-});
 
 /* FALLBACK ROUTE */
 app.all("*", (req, res, next) => {
