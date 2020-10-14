@@ -18,13 +18,13 @@ process.on("uncaughtException", err => {
 });
 
 
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: `./.env.${process.env.APP_ENV}` });
 const config = require("./config");
 
 const app = require("./app");
 
 
-const connectionString = config[(config["env"])].connectionString;
+const connectionString = config.dbConnection;
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -42,8 +42,8 @@ mongoose.connect(connectionString, {
 });
 
 
-const server = app.listen(process.env.PORT || 5000, () => {
-    console.log("server started...", process.env.PORT);
+const server = app.listen(config.port, () => {
+    console.log("server started...", config.port);
 });
 
 
