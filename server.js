@@ -32,7 +32,7 @@ mongoose.connect(connectionString, {
 })
 .then(conn => { 
     // console.log(conn.connections); 
-    console.log("DB Connection Successful.")
+    console.log("DB Connection Successful.");
 })
 .catch(err => { 
     console.error(err);

@@ -1,0 +1,14 @@
+/* line 1, public/css/style.scss */
+tr:hover {
+  cursor: default; }
+
+/* line 5, public/css/style.scss */
+.row-manage {
+  display: flex;
+  justify-content: center; }
+  /* line 9, public/css/style.scss */
+  .row-manage__btn {
+    cursor: pointer; }
+  /* line 14, public/css/style.scss */
+  .row-manage__separator span {
+    margin: 0 .5rem; }

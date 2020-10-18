@@ -1,0 +1,18 @@
+tr:hover {
+    cursor: default;
+}
+
+.row-manage {
+    display: flex;
+    justify-content: center;
+
+    &__btn {
+        cursor: pointer;
+    }
+
+    &__separator {
+        span {
+            margin: 0 .5rem;
+        }
+    }
+}

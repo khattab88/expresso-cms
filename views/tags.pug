@@ -1,4 +1,31 @@
 extends base
 
 block content
-    h1 Tags
+    
+    .app-page-title.mb-0.py-2
+        .page-title-wrapper
+            .page-title-heading
+                h1 Tags
+
+    .row
+        .col-lg-8
+
+            .main-card.mb-3.card.mt-3
+                .card-body
+                    table.mb-0.mt-0.table.table-striped.table-hover
+                        thead
+                            tr
+                                th #
+                                th Name
+                                th 
+                        tbody
+                            - var x = 0
+                            each tag in tags
+                                tr
+                                    th(scope='row') #{++x}
+                                    td= tag.name
+                                    td.text-center
+                                        .row-manage
+                                            .row-manage__btn: a(href='#' data-tag-id=`${tag.id}`) Edit
+                                            .row-manage__separator: span |
+                                            .row-manage__btn: a(href='#' data-tag-id=`${tag.id}`) Delete

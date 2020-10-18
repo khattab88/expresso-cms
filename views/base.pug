@@ -13,6 +13,7 @@ html(lang='en')
     link(href='./template/main.css' rel='stylesheet')
     link(rel='stylesheet' href='./css/bootstrap-overrides.css')
     link(rel='stylesheet' href='./css/template-overrides.css')
+    link(rel='stylesheet' href='./css/style.css')
 
   body
     .app-container.app-theme-white.body-tabs-shadow.fixed-sidebar.fixed-header
@@ -29,8 +30,7 @@ html(lang='en')
           .app-main__inner
 
             // CONTENT
-            .container-fluid
-              block content
+            block content
 
           // FOOTER  
           include _footer
