@@ -20,10 +20,12 @@ console.log(process.env.NODE_ENV);
 console.log(process.env.APP_ENV);
 console.log(process.env.ECHO);
 
-app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "views"));
 
 /* GLOBAL MIDDLEWARES */
+
+// setting view engine
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
