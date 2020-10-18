@@ -9,8 +9,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xssClean = require("xss-clean");
 const hpp = require("hpp");
 
-const AppError = require("./utils/app-error");
-const globalErorrHandler = require("./controllers/error-controller");
+const { errorHandling } = require("expresso-utils");
 const viewRouter = require("./routes/view-routes");
 
 
@@ -81,12 +80,12 @@ app.use("/", viewRouter);
 
 /* FALLBACK ROUTE */
 app.all("*", (req, res, next) => {
-    const err = new AppError(`Can't find ${req.originalUrl} on this server!`, 404);
+    const err = new errorHandling.AppError(`Can't find ${req.originalUrl} on this server!`, 404);
     next(err);
 });
 
 /* GLOBAL ERROR HANDLING MIDDLEWARE */
-app.use(globalErorrHandler);
+app.use(errorHandling.globalErrorHandler);
 
 
 module.exports = app;
