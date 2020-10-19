@@ -67,6 +67,16 @@ app.use((req, res, next) => {
     next();
 });
 
+
+// Allow loading external images 
+// https://stackoverflow.com/questions/21048252/nodejs-where-exactly-can-i-put-the-content-security-policy
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "img-src 'self' https://cdnjs.cloudflare.com");
+
+    next();
+});
+
+
 // Test Middleware
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();

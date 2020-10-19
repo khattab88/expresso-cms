@@ -1,0 +1,39 @@
+extends base
+
+block content
+
+    .app-page-title.mb-0.py-2
+        .page-title-wrapper
+            .page-title-heading
+                h1= title
+
+    .row
+        .col-lg-10
+
+            .main-card.mb-3.card.mt-3
+                .card-body
+                    table.mb-0.mt-0.table.table-striped.table-hover
+                        thead
+                            tr
+                                th #
+                                th.text-center Name
+                                th.d-none.d-md-table-cell.text-center Alias
+                                th.d-none.d-md-table-cell.text-center Slug
+                                th.text-center Currency
+                                th.text-center Image
+                                th 
+                        tbody
+                            - var x = 0
+                            each country in countries
+                                tr
+                                    th.text-center(scope='row') #{++x}
+                                    td.text-center= country.name
+                                    td.d-none.d-md-table-cell.text-center= country.alias
+                                    td.d-none.d-md-table-cell.text-center= country.slug
+                                    td.text-center= country.currency
+                                    td.text-center: img.w-25(src=`${country.image}`, alt=`${country.name}`)
+                                    td.text-center
+                                        .row-manage
+                                            .row-manage__btn: a(href='#' data-country-id=`${country.id}`) Edit
+                                            .row-manage__separator: span |
+                                            .row-manage__btn: a(href='#' data-country-id=`${country.id}`) Delete
