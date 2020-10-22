@@ -8,5 +8,6 @@ router.get("/", viewController.getDashboardView);
 router.get("/tags", viewController.getTagListView);
 router.get("/countries", viewController.getCountryListView);
 router.get("/cities", viewController.getCityListView);
+router.get("/areas", viewController.getAreaListView);
 
 module.exports = router;
