@@ -1,0 +1,40 @@
+extends base
+
+block content
+
+    .row
+        .col
+        
+            .app-page-title.mb-0.py-2
+                .page-title-wrapper
+                    .page-title-heading
+                        h1= title
+
+    .row
+        .col-lg-10
+
+            .main-card.mb-3.card.mt-3
+                .card-body
+                    table.mb-0.mt-0.table.table-striped.table-hover
+                        thead
+                            tr
+                                th #
+                                th.text-center Name
+                                th.text-center Slug
+                                th.text-center Country
+                                th.text-center Image
+                                th 
+                        tbody
+                            - var x = 0
+                            each city in cities
+                                tr
+                                    th.text-center(scope='row') #{++x}
+                                    td.text-center= city.name
+                                    td.d-none.d-md-table-cell.text-center= city.slug
+                                    td.text-center= city.country.name
+                                    td.text-center: img.w-25(src=`${city.country.image}`, alt=`${city.country.name}`)
+                                    td.text-center
+                                        .row-manage
+                                            .row-manage__btn: a(href='#' data-city-id=`${city.id}`) Edit
+                                            .row-manage__separator: span |
+                                            .row-manage__btn: a(href='#' data-city-id=`${city.id}`) Delete
