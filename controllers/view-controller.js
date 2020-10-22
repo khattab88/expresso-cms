@@ -68,3 +68,13 @@ exports.getBranchList = catchAsync(async (req, res, next) => {
         branches
     });
 });
+
+exports.getAdminList = catchAsync(async (req, res, next) => {
+
+    const admins = [];
+
+    res.status(200).render("admin-list", {
+        title: "Admins",
+        admins
+    });
+});
