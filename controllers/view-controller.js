@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 const { catchAsync } = require('expresso-utils');
-const { Tag, Country, City, Area, Restaurant } = require('expresso-models');
-const { tagRepository, countryRepository, cityRepository, areaRepository, restaurantRepository } = require("expresso-repositories");
+const { Tag, Country, City, Area, Restaurant, Branch } = require('expresso-models');
+const { tagRepository, countryRepository, cityRepository, areaRepository, restaurantRepository, branchRepository } = require("expresso-repositories");
 
 exports.getDashboardView = catchAsync(async (req, res, next) => {
     res.status(200).render("dashboard", {
@@ -56,5 +56,15 @@ exports.getRestaurantList = catchAsync(async (req, res, next) => {
     res.status(200).render("restaurant-list", {
         title: "Restaurants",
         restaurants
+    });
+});
+
+exports.getBranchList = catchAsync(async (req, res, next) => {
+
+    const branches = await branchRepository.getAll();
+
+    res.status(200).render("branch-list", {
+        title: "Branches",
+        branches
     });
 });

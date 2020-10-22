@@ -13,5 +13,6 @@ router.get("/areas", viewController.getAreaListView);
 
 router.get("/tags", viewController.getTagListView);
 router.get("/restaurants", viewController.getRestaurantList);
+router.get("/branches", viewController.getBranchList);
 
 module.exports = router;

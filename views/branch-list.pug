@@ -1,0 +1,40 @@
+extends base
+
+block content
+
+    .row
+        .col
+        
+            .app-page-title.mb-0.py-2
+                .page-title-wrapper
+                    .page-title-heading
+                        h1= title
+
+    .row
+        .col-lg-10
+
+            .main-card.mb-3.card.mt-3
+                .card-body
+                    table.mb-0.mt-0.table.table-striped.table-hover
+                        thead
+                            tr
+                                th #
+                                th.text-center Name
+                                //th.text-center Restaurant
+                                th.text-center.d-none.d-sm-table-cell Slug
+                                th.text-center City
+                                th 
+                        tbody
+                            - var x = 0
+                            each branch in branches
+                                tr
+                                    th.text-center(scope='row') #{++x}
+                                    td.text-center= branch.name
+                                    //td.text-center= branch.restaurant.name
+                                    td.text-center.d-none.d-sm-table-cell= branch.slug
+                                    td.text-center= branch.area.city.name
+                                    td.text-center
+                                        .row-manage
+                                            .row-manage__btn: a(href='#' data-branch-id=`${branch.id}`) Edit
+                                            .row-manage__separator: span |
+                                            .row-manage__btn: a(href='#' data-branch-id=`${branch.id}`) Delete
