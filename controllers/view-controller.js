@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 const { catchAsync } = require('expresso-utils');
-const { Tag, Country, City, Area } = require('expresso-models');
-const { tagRepository, countryRepository, cityRepository, areaRepository } = require("expresso-repositories");
+const { Tag, Country, City, Area, Restaurant } = require('expresso-models');
+const { tagRepository, countryRepository, cityRepository, areaRepository, restaurantRepository } = require("expresso-repositories");
 
 exports.getDashboardView = catchAsync(async (req, res, next) => {
     res.status(200).render("dashboard", {
@@ -46,5 +46,15 @@ exports.getAreaListView = catchAsync(async (req, res, next) => {
     res.status(200).render("area-list", {
         title: "Areas",
         areas
+    });
+});
+
+exports.getRestaurantList = catchAsync(async (req, res, next) => {
+
+    const restaurants = await restaurantRepository.getAll();
+
+    res.status(200).render("restaurant-list", {
+        title: "Restaurants",
+        restaurants
     });
 });

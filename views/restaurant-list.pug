@@ -1,0 +1,42 @@
+extends base
+
+block content
+
+    .row
+        .col
+        
+            .app-page-title.mb-0.py-2
+                .page-title-wrapper
+                    .page-title-heading
+                        h1= title
+
+    .row
+        .col-lg-10
+
+            .main-card.mb-3.card.mt-3
+                .card-body
+                    table.mb-0.mt-0.table.table-striped.table-hover
+                        thead
+                            tr
+                                th #
+                                th.text-center Name
+                                th.text-center.d-none.d-sm-table-cell Slug
+                                th.text-center Slogan
+                                th.text-center.d-none.d-sm-table-cell Delivery Time
+                                th.text-center.d-none.d-sm-table-cell Delivery Fee
+                                th 
+                        tbody
+                            - var x = 0
+                            each restaurant in restaurants
+                                tr
+                                    th.text-center(scope='row') #{++x}
+                                    td.text-center= restaurant.name
+                                    td.text-center.d-none.d-sm-table-cell= restaurant.slug
+                                    td.text-center= restaurant.slogan
+                                    td.text-center.d-none.d-sm-table-cell= restaurant.deliveryTime
+                                    td.text-center.d-none.d-sm-table-cell= restaurant.deliveryFee
+                                    td.text-center
+                                        .row-manage
+                                            .row-manage__btn: a(href='#' data-restaurant-id=`${restaurant.id}`) Edit
+                                            .row-manage__separator: span |
+                                            .row-manage__btn: a(href='#' data-restaurant-id=`${restaurant.id}`) Delete
