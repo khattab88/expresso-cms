@@ -33,6 +33,6 @@ block content
                                     td.text-center= city.country.name
                                     td.text-center
                                         .row-manage
-                                            .row-manage__btn: a(href='#' data-city-id=`${city.id}`) Edit
+                                            .row-manage__btn: a(href=`/cities/${city.id}` data-city-id=`${city.id}`) Edit
                                             .row-manage__separator: span |
                                             .row-manage__btn: a(href='#' data-city-id=`${city.id}`) Delete

@@ -8,7 +8,10 @@ const router = express.Router();
 router.get("/", viewController.getDashboardView);
 
 router.get("/countries", viewController.getCountryListView);
+
 router.get("/cities", viewController.getCityListView);
+router.get("/cities/:id", viewController.getCityDetailView);
+
 router.get("/areas", viewController.getAreaListView);
 
 router.get("/tags", viewController.getTagListView);
