@@ -37,6 +37,6 @@ block content
                                     td.text-center: img.w-25(src=`${country.image}`, alt=`${country.name}`)
                                     td.text-center
                                         .row-manage
-                                            .row-manage__btn: a(href='#' data-country-id=`${country.id}`) Edit
+                                            .row-manage__btn: a(href=`/countries/${country.id}` data-country-id=`${country.id}`) Edit
                                             .row-manage__separator: span |
                                             .row-manage__btn: a(href='#' data-country-id=`${country.id}`) Delete

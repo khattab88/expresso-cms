@@ -29,6 +29,16 @@ exports.getCountryListView = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.getCountryDetailView = catchAsync(async (req, res, next) => {
+
+    const country = await countryRepository.getById(req.params.id);
+
+    res.status(200).render("country-detail", {
+        title: country.name,
+        country
+    });
+});
+
 exports.getCityListView = catchAsync(async (req, res, next) => {
 
     const cities = await cityRepository.getAll();

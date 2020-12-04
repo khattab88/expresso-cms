@@ -8,6 +8,7 @@ const router = express.Router();
 router.get("/", viewController.getDashboardView);
 
 router.get("/countries", viewController.getCountryListView);
+router.get("/countries/:id", viewController.getCountryDetailView);
 
 router.get("/cities", viewController.getCityListView);
 router.get("/cities/:id", viewController.getCityDetailView);
