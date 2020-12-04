@@ -69,6 +69,16 @@ exports.getAreaListView = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.getAreaDetailView = catchAsync(async (req, res, next) => {
+
+    const area = await areaRepository.getById(req.params.id);
+
+    res.status(200).render("area-detail", {
+        title: area.name,
+        area
+    });
+});
+
 exports.getRestaurantList = catchAsync(async (req, res, next) => {
 
     const restaurants = await restaurantRepository.getAll();

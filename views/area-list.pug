@@ -35,6 +35,6 @@ block content
                                     td.text-center.d-none.d-sm-table-cell= area.city.country.name
                                     td.text-center
                                         .row-manage
-                                            .row-manage__btn: a(href='#' data-area-id=`${area.id}`) Edit
+                                            .row-manage__btn: a(href=`/areas/${area.id}` data-area-id=`${area.id}`) Edit
                                             .row-manage__separator: span |
                                             .row-manage__btn: a(href='#' data-area-id=`${area.id}`) Delete
