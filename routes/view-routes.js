@@ -17,6 +17,8 @@ router.get("/areas", viewController.getAreaListView);
 router.get("/areas/:id", viewController.getAreaDetailView);
 
 router.get("/tags", viewController.getTagListView);
+router.get("/tags/:id", viewController.getTagDetailView);
+
 router.get("/restaurants", viewController.getRestaurantList);
 router.get("/branches", viewController.getBranchList);
 

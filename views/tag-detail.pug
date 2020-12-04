@@ -1,0 +1,26 @@
+extends base
+
+block content
+
+    .row
+        .col
+        
+            .app-page-title.mb-0.py-2
+                .page-title-wrapper
+                    .page-title-heading
+                        h1= `Tag: ${title}`
+
+    .row
+        .col-lg-6
+
+          .main-card.mb-3.mt-3.card
+            .card-body
+
+              form(method='GET')
+                .position-relative.form-group
+                  label(for='name') Name
+                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${tag.name}` disabled)
+
+                .d-flex.justify-content-end.pt-3
+                    button.mt-1.mr-2.btn.btn-success Submit
+                    button.mt-1.btn.btn-danger Cancel

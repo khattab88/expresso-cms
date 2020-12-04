@@ -19,6 +19,16 @@ exports.getTagListView = catchAsync(async (req, res) => {
     });
 });
 
+exports.getTagDetailView = catchAsync(async (req, res, next) => {
+
+    const tag = await tagRepository.getById(req.params.id);
+
+    res.status(200).render("tag-detail", {
+        title: tag.name,
+        tag
+    });
+});
+
 exports.getCountryListView = catchAsync(async (req, res, next) => {
 
     const countries = await countryRepository.getAll();
