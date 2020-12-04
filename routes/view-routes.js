@@ -20,6 +20,8 @@ router.get("/tags", viewController.getTagListView);
 router.get("/tags/:id", viewController.getTagDetailView);
 
 router.get("/restaurants", viewController.getRestaurantList);
+router.get("/restaurants/:id", viewController.getRestaurantDetailView);
+
 router.get("/branches", viewController.getBranchList);
 
 router.get("/admins", viewController.getAdminList);

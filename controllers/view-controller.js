@@ -99,6 +99,16 @@ exports.getRestaurantList = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
+
+    const restaurant = await restaurantRepository.getById(req.params.id);
+
+    res.status(200).render("restaurant-detail", {
+        title: restaurant.name,
+        restaurant
+    });
+});
+
 exports.getBranchList = catchAsync(async (req, res, next) => {
 
     const branches = await branchRepository.getAll();
