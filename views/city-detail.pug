@@ -9,3 +9,26 @@ block content
                 .page-title-wrapper
                     .page-title-heading
                         h1= `City: ${title}`
+
+    .row
+        .col-lg-6
+
+          .main-card.mb-3.mt-3.card
+            .card-body
+
+              form(method='GET')
+                .position-relative.form-group
+                  label(for='name') Name
+                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${city.name}` disabled)
+                .position-relative.form-group
+                  label(for='country') Country
+                  select.mb-2.form-control(disabled)
+                    option Egypt
+                    option(selected) UAE
+                    option Saudia Arabia
+                    option Qatar
+                    option Kuwait
+                
+                .d-flex.justify-content-end.pt-3
+                    button.mt-1.mr-2.btn.btn-success Submit
+                    button.mt-1.btn.btn-danger Cancel
