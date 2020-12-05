@@ -5,10 +5,12 @@ block content
     .row
         .col
         
-            .app-page-title.mb-0.py-2
+            .app-page-title.mb-0.py-2.d-lg-flex.align-items-center
                 .page-title-wrapper
                     .page-title-heading
                         h1= `Restaurant: ${title}`
+                
+                a.btn.btn-info.mx-5(href=`/restaurants/${restaurant.id}/menu`) Show Menu
 
     .row
         .col-lg-6
@@ -37,6 +39,8 @@ block content
                     label.form-check-label(for='specialOffers')
                         input#specialOffers.form-check-input(name='specialOffers' type='checkbox' checked)
                         | Special Offers
+
+
 
                 .d-flex.justify-content-end.pt-3
                     button.mt-1.mr-2.btn.btn-success Submit

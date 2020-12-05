@@ -3,32 +3,15 @@ const { catchAsync } = require('expresso-utils');
 const { Tag, Country, City, Area, Restaurant, Branch } = require('expresso-models');
 const { tagRepository, countryRepository, cityRepository, areaRepository, restaurantRepository, branchRepository } = require("expresso-repositories");
 
+/* Dashboard */
 exports.getDashboardView = catchAsync(async (req, res, next) => {
     res.status(200).render("dashboard", {
         title: "Dashboard"
     });
 });
 
-exports.getTagListView = catchAsync(async (req, res) => {
 
-    const tags = await tagRepository.getAll();
-
-    res.status(200).render("tag-list", {
-        title: "Tags",
-        tags
-    });
-});
-
-exports.getTagDetailView = catchAsync(async (req, res, next) => {
-
-    const tag = await tagRepository.getById(req.params.id);
-
-    res.status(200).render("tag-detail", {
-        title: tag.name,
-        tag
-    });
-});
-
+/* Countries */
 exports.getCountryListView = catchAsync(async (req, res, next) => {
 
     const countries = await countryRepository.getAll();
@@ -49,6 +32,8 @@ exports.getCountryDetailView = catchAsync(async (req, res, next) => {
     });
 });
 
+
+/* Cities */
 exports.getCityListView = catchAsync(async (req, res, next) => {
 
     const cities = await cityRepository.getAll();
@@ -69,6 +54,8 @@ exports.getCityDetailView = catchAsync(async (req, res, next) => {
     });
 });
 
+
+/* Areas */
 exports.getAreaListView = catchAsync(async (req, res, next) => {
 
     const areas = await areaRepository.getAll();
@@ -78,7 +65,6 @@ exports.getAreaListView = catchAsync(async (req, res, next) => {
         areas
     });
 });
-
 exports.getAreaDetailView = catchAsync(async (req, res, next) => {
 
     const area = await areaRepository.getById(req.params.id);
@@ -89,6 +75,30 @@ exports.getAreaDetailView = catchAsync(async (req, res, next) => {
     });
 });
 
+
+/* Tags */
+exports.getTagListView = catchAsync(async (req, res) => {
+
+    const tags = await tagRepository.getAll();
+
+    res.status(200).render("tag-list", {
+        title: "Tags",
+        tags
+    });
+});
+
+exports.getTagDetailView = catchAsync(async (req, res, next) => {
+
+    const tag = await tagRepository.getById(req.params.id);
+
+    res.status(200).render("tag-detail", {
+        title: tag.name,
+        tag
+    });
+});
+
+
+/* Restaurants */
 exports.getRestaurantList = catchAsync(async (req, res, next) => {
 
     const restaurants = await restaurantRepository.getAll();
@@ -109,6 +119,17 @@ exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
+
+    const restaurant = await restaurantRepository.getById(req.params.id);
+
+    res.status(200).render("restaurant-menu", {
+        title: `${restaurant.name} Menu`,
+        restaurant
+    });
+});
+
+/* Branches */
 exports.getBranchList = catchAsync(async (req, res, next) => {
 
     const branches = await branchRepository.getAll();
@@ -129,6 +150,8 @@ exports.getBranchDetailView = catchAsync(async (req, res, next) => {
     });
 });
 
+
+/* Admins */
 exports.getAdminList = catchAsync(async (req, res, next) => {
 
     const admins = [];
