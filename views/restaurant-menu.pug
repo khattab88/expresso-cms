@@ -1,1 +1,37 @@
-h1= title
+extends base
+
+mixin menuSectionBox(section)
+    .card
+        .card-header(id=`heading-${section.name}`)
+          button.text-left.m-0.p-0.btn.btn-link.btn-block(type='button' data-toggle='collapse' data-target=`#collapse-${section.name}` aria-expanded='true' aria-controls=`collapse-${section.name}`)
+            h5.m-0.p-0= section.name
+        .collapse(id=`collapse-${section.name}` data-parent='#accordion' aria-labelledby=`heading-${section.name}`)
+          .card-body
+            .row
+                each item in section.menuItems
+                    .col-md-4
+                        .main-card.mb-3.card
+                            img.card-img-top(width='100%' src=`/img/items/${item.image}` alt=`${item.name}`)
+                            .card-body
+                              h5.card-title= item.name
+                              h6.card-subtitle Price: #{item.price}
+                              p= item.description
+                              .d-flex
+                                button.btn.btn-primary Edit
+                                button.btn.btn-danger.mx-1 Delete
+ 
+
+block content
+
+    .row
+        .col
+            .app-page-title.mb-0.py-2
+                .page-title-wrapper
+                    .page-title-heading
+                        h1= `${title}`
+
+    each menuSection in restaurant.menu.menuSections
+        .row
+            .col
+                #accordion.accordion-wrapper.mb-3
+                  +menuSectionBox(menuSection)
