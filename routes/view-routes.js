@@ -23,6 +23,7 @@ router.get("/restaurants", viewController.getRestaurantList);
 router.get("/restaurants/:id", viewController.getRestaurantDetailView);
 
 router.get("/branches", viewController.getBranchList);
+router.get("/branches/:id", viewController.getBranchDetailView);
 
 router.get("/admins", viewController.getAdminList);
 

@@ -119,6 +119,16 @@ exports.getBranchList = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.getBranchDetailView = catchAsync(async (req, res, next) => {
+
+    const branch = await branchRepository.getById(req.params.id);
+
+    res.status(200).render("branch-detail", {
+        title: branch.name,
+        branch
+    });
+});
+
 exports.getAdminList = catchAsync(async (req, res, next) => {
 
     const admins = [];

@@ -35,6 +35,6 @@ block content
                                     td.text-center= branch.area.city.name
                                     td.text-center
                                         .row-manage
-                                            .row-manage__btn: a(href='#' data-branch-id=`${branch.id}`) Edit
+                                            .row-manage__btn: a(href=`/branches/${branch.id}` data-branch-id=`${branch.id}`) Edit
                                             .row-manage__separator: span |
                                             .row-manage__btn: a(href='#' data-branch-id=`${branch.id}`) Delete
