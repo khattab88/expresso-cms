@@ -1,10 +1,12 @@
 extends base
 
 mixin menuSectionBox(section)
-    .card
-        .card-header(id=`heading-${section.name}`)
-          button.text-left.m-0.p-0.btn.btn-link.btn-block(type='button' data-toggle='collapse' data-target=`#collapse-${section.name}` aria-expanded='true' aria-controls=`collapse-${section.name}`)
-            h5.m-0.p-0= section.name
+    .card.mt-2
+        .card-header.d-flex.justify-content-between(id=`heading-${section.name}`)
+            button.text-left.m-0.p-0.btn.btn-link.btn-block(type='button' data-toggle='collapse' data-target=`#collapse-${section.name}` aria-expanded='true' aria-controls=`collapse-${section.name}`)
+                h5.m-0.p-0= section.name
+            button.btn.btn-success.text-nowrap New Item
+        
         .collapse(id=`collapse-${section.name}` data-parent='#accordion' aria-labelledby=`heading-${section.name}`)
           .card-body
             .row
@@ -18,6 +20,7 @@ mixin menuSectionBox(section)
                               p= item.description
                               .d-flex
                                 button.btn.btn-primary Edit
+                                //-(data-toggle='modal' data-target='.bd-example-modal-lg') Edit
                                 button.btn.btn-danger.mx-1 Delete
  
 
@@ -26,12 +29,33 @@ block content
     .row
         .col
             .app-page-title.mb-0.py-2
-                .page-title-wrapper
+                .page-title-wrapper.d-lg-flex.justify-content-between
                     .page-title-heading
                         h1= `${title}`
+                    button.mb-2.ml-2.btn.btn-success.btn-lg New Menu Section
 
     each menuSection in restaurant.menu.menuSections
         .row
             .col
                 #accordion.accordion-wrapper.mb-3
                   +menuSectionBox(menuSection)
+
+
+
+
+    //- .modal.fade.bd-example-modal-lg(tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' style='display: none;' aria-hidden='true')
+    //-     .modal-dialog.modal-lg
+    //-       .modal-content
+    //-         .modal-header
+    //-           h5#exampleModalLongTitle.modal-title Modal title
+    //-           button.close(type='button' data-dismiss='modal' aria-label='Close')
+    //-             span(aria-hidden='true') &times;
+    //-         .modal-body
+    //-           p
+    //-             | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+    //-           p
+    //-             | Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+    //-         .modal-footer
+    //-           button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+    //-           button.btn.btn-primary(type='button') Save changes
+
