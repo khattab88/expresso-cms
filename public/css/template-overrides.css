@@ -5,3 +5,13 @@
 .app-main .app-main__outer {
     /* height: 91vh; */
 }
+
+.app-logo-inverse {
+    background: none;
+    width: 100%;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    color: #FFF;
+    margin-bottom: 30px;
+}

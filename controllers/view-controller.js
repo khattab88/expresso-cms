@@ -161,3 +161,11 @@ exports.getAdminList = catchAsync(async (req, res, next) => {
         admins
     });
 });
+
+
+/* Login */
+exports.login = catchAsync(async (req, res, next) => {
+    res.status(200).render("login", {
+        title: "Login",
+    });
+});

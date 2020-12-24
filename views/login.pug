@@ -1,0 +1,51 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(http-equiv='Content-Language' content='en')
+    meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
+    title Expresso CMS | Login
+    meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no')
+    meta(name='description' content='Expresso CMS, Login Page')
+    // Disable tap highlight on IE
+    meta(name='msapplication-tap-highlight' content='no')
+    link(rel='icon' type='image/png' href='/img/favicon.ico')
+    link(href='https://demo.dashboardpack.com/architectui-html-pro/main.d810cf0ae7f39f28f336.css' rel='stylesheet')
+    link(rel='stylesheet' href='/css/template-overrides.css')
+  body
+    .app-container.app-theme-white.body-tabs-shadow.closed-sidebar-mobile.closed-sidebar
+      .app-container.closed-sidebar-mobile.closed-sidebar
+        .h-100.bg-plum-plate.bg-animation
+          .d-flex.h-100.justify-content-center.align-items-center
+            .mx-auto.app-login-box.col-md-8
+              .app-logo-inverse 
+                h2 Expresso CMS
+              .modal-dialog.w-100.mx-auto
+                .modal-content
+                  .modal-body
+                    .h5.modal-title.text-center
+                      h4.mt-2
+                        div Welcome back,
+                        span Please sign in to your account .
+                    form
+                      .form-row
+                        .col-md-12
+                          .position-relative.form-group
+                            input#exampleEmail.form-control(name='email' placeholder='Email ...' type='email')
+                        .col-md-12
+                          .position-relative.form-group
+                            input#examplePassword.form-control(name='password' placeholder='Password ...' type='password')
+                      .position-relative.form-check
+                        input#exampleCheck.form-check-input(name='check' type='checkbox')
+                        label.form-check-label(for='exampleCheck') Keep me logged in
+                    .divider
+                    h6.mb-0
+                      | No account? 
+                      a.text-primary(href='javascript:void(0);') Sign up now
+                  .modal-footer.clearfix
+                    .float-left
+                      a.btn-lg.btn.btn-link(href='javascript:void(0);') Forgot Password
+                    .float-right
+                      button.btn.btn-primary.btn-lg Login to Dashboard
+              .text-center.text-white.opacity-8.mt-3 Copyright © Expresso 2020

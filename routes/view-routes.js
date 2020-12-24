@@ -28,4 +28,6 @@ router.get("/branches/:id", viewController.getBranchDetailView);
 
 router.get("/admins", viewController.getAdminList);
 
+router.get("/login", viewController.login);
+
 module.exports = router;
