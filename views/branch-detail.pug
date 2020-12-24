@@ -1,5 +1,10 @@
 extends base
 
+block append head
+  script(src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js')
+  link(href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet')
+  //- script(src='/js/mapbox.js')
+
 block content
 
     .row
@@ -26,9 +31,10 @@ block content
                     option Mc'Donalds
                     option KFC
                     option Pizza Hut
-                .position-relative.form-group
+                .position-relative.form-group(style='height: 310px;')
                   label(for='location') Location
-                  input#location.form-control(name='location' placeholder='Location' type='text' value=`${branch.location.coordinates}`)
+                  //- input#coords(type='hidden' value=`${branch.location.coordinates}`)
+                  #map(data-location=`${branch.location.coordinates}` data-branch=`${branch.name}`)
 
                 .d-flex.justify-content-end.pt-3
                     button.mt-1.mr-2.btn.btn-success Submit

@@ -30,7 +30,10 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(`${__dirname}/public`));
 
 // Setting security HTTP headers
-app.use(helmet());
+app.use(
+    helmet({
+        contentSecurityPolicy: false // VERY BAD: disabling content security policy
+}));
 
 app.use(bodyParser.json({ limit: "100kb" })); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -71,7 +74,10 @@ app.use((req, res, next) => {
 // Allow loading external images 
 // https://stackoverflow.com/questions/21048252/nodejs-where-exactly-can-i-put-the-content-security-policy
 app.use((req, res, next) => {
-    res.setHeader("Content-Security-Policy", "img-src 'self' https://cdnjs.cloudflare.com");
+    //res.setHeader("Content-Security-Policy", "img-src 'self' https://cdnjs.cloudflare.com");
+    //res.setHeader("Content-Security-Policy", "worker-src 'self' https://api.mapbox.com");
+    //res.setHeader("Content-Security-Policy", "img-src 'self' https://api.mapbox.com");
+    //res.set("Content-Security-Policy", "default-src 'self'");
 
     next();
 });
