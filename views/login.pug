@@ -28,17 +28,17 @@ html(lang='en')
                       h4.mt-2
                         div Welcome back,
                         span Please sign in to your account .
-                    form
+                    form#login-form.form
                       .form-row
                         .col-md-12
                           .position-relative.form-group
-                            input#exampleEmail.form-control(name='email' placeholder='Email ...' type='email')
+                            input#email.form-control(name='email' placeholder='Email ...' type='email')
                         .col-md-12
                           .position-relative.form-group
-                            input#examplePassword.form-control(name='password' placeholder='Password ...' type='password')
+                            input#password.form-control(name='password' placeholder='Password ...' type='password')
                       .position-relative.form-check
-                        input#exampleCheck.form-check-input(name='check' type='checkbox')
-                        label.form-check-label(for='exampleCheck') Keep me logged in
+                        input#rememberme.form-check-input(name='check' type='checkbox')
+                        label.form-check-label(for='rememberme') Keep me logged in
                     .divider
                     h6.mb-0
                       | No account? 
@@ -47,5 +47,8 @@ html(lang='en')
                     .float-left
                       a.btn-lg.btn.btn-link(href='javascript:void(0);') Forgot Password
                     .float-right
-                      button.btn.btn-primary.btn-lg Login to Dashboard
+                      button.btn.btn-primary.btn-lg(type='submit' form='login-form') Login to Dashboard
               .text-center.text-white.opacity-8.mt-3 Copyright © Expresso 2020
+
+    script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js')
+    script(type='text/javascript' src='/js/login.js')

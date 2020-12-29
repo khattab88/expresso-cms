@@ -8,9 +8,12 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xssClean = require("xss-clean");
 const hpp = require("hpp");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const { errorHandling } = require("expresso-utils");
 const viewRouter = require("./routes/view-routes");
+const authRouter = require("./routes/auth-routes");
 
 
 const app = express();
@@ -38,6 +41,8 @@ app.use(
 app.use(bodyParser.json({ limit: "100kb" })); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+app.use(cookieParser());
+
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
@@ -61,14 +66,17 @@ const limiter = rateLimit({
 app.use("/api/", limiter);
 
 // Enabling CORS
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    // console.log(req.headers);
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+//     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//     // console.log(req.headers);
 
-    next();
-});
+//     next();
+// });
+
+app.use(cors());
+app.options('*', cors());
 
 
 // Allow loading external images 
@@ -86,13 +94,14 @@ app.use((req, res, next) => {
 // Test Middleware
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
+    console.log("cookies:", req.cookies);
     next();
 }); 
 
 
 // ROUTES
 app.use("/", viewRouter);
-
+app.use("/api/v1/auth", authRouter);
 
 /* FALLBACK ROUTE */
 app.all("*", (req, res, next) => {

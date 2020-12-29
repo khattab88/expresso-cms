@@ -25,6 +25,8 @@ const app = require("./app");
 
 
 const connectionString = config.dbConnection;
+console.log(connectionString);
+
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useCreateIndex: true,

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 const express = require('express');
 const viewController = require('../controllers/view-controller');
+const authController = require('../controllers/auth-controller');
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.get("/restaurants/:id", viewController.getRestaurantDetailView);
 router.get("/restaurants/:id/menu", viewController.getRestaurantMenuView);
 
 router.get("/branches", viewController.getBranchList);
-router.get("/branches/:id", viewController.getBranchDetailView);
+router.get("/branches/:id", authController.protect, viewController.getBranchDetailView);
 
 router.get("/admins", viewController.getAdminList);
 
