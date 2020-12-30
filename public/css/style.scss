@@ -16,3 +16,22 @@ tr:hover {
         }
     }
 }
+
+
+@media (max-width: 992px) { 
+    .dropdown-menu {
+        top: 21% !important; 
+    }
+}
+
+@media (max-width: 767.98px) {
+    .dropdown-menu {
+        top: 52% !important; 
+    }
+}
+
+@media (max-width: 567px) {
+    .dropdown-menu {
+        top: 29% !important; 
+    }
+}
