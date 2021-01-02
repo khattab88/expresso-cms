@@ -27,3 +27,18 @@ tr:hover {
   /* line 34, public/css/style.scss */
   .dropdown-menu {
     top: 29% !important; } }
+
+/* line 39, public/css/style.scss */
+.alert {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  font-weight: 400;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25); }
