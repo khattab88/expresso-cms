@@ -10,7 +10,7 @@ router.use(authController.isLoggedIn);
 // ROUTES
 router.get("/login", viewController.login);
 
-router.get("/", viewController.getDashboardView);
+router.get("/", authController.protect, viewController.getDashboardView);
 
 router.get("/countries", viewController.getCountryListView);
 router.get("/countries/:id", viewController.getCountryDetailView);

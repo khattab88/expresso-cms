@@ -43,28 +43,33 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 // Only for rendered pages, no errors!
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
+exports.isLoggedIn = async (req, res, next) => {
     if (req.cookies.jwt) {
-        // verify token
-        const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+        try {
+            // verify token
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
 
-        // check if user still exists
-        const user = await userRepo.getById(decoded.id);
-        if (!user) return next();
+            // check if user still exists
+            const user = await userRepo.getById(decoded.id);
+            if (!user) return next();
 
-        // check if user changed password, after token issued
-        if (user.hasPasswordChangedAfter(decoded.iat)) {
+            // check if user changed password, after token issued
+            if (user.hasPasswordChangedAfter(decoded.iat)) {
+                return next();
+            };
+
+            // there is a logged in user, add current user to res.locals
+            // (make it accessible to pug templates)
+            res.locals.loggedInUser = user;
             return next();
-        };
 
-        // there is a logged in user, add current user to res.locals
-        // (make it accessible to pug templates)
-        res.locals.loggedInUser = user;
-        return next();
+        } catch (err) {
+            return next();
+        }
     }
 
     next();
-});
+};
 
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
@@ -80,18 +85,6 @@ const signToken = id => {
     return jwt.sign({ id: id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES
     });
-};
-
-/* OBSOLETE - TO BE DELETED */
-const setTokenCookie = (res, token) => {
-    const cookieOptions = {
-        expires: new Date(Date.now() + (process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)),
-        httpOnly: true
-    };
-
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-
-    res.cookie('jwt', token, cookieOptions);
 };
 
 const sendResponseWithCookie = (user, statusCode, res) => {
@@ -147,6 +140,17 @@ exports.login = catchAsync(async (req, res, next) => {
     if (!correctPassword) return next(new errorHandling.AppError("Wrong password entered!", 401));
 
     sendResponseWithCookie(user, 200, res);
+});
+
+exports.logout = catchAsync(async (req, res, next) => {
+    res.cookie("jwt", "loggedout", {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true
+    });
+
+    res.status(200).json({
+        status: 'success'
+    });
 });
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
