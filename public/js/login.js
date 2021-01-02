@@ -1,20 +1,23 @@
-// const config = require("../../config");
-
 const login = async (email, password) => {
-    // console.log(email, password);
+    
 
     try {
-        const result = await axios({
+        const res = await axios({
             method: 'POST',
             url: 'http://127.0.0.1:5000/api/v1/auth/login',
             data: {
                 email, password
             }
         });
-        console.log(result);
 
+        if(res.data.status === "success") {
+            alert("logged in successfully!");
+            window.setTimeout(() => {
+                window.location.assign("/");
+            }, 1500);
+        }
     } catch (err) {
-        console.error(err.response.data);
+        alert(err.response.data.message);
     }
 };
 

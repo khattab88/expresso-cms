@@ -30,14 +30,9 @@
                 .widget-content.p-0
                     .widget-content-wrapper
                         .widget-content-left.mr-3.header-user-info
-                            .widget-heading.
-
-                                CMS Admin
-
-                            .widget-subheading.
-
-                                Admin
-
+                            if loggedInUser 
+                                .widget-heading Hello, #{loggedInUser.firstName}
+                            .widget-subheading CMS Admin
                         .widget-content-left
                             .btn-group
                                 a.p-0.btn(data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')

@@ -5,7 +5,11 @@ const authController = require('../controllers/auth-controller');
 
 const router = express.Router();
 
+router.use(authController.isLoggedIn);
+
 // ROUTES
+router.get("/login", viewController.login);
+
 router.get("/", viewController.getDashboardView);
 
 router.get("/countries", viewController.getCountryListView);
@@ -25,10 +29,8 @@ router.get("/restaurants/:id", viewController.getRestaurantDetailView);
 router.get("/restaurants/:id/menu", viewController.getRestaurantMenuView);
 
 router.get("/branches", viewController.getBranchList);
-router.get("/branches/:id", authController.protect, viewController.getBranchDetailView);
+router.get("/branches/:id", viewController.getBranchDetailView);
 
 router.get("/admins", viewController.getAdminList);
-
-router.get("/login", viewController.login);
 
 module.exports = router;
