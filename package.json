@@ -10,6 +10,7 @@
     "start:prod": "set NODE_ENV=production&& set APP_ENV=production&& node server.js",
     "debug": "set NODE_ENV=development&& set APP_ENV=development&& nodemon --inspect server.js",
     "watch:sass": "node-sass public/css/style.scss public/css/style.css -watch",
+    "build:sass": "node-sass public/css/style.scss public/css/style.css",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
     "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
