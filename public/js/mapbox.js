@@ -1,9 +1,5 @@
-console.log("hello from mapbox");
-
-document.addEventListener("DOMContentLoaded", function (event) {
-    var location = document.getElementById("map").dataset.location;
-    location = location.split`,`.map(x => +x);
-    console.log("location: ", location);
+export const displayMap = (location) => {
+    // console.log("location: ", location);
 
     //mapboxgl.accessToken = 'pk.eyJ1IjoiZXhwcmVzc28tYXBwIiwiYSI6ImNrajIxdWJvMzM2czMyeHNja2N3cjZ4MG4ifQ.dNAHPe2ukL_MefjI8G1Ygg';
     mapboxgl.accessToken = 'pk.eyJ1IjoiZXhwcmVzc28tYXBwIiwiYSI6ImNrajIyOWQ4ZDBwMzEzMHA4b2dpdnh5dWwifQ.GShzOatTtqs3c_s5kndAcA';
@@ -17,18 +13,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
         zoom: 14, // starting zoom
         interactive: true,
     });
-    
+
     var marker = new mapboxgl.Marker({
         color: "#009a9a",
         draggable: true
     }).setLngLat(location)
-    .addTo(map);
+        .addTo(map);
 
     var branch = document.getElementById("map").dataset.branch;
     var popup = new mapboxgl.Popup({ offset: 30 })
-                    .setLngLat(location)
-                    .setHTML(`<p>${branch}</p>`)
-                    .addTo(map);
+        .setLngLat(location)
+        .setHTML(`<p>${branch}</p>`)
+        .addTo(map);
 
 
     var mapControls = document.getElementsByClassName("mapboxgl-control-container")[0];
@@ -41,4 +37,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     var mapCanvas = document.getElementsByClassName("mapboxgl-canvas")[0];
     mapCanvas.style.width = "530px";
-});
+};

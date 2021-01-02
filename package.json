@@ -9,12 +9,16 @@
     "start:stag": "set NODE_ENV=production&& set APP_ENV=staging&& node server.js",
     "start:prod": "set NODE_ENV=production&& set APP_ENV=production&& node server.js",
     "debug": "set NODE_ENV=development&& set APP_ENV=development&& nodemon --inspect server.js",
-    "watch:sass": "node-sass public/css/style.scss public/css/style.css -watch"
+    "watch:sass": "node-sass public/css/style.scss public/css/style.css -watch",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@expresso-app/expresso-auth": "^1.0.0",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
@@ -33,6 +37,7 @@
     "helmet": "^4.1.0",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
+    "login": "^0.8.0",
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.23",
     "morgan": "^1.10.0",
@@ -56,6 +61,7 @@
     "ndb": "^1.1.5",
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
+    "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5"
   }
 }
