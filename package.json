@@ -34,7 +34,7 @@
     "expresso-models": "^1.0.0",
     "expresso-repositories": "^1.0.1",
     "expresso-services": "^1.0.1",
-    "expresso-utils": "^1.1.1",
+    "expresso-utils": "^1.1.2",
     "helmet": "^4.1.0",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
