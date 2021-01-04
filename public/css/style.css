@@ -42,3 +42,14 @@ tr:hover {
   border-bottom-right-radius: 5px;
   -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25); }
+
+/* line 55, public/css/style.scss */
+.error-box {
+  width: 90%;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center; }

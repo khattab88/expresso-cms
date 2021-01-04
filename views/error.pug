@@ -1,0 +1,22 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(http-equiv='Content-Language' content='en')
+    meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
+    title #{title}
+    meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no')
+    meta(name='description' content='Expresso CMS, Login Page')
+    // Disable tap highlight on IE
+    meta(name='msapplication-tap-highlight' content='no')
+    link(rel='icon' type='image/png' href='/img/favicon.ico')
+    link(href='/css/template.css' rel='stylesheet')
+    link(rel='stylesheet' href='/css/template-overrides.css')
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .error-box.px-3.border.rounded.mt-3.text-center.m-lg-0.pt-3
+        .error-box__title
+            h2 Sorry, something went wrong :)
+        p.error-box__msg.font-weight-bold.text-danger= msg
+        a.btn.btn-outline-primary.m-3.p-3.rounded(href='/') Home Page
