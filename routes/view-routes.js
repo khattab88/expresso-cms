@@ -31,6 +31,6 @@ router.get("/restaurants/:id/menu", viewController.getRestaurantMenuView);
 router.get("/branches", viewController.getBranchList);
 router.get("/branches/:id", viewController.getBranchDetailView);
 
-router.get("/admins", viewController.getAdminList);
+router.get("/me", authController.protect, viewController.getAccount);
 
 module.exports = router;

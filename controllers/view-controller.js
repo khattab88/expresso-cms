@@ -176,21 +176,17 @@ exports.getBranchDetailView = catchAsync(async (req, res, next) => {
 });
 
 
-/* Admins */
-exports.getAdminList = catchAsync(async (req, res, next) => {
-
-    const admins = [];
-
-    res.status(200).render("admin-list", {
-        title: "Admins",
-        admins
-    });
-});
-
-
 /* Login */
 exports.login = catchAsync(async (req, res, next) => {
     res.status(200).render("login", {
         title: "Login",
+    });
+});
+
+
+/* Account */
+exports.getAccount = catchAsync(async (req, res, next) => {
+    res.status(200).render("account", {
+        title: "My Account",
     });
 });
