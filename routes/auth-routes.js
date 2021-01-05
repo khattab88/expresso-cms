@@ -15,6 +15,10 @@ router
     .route("/login")
     .post(authController.login);
 
+    router
+    .route("/loginadmin")
+    .post(authController.loginAdmin);
+
 router
     .route("/logout")
     .get(authController.logout);

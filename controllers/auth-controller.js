@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const { userRepository: userRepo } = require("expresso-repositories");
 const { EmailService } = require("expresso-services");
 const { errorHandling, catchAsync, helpers } = require("expresso-utils");
+const AppError = errorHandling.AppError;
 
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -23,18 +24,18 @@ exports.protect = catchAsync(async (req, res, next) => {
         token = req.cookies.jwt
     }
 
-    if (!token) return next(new errorHandling.AppError("You are not logged in!", 401));
+    if (!token) return next(new AppError("You are not logged in!", 401));
 
     // verify token
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
     // check if user still exists
     const user = await userRepo.getById(decoded.id);
-    if (!user) return next(new errorHandling.AppError("User is no longer exists", 401));
+    if (!user) return next(new AppError("User is no longer exists", 401));
 
     // check if user changed password, after token issued
     if (user.hasPasswordChangedAfter(decoded.iat)) {
-        return next(new errorHandling.AppError("User recently changed password, please login again!", 401));
+        return next(new AppError("User recently changed password, please login again!", 401));
     };
 
     // next() => grant access to protected route
@@ -74,7 +75,7 @@ exports.isLoggedIn = async (req, res, next) => {
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
         // Roles: ["user", "admin"]
-        if (!roles.includes(req.user.role)) return next(new errorHandling.AppError("You don't have a sufficient permission!", 403));
+        if (!roles.includes(req.user.role)) return next(new AppError("You don't have a sufficient permission!", 403));
 
         next();
     };
@@ -131,16 +132,32 @@ exports.signup = catchAsync(async (req, res) => {
 exports.login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
 
-    if (!email || !password) return next(new errorHandling.AppError("Please provide email and password!", 400));
+    if (!email || !password) return next(new AppError("Please provide email and password!", 400));
 
     const user = await userRepo.getByEmail(email);
-    if (!user) return next(new errorHandling.AppError("Email not found!", 404));
+    if (!user) return next(new AppError("Email not found!", 404));
 
     const correctPassword = await user.isCorrectPassword(user.password, password);
-    if (!correctPassword) return next(new errorHandling.AppError("Wrong password entered!", 401));
+    if (!correctPassword) return next(new AppError("Wrong password entered!", 401));
 
     sendResponseWithCookie(user, 200, res);
 });
+
+exports.loginAdmin = catchAsync(async (req, res, next) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) return next(new AppError("Please provide email and password!", 400));
+
+    const admin = await userRepo.getAdminByEmail(email);
+    if (!admin) return next(new AppError("Email not found!", 404));
+
+    const correctPassword = await admin.isCorrectPassword(admin.password, password);
+    if (!correctPassword) return next(new AppError("Wrong password entered!", 401));
+
+    sendResponseWithCookie(admin, 200, res);
+});
+
+
 
 exports.logout = catchAsync(async (req, res, next) => {
     res.cookie("jwt", "loggedout", {
@@ -156,7 +173,7 @@ exports.logout = catchAsync(async (req, res, next) => {
 exports.forgotPassword = catchAsync(async (req, res, next) => {
     // 1. get user based on posted Email
     const user = await userRepo.getByEmail(req.body.email);
-    if (!user) return next(new errorHandling.AppError("There is no user with such email address!", 404));
+    if (!user) return next(new AppError("There is no user with such email address!", 404));
 
     // 2. generate reset token
     const resetToken = user.createPasswordResetToken();
@@ -188,7 +205,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
         await user.save({ validateBeforeSave: false });
 
-        return next(new errorHandling.AppError("Error occured while sending email to user, please try again later!", 500));
+        return next(new AppError("Error occured while sending email to user, please try again later!", 500));
     }
 });
 
@@ -200,11 +217,11 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     const user = await userRepo.getByFieldValue({ passwordResetToken: hashedToken });
 
     if (!user) {
-        return next(new errorHandling.AppError("Invalid token!", 400));
+        return next(new AppError("Invalid token!", 400));
     }
 
     if (user.passwordResetExpires < Date.now()) {
-        return next(new errorHandling.AppError("Expired token!", 400));
+        return next(new AppError("Expired token!", 400));
     }
 
     // 2. if user exists && token is not expired => set the new password
@@ -226,10 +243,10 @@ exports.changePassword = catchAsync(async (req, res, next) => {
     //console.log(user);
 
     // 2. check if POSTed password is correct
-    if (!user) return next(new errorHandling.AppError("User not found!", 404));
+    if (!user) return next(new AppError("User not found!", 404));
 
     if (!(await user.isCorrectPassword(user.password, req.body.currentPassword))) {
-        return next(new errorHandling.AppError("Incorrect password!", 401));
+        return next(new AppError("Incorrect password!", 401));
     }
 
     // 3. if password is correct, change it to new password
@@ -249,7 +266,7 @@ exports.getMe = (req, res, next) => {
 exports.updateMe = catchAsync(async (req, res, next) => {
     // 1. create error if user POSTed password data (no password updtaes)
     if (req.body.password || req.body.passwordConfirm) {
-        return next(new errorHandling.AppError("Can not update password via this route, please use /changePassword instead!", 400));
+        return next(new AppError("Can not update password via this route, please use /changePassword instead!", 400));
     }
 
 
