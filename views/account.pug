@@ -7,7 +7,11 @@ block content
             h3 Account Settings
             .main-card.mb-3.mt-3.card
                 .card-body
-                     form(method='POST' action='/account-data')
+                      //- WITHOUT API (HTML FORM)
+                      //- form(method='POST' action='/account-data')
+
+                      //- WITH API (AJAX CALL)
+                      form#update-data-form
                         .position-relative.form-group
                           label(for='firstName') First Name
                           input#firstName.form-control(name='firstName', placeholder='First Name', type='text', required, value=`${user.firstName}`)
@@ -29,7 +33,7 @@ block content
             h3 Change Password
             .main-card.mb-3.mt-3.card
                 .card-body
-                     form(method='POST')
+                      form(method='POST')
                         .position-relative.form-group
                           label(for='oldPassword') Old Password
                           input#oldPassword.form-control(name='oldPassword' placeholder='Old Password' type='password')
