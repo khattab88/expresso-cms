@@ -1,3 +1,10 @@
+mixin navLink(title, link)
+    li
+        a(href=`/${link}`)
+            i.metismenu-icon
+            p= title
+
+
 .app-sidebar.sidebar-shadow
     .app-header__logo
         .logo-src
@@ -31,43 +38,15 @@
                         p Locations
                         i.metismenu-state-icon.pe-7s-angle-down.caret-left
                     ul
-                        li
-                            a(href='/countries')
-                                i.metismenu-icon
-                                p Countries
-                        li
-                            a(href='/cities')
-                                i.metismenu-icon
-                                p Cities
-                        li
-                            a(href='/areas')
-                                i.metismenu-icon
-                                p Areas
+                        +navLink("Countries", "countries")
+                        +navLink("Cities", "cities")
+                        +navLink("Areas", "areas")
                 li
                     a(href='#')
                         i.metismenu-icon.pe-7s-home
                         p Restaurants
                         i.metismenu-state-icon.pe-7s-angle-down.caret-left
                     ul
-                        li
-                            a(href='/tags')
-                                i.metismenu-icon
-                                p Tags
-                        li
-                            a(href='/restaurants')
-                                i.metismenu-icon
-                                p Restaurants
-                        li
-                            a(href='/branches')
-                                i.metismenu-icon
-                                p Branches
-                li
-                    a(href='#')
-                        i.metismenu-icon.pe-7s-add-user
-                        p Users
-                        i.metismenu-state-icon.pe-7s-angle-down.caret-left
-                    ul
-                        li
-                            a(href='/admins')
-                                i.metismenu-icon
-                                p Admins
+                        +navLink("Tags", "tags")
+                        +navLink("Restaurants", "restaurants")
+                        +navLink("Branches", "branches")
