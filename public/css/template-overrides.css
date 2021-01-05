@@ -2,6 +2,10 @@
     background: none !important;
 }
 
+.logo-src {
+    width: 125px !important;
+}
+
 .app-main .app-main__outer {
     /* height: 91vh; */
 }
