@@ -32,5 +32,6 @@ router.get("/branches", viewController.getBranchList);
 router.get("/branches/:id", viewController.getBranchDetailView);
 
 router.get("/me", authController.protect, viewController.getAccount);
+router.post("/account-data", authController.protect, viewController.updateAccountData);
 
 module.exports = router;

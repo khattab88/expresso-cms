@@ -30,8 +30,8 @@
                 .widget-content.p-0
                     .widget-content-wrapper
                         .widget-content-left.mr-3.header-user-info
-                            if loggedInUser 
-                                .widget-heading Hello, #{loggedInUser.firstName}
+                            if user 
+                                .widget-heading Hello, #{user.lastName}
                             .widget-subheading CMS Admin
                         .widget-content-left
                             .btn-group

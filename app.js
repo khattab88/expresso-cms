@@ -39,7 +39,7 @@ app.use(
 }));
 
 app.use(bodyParser.json({ limit: "100kb" })); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true, limit: "100kb"})); // for parsing application/x-www-form-urlencoded
 
 app.use(cookieParser());
 

@@ -1,4 +1,43 @@
 extend base
 
 block content
-    h1 My Account
+    
+    .row
+        .col-lg-6
+            h3 Account Settings
+            .main-card.mb-3.mt-3.card
+                .card-body
+                     form(method='POST' action='/account-data')
+                        .position-relative.form-group
+                          label(for='firstName') First Name
+                          input#firstName.form-control(name='firstName', placeholder='First Name', type='text', required, value=`${user.firstName}`)
+                        .position-relative.form-group
+                          label(for='lastName') Last Name
+                          input#lastName.form-control(name='lastName', placeholder='Last Name', type='text', required, value=`${user.lastName}`)
+                        .position-relative.form-group
+                          label(for='email') Email
+                          input#email.form-control(name='email', placeholder='Email', type='email', required, value=`${user.email}`)
+                        .d-flex.justify-content-end.pt-3
+                            button.mt-1.mr-2.btn.btn-success Save Settings
+
+    .row
+        .col-lg-6
+            hr
+
+    .row
+        .col-lg-6
+            h3 Change Password
+            .main-card.mb-3.mt-3.card
+                .card-body
+                     form(method='POST')
+                        .position-relative.form-group
+                          label(for='oldPassword') Old Password
+                          input#oldPassword.form-control(name='oldPassword' placeholder='Old Password' type='password')
+                        .position-relative.form-group
+                          label(for='newPassword') New Password
+                          input#newPassword.form-control(name='newPassword' placeholder='New Password' type='password')
+                        .position-relative.form-group
+                          label(for='confirmPassword') Confirm Password
+                          input#confirmPassword.form-control(name='confirmPassword' placeholder='Confirm Password' type='password')
+                        .d-flex.justify-content-end.pt-3
+                            button.mt-1.mr-2.btn.btn-success Change Password

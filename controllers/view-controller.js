@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 const { catchAsync, errorHandling } = require('expresso-utils');
 const { Tag, Country, City, Area, Restaurant, Branch } = require('expresso-models');
-const { tagRepository, countryRepository, cityRepository, areaRepository, restaurantRepository, branchRepository } = require("expresso-repositories");
+const { countryRepository, cityRepository, areaRepository,
+        tagRepository, restaurantRepository, branchRepository,
+        userRepository } = require("expresso-repositories");
 const AppError = errorHandling.AppError;
 
 /* Dashboard */
@@ -188,5 +190,18 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.getAccount = catchAsync(async (req, res, next) => {
     res.status(200).render("account", {
         title: "My Account",
+    });
+});
+
+exports.updateAccountData = catchAsync(async (req, res, next) => {
+    const updatedUser = await userRepository.update(req.user.id, {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+    });
+
+    res.status(200).render("account", {
+        title: "My Account",
+        user: updatedUser
     });
 });
