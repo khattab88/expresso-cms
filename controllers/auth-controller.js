@@ -268,7 +268,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
         return next(new AppError("Can not update password via this route, please use /changePassword instead!", 400));
     }
 
-
     // 2. filter out fields that not allowed to be updated
     const filteredBody = helpers.filterObject(req.body, "firstName", "lastName", "email");
 

@@ -4,51 +4,52 @@
 const express = require('express');
 const router = express.Router();
 
-const authController = require('../controllers/auth-controller');
+const auth = require('@expresso-app/expresso-auth');
+// const auth = require('../controllers/auth-controller');
 // const userController = require('../controllers/user-controller');
 
 router
     .route("/signup")
-    .post(authController.signup);
+    .post(auth.signup);
 
 router
     .route("/login")
-    .post(authController.login);
+    .post(auth.login);
 
     router
     .route("/loginadmin")
-    .post(authController.loginAdmin);
+    .post(auth.loginAdmin);
 
 router
     .route("/logout")
-    .get(authController.logout);
+    .get(auth.logout);
 
 router
     .route("/forgotPassword")
-    .post(authController.forgotPassword);
+    .post(auth.forgotPassword);
 
 router
     .route("/resetPassword/:token")
-    .patch(authController.resetPassword);
+    .patch(auth.resetPassword);
 
 
 // Protected Routes
-router.use(authController.protect);
+router.use(auth.protect);
 
 router
     .route("/changePassword")
-    .patch(authController.changePassword);
+    .patch(auth.changePassword);
 
 // router
 //     .route("/me")
-//     .get(authController.getMe, userController.getUser);
+//     .get(auth.getMe, userController.getUser);
 
 router
     .route("/updateMe")
-    .patch(authController.updateMe);
+    .patch(auth.updateMe);
 
 router
     .route("/deactivate")
-    .delete(authController.deactivate);
+    .delete(auth.deactivate);
 
 module.exports = router;
