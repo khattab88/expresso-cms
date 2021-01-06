@@ -16,11 +16,12 @@ block content
           .main-card.mb-3.mt-3.card
             .card-body
 
-              form(method='GET')
+              form(method='POST', action='/tags/update')
+                input#id(type='hidden' name='id' value=`${tag.id}`)
                 .position-relative.form-group
                   label(for='name') Name
-                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${tag.name}` disabled)
+                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${tag.name}` required)
 
                 .d-flex.justify-content-end.pt-3
                     button.mt-1.mr-2.btn.btn-success Submit
-                    button.mt-1.btn.btn-danger Cancel
+                    a.mt-1.btn.btn-danger(href="/tags") Cancel

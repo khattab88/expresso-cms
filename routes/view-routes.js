@@ -23,6 +23,7 @@ router.get("/areas/:id", viewController.getAreaDetailView);
 
 router.get("/tags", viewController.getTagListView);
 router.get("/tags/:id", viewController.getTagDetailView);
+router.post("/tags/update", viewController.updateTag);
 
 router.get("/restaurants", viewController.getRestaurantList);
 router.get("/restaurants/:id", viewController.getRestaurantDetailView);
@@ -32,6 +33,6 @@ router.get("/branches", viewController.getBranchList);
 router.get("/branches/:id", viewController.getBranchDetailView);
 
 router.get("/me", authController.protect, viewController.getAccount);
-router.post("/account-data", authController.protect, viewController.updateAccountData);
+// router.post("/account-data", authController.protect, viewController.updateAccountData); // HTML FORM
 
 module.exports = router;

@@ -2,8 +2,8 @@
 const { catchAsync, errorHandling } = require('expresso-utils');
 const { Tag, Country, City, Area, Restaurant, Branch } = require('expresso-models');
 const { countryRepository, cityRepository, areaRepository,
-        tagRepository, restaurantRepository, branchRepository,
-        userRepository } = require("expresso-repositories");
+    tagRepository, restaurantRepository, branchRepository,
+    userRepository } = require("expresso-repositories");
 const AppError = errorHandling.AppError;
 
 /* Dashboard */
@@ -29,7 +29,7 @@ exports.getCountryDetailView = catchAsync(async (req, res, next) => {
 
     const country = await countryRepository.getById(req.params.id);
 
-    if(!country) {
+    if (!country) {
         return next(new AppError("There is no country with that id!", 404));
     }
 
@@ -55,7 +55,7 @@ exports.getCityDetailView = catchAsync(async (req, res, next) => {
 
     const city = await cityRepository.getById(req.params.id);
 
-    if(!city) {
+    if (!city) {
         return next(new AppError("There is no city with that id!", 404));
     }
 
@@ -80,7 +80,7 @@ exports.getAreaDetailView = catchAsync(async (req, res, next) => {
 
     const area = await areaRepository.getById(req.params.id);
 
-    if(!area) {
+    if (!area) {
         return next(new AppError("There is no area with that id!", 404));
     }
 
@@ -106,7 +106,7 @@ exports.getTagDetailView = catchAsync(async (req, res, next) => {
 
     const tag = await tagRepository.getById(req.params.id);
 
-    if(!tag) {
+    if (!tag) {
         return next(new AppError("There is no tag with that id!", 404));
     }
 
@@ -114,6 +114,14 @@ exports.getTagDetailView = catchAsync(async (req, res, next) => {
         title: tag.name,
         tag
     });
+});
+
+exports.updateTag = catchAsync(async (req, res, next) => {
+    const updatedTag = await tagRepository.update(req.body.id, {
+        name: req.body.name
+    });
+
+    res.redirect(`/tags/${updatedTag.id}`);
 });
 
 
@@ -132,7 +140,7 @@ exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
 
     const restaurant = await restaurantRepository.getById(req.params.id);
 
-    if(!restaurant) {
+    if (!restaurant) {
         return next(new AppError("There is no restaurant with that id!", 404));
     }
 
@@ -167,7 +175,7 @@ exports.getBranchDetailView = catchAsync(async (req, res, next) => {
 
     const branch = await branchRepository.getById(req.params.id);
 
-    if(!branch) {
+    if (!branch) {
         return next(new AppError("There is no branch with that id!", 404));
     }
 
