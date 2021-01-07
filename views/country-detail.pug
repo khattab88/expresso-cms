@@ -15,34 +15,33 @@ block content
       .main-card.mb-3.mt-3.card
         .card-body
         
-          form(method='GET')
+          form(method='POST' action='/countries/update')
+            input#id(type='hidden' name='id' value=`${country.id}`)
             .position-relative.form-group
               label(for='name') Name
-              input#name.form-control(name='name' placeholder='Name' type='text' value=`${country.name}` disabled)
+              input#name.form-control(name='name' placeholder='Name' type='text' value=`${country.name}`)
             .position-relative.form-group
               label(for='alias') Alias
-              input#alias.form-control(name='alias' placeholder='Alias' type='text' value=`${country.alias}` disabled)
+              input#alias.form-control(name='alias' placeholder='Alias' type='text' value=`${country.alias}`)
             .position-relative.form-group
               label(for='currency') Currency
-              select#currency.form-control(name='currency' disabled)
-                option USD
-                option(selected) EGP
-                option AED
-                option SAR
-                option QAR
-                option KWD
+              select#currency.form-control(name='currency')
+                - var list = ["USD", "EGP", "AED", "SAR", "QAR", "KWD"]
+                  each item in list
+                    if(item === country.currency)
+                      option(selected)= item
+                    else
+                       option= item
             .position-relative.form-group
               label(for='image') Image
               image.img-thumbnail(src=`${country.image}` alt=`${country.name}`)
               .col-sm-10
-                input#exampleFile.form-control-file(name='file' type='file')
+                input#image.form-control-file(name='image' type='file')
                 small.form-text.text-muted
                   | Image types supported (.jpg, .png, ...)
 
             .d-flex.justify-content-end.pt-3
               button.mt-1.mr-2.btn.btn-success Submit
-              button.mt-1.btn.btn-danger Cancel
-
-
+              a.mt-1.btn.btn-danger(href='/countries') Cancel
 
 

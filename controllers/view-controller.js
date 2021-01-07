@@ -39,6 +39,18 @@ exports.getCountryDetailView = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.updateCountry = catchAsync(async (req, res, next) => {
+    // console.log(req.body);
+    
+    const updatedCountry = await countryRepository.update(req.body.id, {
+        name: req.body.name,
+        alias: req.body.alias,
+        currency: req.body.currency
+    });
+
+    res.redirect(`/countries/${req.body.id}`);
+});
+
 
 /* Cities */
 exports.getCityListView = catchAsync(async (req, res, next) => {
