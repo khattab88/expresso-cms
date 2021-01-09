@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 const express = require('express');
+
 const viewController = require('../controllers/view-controller');
 const authController = require('../controllers/auth-controller');
+const uploadController = require('../controllers/upload-controller');
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ router.get("/", authController.protect, viewController.getDashboardView);
 
 router.get("/countries", viewController.getCountryListView);
 router.get("/countries/:id", viewController.getCountryDetailView);
-router.post("/countries/update", viewController.updateCountry)
+router.post("/countries/update", uploadController.uploadImage, viewController.updateCountry)
 
 router.get("/cities", viewController.getCityListView);
 router.get("/cities/:id", viewController.getCityDetailView);

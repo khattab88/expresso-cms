@@ -2,9 +2,10 @@
 const { catchAsync, errorHandling } = require('expresso-utils');
 const { Tag, Country, City, Area, Restaurant, Branch } = require('expresso-models');
 const { countryRepository, cityRepository, areaRepository,
-    tagRepository, restaurantRepository, branchRepository,
-    userRepository } = require("expresso-repositories");
+        tagRepository, restaurantRepository, branchRepository,
+        userRepository } = require("expresso-repositories");
 const AppError = errorHandling.AppError;
+
 
 /* Dashboard */
 exports.getDashboardView = catchAsync(async (req, res, next) => {
@@ -40,8 +41,9 @@ exports.getCountryDetailView = catchAsync(async (req, res, next) => {
 });
 
 exports.updateCountry = catchAsync(async (req, res, next) => {
-    // console.log(req.body);
-    
+    console.log(req.body);
+    console.log(req.file);
+
     const updatedCountry = await countryRepository.update(req.body.id, {
         name: req.body.name,
         alias: req.body.alias,
