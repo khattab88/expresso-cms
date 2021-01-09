@@ -41,14 +41,18 @@ exports.getCountryDetailView = catchAsync(async (req, res, next) => {
 });
 
 exports.updateCountry = catchAsync(async (req, res, next) => {
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
 
-    const updatedCountry = await countryRepository.update(req.body.id, {
+    const data = {
         name: req.body.name,
         alias: req.body.alias,
         currency: req.body.currency
-    });
+    };
+
+    if(req.file) data.image = req.file.filename;
+
+    const updatedCountry = await countryRepository.update(req.body.id, data);
 
     res.redirect(`/countries/${req.body.id}`);
 });

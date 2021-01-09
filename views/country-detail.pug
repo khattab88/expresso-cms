@@ -15,7 +15,7 @@ block content
       .main-card.mb-3.mt-3.card
         .card-body
         
-          form(method='POST' action='/countries/update')
+          form(method='POST' action='/countries/update' enctype="multipart/form-data")
             input#id(type='hidden' name='id' value=`${country.id}`)
             .position-relative.form-group
               label(for='name') Name
@@ -34,7 +34,7 @@ block content
                        option= item
             .position-relative.form-group
               label(for='image') Image
-              image.img-thumbnail(src=`${country.image}` alt=`${country.name}`)
+              image.img-thumbnail(src=`/img/uploads/${country.image}` alt=`${country.name}`)
               .col-sm-10
                 input#image.form-control-file(name='image' type='file')
                 small.form-text.text-muted
