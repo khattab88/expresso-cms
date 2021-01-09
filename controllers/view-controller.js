@@ -50,7 +50,9 @@ exports.updateCountry = catchAsync(async (req, res, next) => {
         currency: req.body.currency
     };
 
-    if(req.file) data.image = req.file.filename;
+    if(req.file) {
+        data.image = req.file.filename;
+    }
 
     const updatedCountry = await countryRepository.update(req.body.id, data);
 

@@ -16,7 +16,10 @@ router.get("/", authController.protect, viewController.getDashboardView);
 
 router.get("/countries", viewController.getCountryListView);
 router.get("/countries/:id", viewController.getCountryDetailView);
-router.post("/countries/update", uploadController.uploadImage, viewController.updateCountry)
+router.post("/countries/update", 
+            uploadController.uploadImage, 
+            // uploadController.resizeImage,
+            viewController.updateCountry)
 
 router.get("/cities", viewController.getCityListView);
 router.get("/cities/:id", viewController.getCityDetailView);
