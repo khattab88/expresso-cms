@@ -14,8 +14,8 @@ block content
     
       .main-card.mb-3.mt-3.card
         .card-body
-        
-          form(method='POST' action='/countries/update' enctype="multipart/form-data")
+          
+           form(method='POST' action='/countries/update' enctype="multipart/form-data")
             input#id(type='hidden' name='id' value=`${country.id}`)
             .position-relative.form-group
               label(for='name') Name
@@ -33,10 +33,10 @@ block content
                     else
                        option= item
             .position-relative.form-group
-              label(for='image') Image
+              label(for='image') Choose new image
               image.img-thumbnail(src=`/img/uploads/${country.image}` alt=`${country.name}`)
               .col-sm-10
-                input#image.form-control-file(name='image' type='file')
+                input#image.form-control-file(name='image' type='file' accept='image/*')
                 small.form-text.text-muted
                   | Image types supported (.jpg, .png, ...)
 

@@ -2,13 +2,18 @@ import "@babel/polyfill";
 import { login, logout } from "./login";
 import { displayMap } from "./mapbox";
 import { updateAccount } from "./account";
+// import { updateCountry } from "./country";
 
 // DOM ELEMENTS
 const loginForm = document.querySelector("#login-form");
 const logoutBtn = document.querySelector("#logout-btn");
+
 const map = document.querySelector("#map");
+
 const accountDataForm = document.querySelector("#account-data-form");
 const accountPasswordForm = document.querySelector("#account-password-form");
+
+const updateCountryForm = document.querySelector("#update-country-form");
 
 
 // DELEGATION
@@ -18,12 +23,12 @@ if (loginForm) {
 
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        
+
         login(email, password);
     });
 }
 
-if(logoutBtn) {
+if (logoutBtn) {
     logoutBtn.addEventListener("click", logout);
 }
 
@@ -34,7 +39,7 @@ if (map) {
     displayMap(location);
 }
 
-if(accountDataForm) {
+if (accountDataForm) {
     accountDataForm.addEventListener("submit", e => {
         e.preventDefault();
 
@@ -46,7 +51,7 @@ if(accountDataForm) {
     });
 }
 
-if(accountPasswordForm) {
+if (accountPasswordForm) {
     accountPasswordForm.addEventListener("submit", async e => {
         e.preventDefault();
 
@@ -55,11 +60,36 @@ if(accountPasswordForm) {
         const newPassword = document.getElementById("newPassword").value;
         const newPasswordConfirm = document.getElementById("newPasswordConfirm").value;
 
-        await updateAccount("password", { currentPassword, newPassword, newPasswordConfirm});
+        await updateAccount("password", { currentPassword, newPassword, newPasswordConfirm });
 
         document.getElementById("change-password-btn").textContent = "Change Password";
         document.getElementById("currentPassword").value = "";
         document.getElementById("newPassword").value = "";
         document.getElementById("newPasswordConfirm").value = "";
+    });
+}
+
+/* UNNECESSARY */
+if (updateCountryForm) {
+    updateCountryForm.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const form = new FormData();
+        form.append("id", document.getElementById("id").value);
+        form.append("name", document.getElementById("name").value);
+        form.append("alias", document.getElementById("alias").value);
+        form.append("currency", document.getElementById("currency").value);
+
+        const data = {
+            id: document.getElementById("id").value,
+            name: document.getElementById("name").value,
+            alias: document.getElementById("alias").value,
+            currency: document.getElementById("currency").value
+        };
+
+        // console.log(data);
+        // console.log(document.cookie);
+
+        // updateCountry(data);
     });
 }
