@@ -5,7 +5,7 @@ module.exports = {
     dbConnection: process.env.DATABASE_CONNECTION,
     // apiUrl: process.env.API_URL,
     email: {
-        host: process.env.EMAIL,
+        host: process.env.EMAIL_HOST,
         address: process.env.EMAIL_ADDRESS,
         password: process.env.EMAIL_PASSWORD,
     }

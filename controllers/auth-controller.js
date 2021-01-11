@@ -11,6 +11,7 @@ const { userRepository: userRepo } = require("expresso-repositories");
 const { EmailService } = require("expresso-services");
 const { errorHandling, catchAsync, helpers } = require("expresso-utils");
 const AppError = errorHandling.AppError;
+// const Email = require("../utils/email");
 
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -126,7 +127,8 @@ exports.signup = catchAsync(async (req, res) => {
     // });
 
     const newUser = await userRepo.create(req.body);
-
+    // const url = `${req.protocol}://${req.get("host")}/login`;
+    // await new Email(req.user, url).sendWelcome();
     sendResponseWithCookie(newUser, 201, res);
 });
 
@@ -187,7 +189,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     const mailOptions = {
         email: user.email,
         subject: "Your password reset token (valid for 10 minutes)",
-        message: message
+        text: message
     };
 
     try {
