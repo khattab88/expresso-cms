@@ -11,7 +11,7 @@ module.exports = class Email {
         this.lastName = user.lastName;
         this.url = url;
 
-        this.emailSvc = new EmailService(config.email.host, config.email.address, config.email.password);
+        this.emailSvc = new EmailService(config.email.host, config.email.userName, config.email.password);
     }
 
     /* PRIVATE METHOD */
