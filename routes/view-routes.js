@@ -44,5 +44,6 @@ router.get("/me", authController.protect, viewController.getAccount);
 // router.post("/account-data", authController.protect, viewController.updateAccountData); // HTML FORM
 
 router.get("/test", authController.protect, testController.test);
+router.get("/checkout/:orderId", authController.protect, viewController.checkout);
 
 module.exports = router;

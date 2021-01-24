@@ -3,6 +3,7 @@ import { login, logout } from "./login";
 import { displayMap } from "./mapbox";
 import { updateAccount } from "./account";
 // import { updateCountry } from "./country";
+import { checkout } from "./checkout";
 
 // DOM ELEMENTS
 const loginForm = document.querySelector("#login-form");
@@ -15,6 +16,7 @@ const accountPasswordForm = document.querySelector("#account-password-form");
 
 const updateCountryForm = document.querySelector("#update-country-form");
 
+const checkoutBtn = document.querySelector("#checkout-btn");
 
 // DELEGATION
 if (loginForm) {
@@ -91,5 +93,15 @@ if (updateCountryForm) {
         // console.log(document.cookie);
 
         // updateCountry(data);
+    });
+}
+
+if(checkoutBtn) {
+    checkoutBtn.addEventListener("click", e => {
+        e.target.textContent = "Processing...";
+
+        const { orderId } = e.target.dataset;
+        console.log(orderId);
+        checkout(orderId);
     });
 }

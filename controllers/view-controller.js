@@ -233,3 +233,12 @@ exports.updateAccountData = catchAsync(async (req, res, next) => {
         user: updatedUser
     });
 });
+
+
+/* Checkout (ONLY FOR TESTING) */
+exports.checkout = catchAsync(async (req, res, next) => {
+    res.status(200).render("checkout", {
+        title: "Checkout",
+        orderId: req.params.orderId
+    });
+});
