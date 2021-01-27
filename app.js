@@ -10,6 +10,7 @@ const xssClean = require("xss-clean");
 const hpp = require("hpp");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const compression = require("compression");
 
 const { errorHandling } = require("expresso-utils");
 const viewRouter = require("./routes/view-routes");
@@ -90,6 +91,8 @@ app.use((req, res, next) => {
     next();
 });
 
+// enable response compression
+app.use(compression());
 
 // Test Middleware
 app.use((req, res, next) => {
