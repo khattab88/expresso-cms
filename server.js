@@ -43,9 +43,9 @@ mongoose.connect(connectionString, {
     process.exit(1);
 });
 
-
-const server = app.listen(config.port, () => {
-    console.log("server started...", config.port);
+const port = process.env.PORT || 5000;
+const server = app.listen(port, () => {
+    console.log("server started...", port);
 });
 
 
