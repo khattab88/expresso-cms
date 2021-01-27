@@ -101,7 +101,7 @@ if(checkoutBtn) {
         e.target.textContent = "Processing...";
 
         const { orderId } = e.target.dataset;
-        console.log(orderId);
+        // console.log(orderId);
         checkout(orderId);
     });
 }

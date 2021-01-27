@@ -19,9 +19,8 @@ const authRouter = require("./routes/auth-routes");
 
 const app = express();
 
-console.log(process.env.NODE_ENV);
-console.log(process.env.APP_ENV);
-console.log(process.env.ECHO);
+console.log("NODE_ENV: " + process.env.NODE_ENV);
+console.log("APP_ENV: " + process.env.APP_ENV);
 
 
 /* GLOBAL MIDDLEWARES */
