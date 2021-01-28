@@ -8,7 +8,7 @@ export const updateAccount = async (type, data) => {
 
         const res = await axios({
             method: 'PATCH',
-            url: `http://127.0.0.1:5000/api/v1/auth/${endpoint}`,
+            url: `/api/v1/auth/${endpoint}`,
             data
         });
 
