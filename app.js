@@ -16,8 +16,9 @@ const { errorHandling } = require("expresso-utils");
 const viewRouter = require("./routes/view-routes");
 const authRouter = require("./routes/auth-routes");
 
-
 const app = express();
+
+app.enable("trust proxy");
 
 console.log("NODE_ENV: " + process.env.NODE_ENV);
 console.log("APP_ENV: " + process.env.APP_ENV);
