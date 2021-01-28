@@ -3,7 +3,7 @@ import { login, logout } from "./login";
 import { displayMap } from "./mapbox";
 import { updateAccount } from "./account";
 // import { updateCountry } from "./country";
-import { checkout } from "./checkout";
+// import { checkout } from "./checkout";
 
 // DOM ELEMENTS
 const loginForm = document.querySelector("#login-form");
@@ -96,12 +96,12 @@ if (updateCountryForm) {
     });
 }
 
-if(checkoutBtn) {
-    checkoutBtn.addEventListener("click", e => {
-        e.target.textContent = "Processing...";
+// if(checkoutBtn) {
+//     checkoutBtn.addEventListener("click", e => {
+//         e.target.textContent = "Processing...";
 
-        const { orderId } = e.target.dataset;
-        // console.log(orderId);
-        checkout(orderId);
-    });
-}
+//         const { orderId } = e.target.dataset;
+//         // console.log(orderId);
+//         checkout(orderId);
+//     });
+// }
