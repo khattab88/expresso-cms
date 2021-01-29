@@ -160,6 +160,11 @@ exports.createOrUpdateTag = catchAsync(async (req, res, next) => {
     }
 });
 
+exports.deleteTag = catchAsync(async (req, res, next) => {
+    await tagRepository.delete(req.params.id);
+
+    // res.redirect(`/tags/`);
+});
 
 /* Restaurants */
 exports.getRestaurantList = catchAsync(async (req, res, next) => {
