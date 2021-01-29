@@ -16,7 +16,7 @@ block content
           .main-card.mb-3.mt-3.card
             .card-body
 
-              form(method='POST', action='/tags/update')
+              form(method='POST', action='/tags/edit')
                 input#id(type='hidden' name='id' value=`${tag.id}`)
                 .position-relative.form-group
                   label(for='name') Name

@@ -31,7 +31,7 @@ router.get("/areas/:id", viewController.getAreaDetailView);
 
 router.get("/tags", viewController.getTagListView);
 router.get("/tags/:id", viewController.getTagDetailView);
-router.post("/tags/update", viewController.updateTag);
+router.post("/tags/edit", viewController.createOrUpdateTag);
 
 router.get("/restaurants", viewController.getRestaurantList);
 router.get("/restaurants/:id", viewController.getRestaurantDetailView);

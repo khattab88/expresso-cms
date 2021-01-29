@@ -2,8 +2,8 @@
 const { catchAsync, errorHandling } = require('expresso-utils');
 const { Tag, Country, City, Area, Restaurant, Branch } = require('expresso-models');
 const { countryRepository, cityRepository, areaRepository,
-        tagRepository, restaurantRepository, branchRepository,
-        userRepository } = require("expresso-repositories");
+    tagRepository, restaurantRepository, branchRepository,
+    userRepository } = require("expresso-repositories");
 const AppError = errorHandling.AppError;
 
 
@@ -50,7 +50,7 @@ exports.updateCountry = catchAsync(async (req, res, next) => {
         currency: req.body.currency
     };
 
-    if(req.file) {
+    if (req.file) {
         data.image = req.file.filename;
     }
 
@@ -123,25 +123,41 @@ exports.getTagListView = catchAsync(async (req, res) => {
 });
 
 exports.getTagDetailView = catchAsync(async (req, res, next) => {
+    if (req.params.id === "new") {
+        const emptyTag = { id: 0, name: "" };
 
-    const tag = await tagRepository.getById(req.params.id);
+        res.status(200).render("tag-detail", {
+            title: "New",
+            tag: emptyTag
+        });
+    } else {
+        const tag = await tagRepository.getById(req.params.id);
 
-    if (!tag) {
-        return next(new AppError("There is no tag with that id!", 404));
+        if (!tag) {
+            return next(new AppError("There is no tag with that id!", 404));
+        }
+
+        res.status(200).render("tag-detail", {
+            title: tag.name,
+            tag
+        });
     }
-
-    res.status(200).render("tag-detail", {
-        title: tag.name,
-        tag
-    });
 });
 
-exports.updateTag = catchAsync(async (req, res, next) => {
-    const updatedTag = await tagRepository.update(req.body.id, {
-        name: req.body.name
-    });
+exports.createOrUpdateTag = catchAsync(async (req, res, next) => {
+    const id = req.body.id;
 
-    res.redirect(`/tags/${updatedTag.id}`);
+    if (id === "0") {
+        const newTag = await tagRepository.create({ name: req.body.name });
+
+        res.redirect(`/tags/`);
+    } else {
+        const updatedTag = await tagRepository.update(id, {
+            name: req.body.name
+        });
+
+        res.redirect(`/tags/${updatedTag.id}`);
+    }
 });
 
 

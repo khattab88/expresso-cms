@@ -6,9 +6,9 @@ block content
         .col
 
             .app-page-title.mb-0.py-2
-                .page-title-wrapper
-                    .page-title-heading
-                        h1= title
+                .page-title-wrapper.d-flex.justify-content-between
+                    h1= title
+                    a.btn.btn-lg.btn-success(href='/tags/new') Create New
 
     .row
         .col-lg-8
@@ -32,3 +32,6 @@ block content
                                             .row-manage__btn: a(href=`/tags/${tag.id}` data-tag-id=`${tag.id}`) Edit
                                             .row-manage__separator: span |
                                             .row-manage__btn: a(href='#' data-tag-id=`${tag.id}`) Delete
+
+block append scripts
+    script(src='js/tags.js')
