@@ -31,7 +31,7 @@ router.get("/areas/:id", viewController.getAreaDetailView);
 
 router.get("/tags", viewController.getTagListView);
 router.get("/tags/:id", viewController.getTagDetailView);
-router.post("/tags/edit", viewController.createOrUpdateTag);
+router.post("/tags", viewController.createOrUpdateTag);
 router.delete("/tags/:id", viewController.deleteTag);
 
 router.get("/restaurants", viewController.getRestaurantList);

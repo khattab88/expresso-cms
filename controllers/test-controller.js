@@ -10,8 +10,7 @@ exports.test = catchAsync(async (req, res, next) => {
 
     /// send PASSWORD RESET email
     // const url = `${req.protocol}://${req.get("host")}/login`;
-    await new Email(req.user, "#").sendPasswordReset();
+    // await new Email(req.user, "#").sendPasswordReset();
 
-
-    res.send("yes");
+    res.send(req.originalUrl);
 });
