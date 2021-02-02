@@ -263,3 +263,10 @@ exports.checkout = catchAsync(async (req, res, next) => {
         orderId: req.params.orderId
     });
 });
+
+/* Chat (ONLY FOR TESTING) */
+exports.chat = catchAsync(async (req, res, next) => {
+    res.status(200).render("chat", {
+        title: "Chat"
+    });
+});

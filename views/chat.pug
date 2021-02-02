@@ -1,0 +1,40 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+        meta(http-equiv='Content-Language' content='en')
+        meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
+        title Expresso CMS | #{title}
+        meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no')
+        meta(name='description' content='Expresso CMS, Chat Page')
+        // Disable tap highlight on IE
+        meta(name='msapplication-tap-highlight' content='no')
+        link(rel='icon' type='image/png' href='/img/favicon.ico')
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")
+        style(type="text/css").
+            body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+            #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+            #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+            #input:focus { outline: none; }
+            #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+            #messages { list-style-type: none; margin: 0; padding: 0; }
+            #messages > li { padding: 0.5rem 1rem; }
+            #messages > li:nth-child(odd) { background: #efefef; }
+    body
+        .container.mt-3.border.border-info.rounded
+            .row 
+                .col
+                    h1.text-center= title
+
+            .row
+                .col
+                    ul#messages
+                    form#form(action='')
+                        input#input(autocomplete='off')
+                        button Send
+
+        script(src='/socket.io/socket.io.js')
+        script(src='/js/chat.js')

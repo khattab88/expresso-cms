@@ -46,5 +46,6 @@ router.get("/me", authController.protect, viewController.getAccount);
 
 router.get("/test", authController.protect, testController.test);
 router.get("/checkout/:orderId", authController.protect, viewController.checkout);
+router.get("/chat", viewController.chat);
 
 module.exports = router;

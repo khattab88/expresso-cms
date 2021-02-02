@@ -6,6 +6,7 @@
 /* eslint-disable prettier/prettier */
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const webSocket = require("socket.io");
 
 
 /* handle UNCAUGHT EXCEPTION for sync code */
@@ -46,6 +47,23 @@ mongoose.connect(connectionString, {
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
     console.log("server started...", port);
+});
+
+
+/* establish socket.io connection */
+const io = webSocket(server);
+io.on('connection', socket => {
+    console.log("client connected!");
+
+    // socket.on('disconnect', () => {
+    //     console.log('client disconnected');
+    // });;
+
+    socket.on('chat message', (msg) => {
+        // console.log('message: ' + msg);
+
+        io.emit('chat message', `server reply: ${msg}`);
+    });
 });
 
 
