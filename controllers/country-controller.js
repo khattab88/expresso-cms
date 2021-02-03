@@ -14,20 +14,34 @@ exports.getCountryListView = catchAsync(async (req, res, next) => {
 });
 
 exports.getCountryDetailView = catchAsync(async (req, res, next) => {
+    if (req.params.id === "new") {
+        const emptyCountry = {
+            id: 0,
+            name: "",
+            alias: "",
+            currency: "",
+        };
 
-    const country = await countryRepository.getById(req.params.id);
+        res.status(200).render("country-detail", {
+            title: "New",
+            country: emptyCountry
+        });
+    } else {
+        const country = await countryRepository.getById(req.params.id);
 
-    if (!country) {
-        return next(new AppError("There is no country with that id!", 404));
+        if (!country) {
+            return next(new AppError("There is no country with that id!", 404));
+        }
+
+        res.status(200).render("country-detail", {
+            title: country.name,
+            country
+        });
     }
-
-    res.status(200).render("country-detail", {
-        title: country.name,
-        country
-    });
 });
 
-exports.updateCountry = catchAsync(async (req, res, next) => {
+exports.createOrUpdateCountry = catchAsync(async (req, res, next) => {
+    const id = req.body.id;
 
     const data = {
         name: req.body.name,
@@ -39,7 +53,13 @@ exports.updateCountry = catchAsync(async (req, res, next) => {
         data.image = req.file.filename;
     }
 
-    const updatedCountry = await countryRepository.update(req.body.id, data);
+    if (id === "0") {
+        const newCountry = await countryRepository.create(data);
 
-    res.redirect(`/countries/${req.body.id}`);
+        res.redirect("/countries");
+    } else {
+        const updatedCountry = await countryRepository.update(id, data);
+
+        res.redirect(`/countries/${id}`);
+    }
 });

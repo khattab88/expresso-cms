@@ -15,7 +15,7 @@ block content
       .main-card.mb-3.mt-3.card
         .card-body
           
-           form(method='POST' action='/countries/update' enctype="multipart/form-data")
+           form(method='POST' action='/countries' enctype="multipart/form-data")
             input#id(type='hidden' name='id' value=`${country.id}`)
             .position-relative.form-group
               label(for='name') Name

@@ -20,9 +20,9 @@ router.get("/", authController.protect, viewController.getDashboardView);
 
 router.get("/countries", countryController.getCountryListView);
 router.get("/countries/:id", countryController.getCountryDetailView);
-router.post("/countries/update", 
+router.post("/countries", 
             uploadController.uploadImage, // uploadController.resizeImage,
-            countryController.updateCountry)
+            countryController.createOrUpdateCountry)
 
 router.get("/cities", viewController.getCityListView);
 router.get("/cities/:id", viewController.getCityDetailView);
