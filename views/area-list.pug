@@ -21,8 +21,8 @@ block content
                                 th #
                                 th.text-center Name
                                 th.text-center.d-none.d-sm-table-cell Slug
-                                th.text-center.d-none.d-sm-table-cell Country
-                                th.text-center City
+                                //- th.text-center.d-none.d-sm-table-cell Country
+                                //- th.text-center City
                                 th 
                         tbody
                             - var x = 0
@@ -31,8 +31,8 @@ block content
                                     th.text-center(scope='row') #{++x}
                                     td.text-center= area.name
                                     td.text-center.d-none.d-sm-table-cell= area.slug
-                                    td.text-center.d-none.d-sm-table-cell= area.city.country.name
-                                    td.text-center= area.city.name
+                                    //- td.text-center.d-none.d-sm-table-cell= area.city.country.name
+                                    //- td.text-center= area.city.name
                                     td.text-center
                                         .row-manage
                                             .row-manage__btn: a(href=`/areas/${area.id}` data-id=`${area.id}`) Edit

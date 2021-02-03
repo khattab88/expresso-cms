@@ -17,6 +17,7 @@ block content
             .card-body
 
               form(method='POST' action="/areas")
+                input#id(type='hidden' name='id' value=`${area.id}`)
                 .position-relative.form-group
                   label(for='name') Name
                   input#name.form-control(name='name' placeholder='Name' type='text' value=`${area.name}`)

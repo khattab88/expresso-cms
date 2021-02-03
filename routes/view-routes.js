@@ -35,7 +35,7 @@ router.delete("/cities/:id", cityController.deleteCity);
 router.get("/areas", areaController.getAreaListView);
 router.get("/areas/:id", areaController.getAreaDetailView);
 router.post("/areas", areaController.createOrUpdateArea);
-router.delete("/areas:/id", areaController.deleteArea);
+router.delete("/areas/:id", areaController.deleteArea);
 
 router.get("/tags", tagController.getTagListView);
 router.get("/tags/:id", tagController.getTagDetailView);
