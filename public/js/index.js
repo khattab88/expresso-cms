@@ -4,6 +4,10 @@ import { displayMap } from "./mapbox";
 import { updateAccount } from "./account";
 // import { updateCountry } from "./country";
 // import { checkout } from "./checkout";
+import { config } from "./config";
+
+// configure app variables (client-side)
+config();
 
 // DOM ELEMENTS
 const loginForm = document.querySelector("#login-form");
@@ -105,3 +109,4 @@ if (updateCountryForm) {
 //         checkout(orderId);
 //     });
 // }
+

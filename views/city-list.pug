@@ -6,9 +6,9 @@ block content
         .col
         
             .app-page-title.mb-0.py-2
-                .page-title-wrapper
-                    .page-title-heading
-                        h1= title
+                .page-title-wrapper.d-flex.justify-content-between
+                    h1= title
+                    a.btn.btn-lg.btn-success(href='/cities/new') Create New
 
     .row
         .col-lg-10
@@ -33,6 +33,10 @@ block content
                                     td.text-center= city.country.name
                                     td.text-center
                                         .row-manage
-                                            .row-manage__btn: a(href=`/cities/${city.id}` data-city-id=`${city.id}`) Edit
+                                            .row-manage__btn: a(href=`/cities/${city.id}` data-id=`${city.id}`) Edit
                                             .row-manage__separator: span |
-                                            .row-manage__btn: a(href='#' data-city-id=`${city.id}`) Delete
+                                            .row-manage__btn: a.delete-btn.text-danger(data-type="cities" data-id=`${city.id}`) Delete
+
+
+//- block append scripts
+//-     script(src='/js/delete-list-item.js')

@@ -2,33 +2,44 @@ extends base
 
 block content
 
-    .row
-        .col
-        
-            .app-page-title.mb-0.py-2
-                .page-title-wrapper
-                    .page-title-heading
-                        h1= `City: ${title}`
+  .row
+    .col
 
-    .row
-        .col-lg-6
+      .app-page-title.mb-0.py-2
+        .page-title-wrapper
+          .page-title-heading
+            h1= `City: ${title}`
 
-          .main-card.mb-3.mt-3.card
-            .card-body
+  .row
+    .col-lg-6
 
-              form(method='GET')
-                .position-relative.form-group
-                  label(for='name') Name
-                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${city.name}` disabled)
-                .position-relative.form-group
-                  label(for='country') Country
-                  select.mb-2.form-control(disabled)
-                    option Egypt
-                    option(selected) UAE
-                    option Saudia Arabia
-                    option Qatar
-                    option Kuwait
-                
-                .d-flex.justify-content-end.pt-3
-                    button.mt-1.mr-2.btn.btn-success Submit
-                    button.mt-1.btn.btn-danger Cancel
+      .main-card.mb-3.mt-3.card
+        .card-body
+
+          form(method='GET')
+            .position-relative.form-group
+              label(for='name') Name
+              input#name.form-control(name='name' placeholder='Name' type='text' value=`${city.name}` disabled)
+            .position-relative.form-group
+              label(for='country') Country
+              select#country.mb-2.form-control(name='country')
+                each item in countryList
+                  if(item.id === city.country.id)
+                    option(selected)= item.name
+                  else
+                     option= item.name
+
+            .d-flex.justify-content-end.pt-3
+              button.mt-1.mr-2.btn.btn-success Submit
+              button.mt-1.btn.btn-danger Cancel
+
+block append scripts
+  script.
+    const config = JSON.parse(window.localStorage.getItem("expresso"));
+
+    fetch(`${config.apiUrl}api/v1/countries`)
+      .then(response => response.json())
+      .then(data => {
+        const countries = data.data.docs;
+        // console.log(countries);
+    });

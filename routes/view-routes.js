@@ -8,6 +8,7 @@ const uploadController = require('../controllers/upload-controller');
 const testController = require('../controllers/test-controller');
 const tagController = require('../controllers/tag-controller');
 const countryController = require('../controllers/country-controller');
+const cityController = require('../controllers/city-controller');
 
 const router = express.Router();
 
@@ -25,8 +26,8 @@ router.post("/countries",
             countryController.createOrUpdateCountry);
 router.delete("/countries/:id", countryController.deleteCountry);
 
-router.get("/cities", viewController.getCityListView);
-router.get("/cities/:id", viewController.getCityDetailView);
+router.get("/cities", cityController.getCityListView);
+router.get("/cities/:id", cityController.getCityDetailView);
 
 router.get("/areas", viewController.getAreaListView);
 router.get("/areas/:id", viewController.getAreaDetailView);
@@ -45,6 +46,8 @@ router.get("/branches/:id", viewController.getBranchDetailView);
 
 router.get("/me", authController.protect, viewController.getAccount);
 // router.post("/account-data", authController.protect, viewController.updateAccountData); // HTML FORM
+
+router.get("/config", viewController.getConfig);
 
 router.get("/test", authController.protect, testController.test);
 router.get("/checkout/:orderId", authController.protect, viewController.checkout);

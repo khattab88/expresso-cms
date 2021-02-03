@@ -3,7 +3,7 @@ module.exports = {
     appEnv: process.env.APP_ENV,
     port: process.env.PORT || 5000,
     dbConnection: process.env.DATABASE_CONNECTION,
-    // apiUrl: process.env.API_URL,
+    apiUrl: process.env.API_URL,
     email: {
         address: process.env.EMAIL_ADDRESS,
         host: process.env.EMAIL_HOST,

@@ -5,7 +5,7 @@ const { countryRepository, cityRepository, areaRepository,
         tagRepository, restaurantRepository, branchRepository,
         userRepository } = require("expresso-repositories");
 const AppError = errorHandling.AppError;
-
+const config = require("../config");
 
 /* Dashboard */
 exports.getDashboardView = catchAsync(async (req, res, next) => {
@@ -14,32 +14,12 @@ exports.getDashboardView = catchAsync(async (req, res, next) => {
     });
 });
 
-
-/* Cities */
-exports.getCityListView = catchAsync(async (req, res, next) => {
-
-    const cities = await cityRepository.getAll();
-
-    res.status(200).render("city-list", {
-        title: "Cities",
-        cities
+exports.getConfig = catchAsync(async (req, res, next) => {
+    res.status(200).json({
+        env: config.env,
+        apiUrl: config.apiUrl
     });
 });
-
-exports.getCityDetailView = catchAsync(async (req, res, next) => {
-
-    const city = await cityRepository.getById(req.params.id);
-
-    if (!city) {
-        return next(new AppError("There is no city with that id!", 404));
-    }
-
-    res.status(200).render("city-detail", {
-        title: city.name,
-        city
-    });
-});
-
 
 /* Areas */
 exports.getAreaListView = catchAsync(async (req, res, next) => {
