@@ -16,22 +16,23 @@ block content
       .main-card.mb-3.mt-3.card
         .card-body
 
-          form(method='GET')
+          form(method='POST' action="/cities")
+            input#id(type='hidden' name='id' value=`${city.id}`)
             .position-relative.form-group
               label(for='name') Name
-              input#name.form-control(name='name' placeholder='Name' type='text' value=`${city.name}` disabled)
+              input#name.form-control(name='name' placeholder='Name' type='text' value=`${city.name}`)
             .position-relative.form-group
               label(for='country') Country
               select#country.mb-2.form-control(name='country')
                 each item in countryList
                   if(item.id === city.country.id)
-                    option(selected)= item.name
+                    option(value=`${item.id}` selected)= item.name
                   else
-                     option= item.name
+                     option(value=`${item.id}`)= item.name
 
             .d-flex.justify-content-end.pt-3
               button.mt-1.mr-2.btn.btn-success Submit
-              button.mt-1.btn.btn-danger Cancel
+              a.mt-1.btn.btn-danger(href="/cities") Cancel
 
 block append scripts
   script.

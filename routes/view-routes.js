@@ -28,6 +28,8 @@ router.delete("/countries/:id", countryController.deleteCountry);
 
 router.get("/cities", cityController.getCityListView);
 router.get("/cities/:id", cityController.getCityDetailView);
+router.post("/cities", cityController.createOrUpdateCity);
+router.delete("/cities/:id", cityController.deleteCity);
 
 router.get("/areas", viewController.getAreaListView);
 router.get("/areas/:id", viewController.getAreaDetailView);

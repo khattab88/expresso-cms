@@ -2,7 +2,7 @@ const tableBody = document.querySelector("tbody");
 
 if (tableBody) {
     tableBody.addEventListener("click", e => {
-        e.preventDefault();
+        // e.preventDefault();
 
         if (e.target.className.indexOf("delete-btn") >= 0) {
 

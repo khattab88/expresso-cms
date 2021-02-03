@@ -45,3 +45,29 @@ exports.getCityDetailView = catchAsync(async (req, res, next) => {
         });
     }
 });
+
+exports.createOrUpdateCity = catchAsync(async (req, res, next) => {
+    const id = req.body.id;
+
+    if (id === "0") {
+        const newCity = await cityRepository.create({
+            name: req.body.name,
+            country: req.body.country 
+        });
+
+        res.redirect(`/cities/`);
+    } else {
+        const updatedCity = await cityRepository.update(id, {
+            name: req.body.name,
+            country: req.body.country
+        });
+
+        res.redirect(`/cities/${updatedCity.id}`);
+    }
+});
+
+exports.deleteCity = catchAsync(async (req, res, next) => {
+    await cityRepository.delete(req.params.id);
+
+    // res.redirect(`/cities/`);
+});
