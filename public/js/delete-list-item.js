@@ -9,10 +9,11 @@ if (tableBody) {
             const answer = confirm("Are you sure you want to delete?");
 
             if (answer) {
-                const tagId = e.target.dataset.tagId;
+                const type = e.target.dataset.type;
+                const id = e.target.dataset.id;
 
-                // delete tag
-                fetch(`/tags/${tagId}`, { method: "DELETE" });
+                // delete item
+                fetch(`/${type}/${id}`, { method: "DELETE" });
 
                 // remove row from the table
                 const tableRow = e.target.closest("tr");

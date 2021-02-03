@@ -63,3 +63,7 @@ exports.createOrUpdateCountry = catchAsync(async (req, res, next) => {
         res.redirect(`/countries/${id}`);
     }
 });
+
+exports.deleteCountry = catchAsync(async (req, res, next) => {
+    await countryRepository.delete(req.params.id);
+});

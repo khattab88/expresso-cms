@@ -22,7 +22,8 @@ router.get("/countries", countryController.getCountryListView);
 router.get("/countries/:id", countryController.getCountryDetailView);
 router.post("/countries", 
             uploadController.uploadImage, // uploadController.resizeImage,
-            countryController.createOrUpdateCountry)
+            countryController.createOrUpdateCountry);
+router.delete("/countries/:id", countryController.deleteCountry);
 
 router.get("/cities", viewController.getCityListView);
 router.get("/cities/:id", viewController.getCityDetailView);
