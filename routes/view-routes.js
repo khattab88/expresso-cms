@@ -7,6 +7,7 @@ const authController = require('@expresso-app/expresso-auth');
 const uploadController = require('../controllers/upload-controller');
 const testController = require('../controllers/test-controller');
 const tagController = require('../controllers/tag-controller');
+const countryController = require('../controllers/country-controller');
 
 const router = express.Router();
 
@@ -17,11 +18,11 @@ router.get("/login", viewController.login);
 
 router.get("/", authController.protect, viewController.getDashboardView);
 
-router.get("/countries", viewController.getCountryListView);
-router.get("/countries/:id", viewController.getCountryDetailView);
+router.get("/countries", countryController.getCountryListView);
+router.get("/countries/:id", countryController.getCountryDetailView);
 router.post("/countries/update", 
             uploadController.uploadImage, // uploadController.resizeImage,
-            viewController.updateCountry)
+            countryController.updateCountry)
 
 router.get("/cities", viewController.getCityListView);
 router.get("/cities/:id", viewController.getCityDetailView);
