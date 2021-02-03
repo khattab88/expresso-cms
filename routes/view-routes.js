@@ -6,6 +6,7 @@ const viewController = require('../controllers/view-controller');
 const authController = require('@expresso-app/expresso-auth');
 const uploadController = require('../controllers/upload-controller');
 const testController = require('../controllers/test-controller');
+const tagController = require('../controllers/tag-controller');
 
 const router = express.Router();
 
@@ -19,8 +20,7 @@ router.get("/", authController.protect, viewController.getDashboardView);
 router.get("/countries", viewController.getCountryListView);
 router.get("/countries/:id", viewController.getCountryDetailView);
 router.post("/countries/update", 
-            uploadController.uploadImage, 
-            // uploadController.resizeImage,
+            uploadController.uploadImage, // uploadController.resizeImage,
             viewController.updateCountry)
 
 router.get("/cities", viewController.getCityListView);
@@ -29,10 +29,10 @@ router.get("/cities/:id", viewController.getCityDetailView);
 router.get("/areas", viewController.getAreaListView);
 router.get("/areas/:id", viewController.getAreaDetailView);
 
-router.get("/tags", viewController.getTagListView);
-router.get("/tags/:id", viewController.getTagDetailView);
-router.post("/tags", viewController.createOrUpdateTag);
-router.delete("/tags/:id", viewController.deleteTag);
+router.get("/tags", tagController.getTagListView);
+router.get("/tags/:id", tagController.getTagDetailView);
+router.post("/tags", tagController.createOrUpdateTag);
+router.delete("/tags/:id", tagController.deleteTag);
 
 router.get("/restaurants", viewController.getRestaurantList);
 router.get("/restaurants/:id", viewController.getRestaurantDetailView);
