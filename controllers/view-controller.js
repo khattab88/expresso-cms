@@ -14,34 +14,11 @@ exports.getDashboardView = catchAsync(async (req, res, next) => {
     });
 });
 
+/* Config */
 exports.getConfig = catchAsync(async (req, res, next) => {
     res.status(200).json({
         env: config.env,
         apiUrl: config.apiUrl
-    });
-});
-
-/* Areas */
-exports.getAreaListView = catchAsync(async (req, res, next) => {
-
-    const areas = await areaRepository.getAll();
-
-    res.status(200).render("area-list", {
-        title: "Areas",
-        areas
-    });
-});
-exports.getAreaDetailView = catchAsync(async (req, res, next) => {
-
-    const area = await areaRepository.getById(req.params.id);
-
-    if (!area) {
-        return next(new AppError("There is no area with that id!", 404));
-    }
-
-    res.status(200).render("area-detail", {
-        title: area.name,
-        area
     });
 });
 

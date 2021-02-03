@@ -16,27 +16,45 @@ block content
           .main-card.mb-3.mt-3.card
             .card-body
 
-              form(method='GET')
+              form(method='POST' action="/areas")
                 .position-relative.form-group
                   label(for='name') Name
-                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${area.name}` disabled)
-                .position-relative.form-group
-                  label(for='country') Country
-                  select.mb-2.form-control(disabled)
-                    option Egypt
-                    option(selected) UAE
-                    option Saudia Arabia
-                    option Qatar
-                    option Kuwait
+                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${area.name}`)
+
+                //- .position-relative.form-group
+                //-   label(for='country') Country
+                //-   select#country.mb-2.form-control(name='country')
+                //-     each item in countryList
+                //-       if(item.id === area.city.country.id)
+                //-         option(value=`${item.id}` selected)= item.name
+                //-       else
+                //-          option(value=`${item.id}`)= item.name
 
                 .position-relative.form-group
                   label(for='city') City
-                  select.mb-2.form-control(disabled)
-                    option Cairo
-                    option Giza
-                    option Alexandria
-                    
+                  select#city.mb-2.form-control(name='city')
+                    each item in cityList
+                      if(item.id === area.city.id)
+                        option(value=`${item.id}` data-country-id=`${item.country.id}` selected)= `${item.name} (${item.country.name})`
+                      else
+                         option(value=`${item.id}` data-country-id=`${item.country.id}`)= `${item.name} (${item.country.name})`
                 
                 .d-flex.justify-content-end.pt-3
                     button.mt-1.mr-2.btn.btn-success Submit
-                    button.mt-1.btn.btn-danger Cancel
+                    a.mt-1.btn.btn-danger(href="/areas") Cancel
+
+block append scripts
+  script.
+    //- var countryList = document.querySelector("#country");
+    //- var cityList = document.querySelector("#city");
+
+    //- countryList.addEventListener("change", e => {
+    //-   const countryId = e.target.value;
+
+    //-   const allCities = Array.from(cityList.children).map(opt => {
+    //-     return { id: opt.value, country: opt.dataset.countryId };
+    //-   });
+
+    //-   const countryCities = allCities.filter(c => c.country.id == countryId);
+      // console.log(countryCities);
+    //});

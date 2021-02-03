@@ -9,6 +9,7 @@ const testController = require('../controllers/test-controller');
 const tagController = require('../controllers/tag-controller');
 const countryController = require('../controllers/country-controller');
 const cityController = require('../controllers/city-controller');
+const areaController = require('../controllers/area-controller');
 
 const router = express.Router();
 
@@ -31,8 +32,10 @@ router.get("/cities/:id", cityController.getCityDetailView);
 router.post("/cities", cityController.createOrUpdateCity);
 router.delete("/cities/:id", cityController.deleteCity);
 
-router.get("/areas", viewController.getAreaListView);
-router.get("/areas/:id", viewController.getAreaDetailView);
+router.get("/areas", areaController.getAreaListView);
+router.get("/areas/:id", areaController.getAreaDetailView);
+router.post("/areas", areaController.createOrUpdateArea);
+router.delete("/areas:/id", areaController.deleteArea);
 
 router.get("/tags", tagController.getTagListView);
 router.get("/tags/:id", tagController.getTagDetailView);
