@@ -55,9 +55,9 @@ exports.createOrUpdateRestaurant = catchAsync(async (req, res, next) => {
             specialOffers: req.body.specialOffers
         });
 
-        // const newMenu = await menuRepository.create({
-        //     restaurant: newRestaurant._id
-        // });
+        const newMenu = await menuRepository.create({
+            restaurant: newRestaurant._id
+        });
 
         res.redirect(`/restaurants`);
     } else {
@@ -66,7 +66,7 @@ exports.createOrUpdateRestaurant = catchAsync(async (req, res, next) => {
             slogan: req.body.slogan,
             deliveryTime: req.body.deliveryTime,
             deliveryFee: req.body.deliveryFee,
-            specialOffers: req.body.specialOffers
+            specialOffers: req.body.specialOffers === "on" ?true :false
         });
 
         res.redirect(`/restaurants/${id}`);

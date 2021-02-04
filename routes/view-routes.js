@@ -2,8 +2,8 @@
 const express = require('express');
 
 const viewController = require('../controllers/view-controller');
-// const authController = require('../controllers/auth-controller');
-const authController = require('@expresso-app/expresso-auth');
+const authController = require('../controllers/auth-controller');
+// const authController = require('@expresso-app/expresso-auth');
 const uploadController = require('../controllers/upload-controller');
 const testController = require('../controllers/test-controller');
 const tagController = require('../controllers/tag-controller');

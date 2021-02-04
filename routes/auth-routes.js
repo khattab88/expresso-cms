@@ -4,8 +4,8 @@
 const express = require('express');
 const router = express.Router();
 
-const auth = require('@expresso-app/expresso-auth');
-// const auth = require('../controllers/auth-controller');
+// const auth = require('@expresso-app/expresso-auth');
+const auth = require('../controllers/auth-controller');
 // const userController = require('../controllers/user-controller');
 
 router
