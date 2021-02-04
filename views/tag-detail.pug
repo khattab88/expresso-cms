@@ -18,6 +18,7 @@ block content
 
               form(method='POST', action='/tags')
                 input#id(type='hidden' name='id' value=`${tag.id}`)
+                
                 .position-relative.form-group
                   label(for='name') Name
                   input#name.form-control(name='name' placeholder='Name' type='text' value=`${tag.name}` required)

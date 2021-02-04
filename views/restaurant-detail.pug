@@ -18,30 +18,32 @@ block content
           .main-card.mb-3.mt-3.card
             .card-body
 
-              form(method='GET')
+              form(method='POST' action='/restaurants')
+                input#id(type='hidden' name='id' value=`${restaurant.id}`)
+
                 .position-relative.form-group
                   label(for='name') Name
-                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${restaurant.name}`)
+                  input#name.form-control(name='name' placeholder='Name' type='text' value=`${restaurant.name}` required)
                 
                 .position-relative.form-group
                   label(for='slogan') Slogan
-                  input#slogan.form-control(name='slogan' placeholder='Slogan' type='text' value=`${restaurant.slogan}`)
+                  input#slogan.form-control(name='slogan' placeholder='Slogan' type='text' value=`${restaurant.slogan}` required)
 
                 .position-relative.form-group
                   label(for='deliveryTime') Deleivery Time
-                  input#deliveryTime.form-control(name='deliveryTime' placeholder='Deleivery Time' type='number' value=`${restaurant.deliveryTime}`)
+                  input#deliveryTime.form-control(name='deliveryTime' placeholder='Deleivery Time' type='number' value=`${restaurant.deliveryTime}` required)
                 
                 .position-relative.form-group
                   label(for='deliveryFee') Deleivery Fee
-                  input#deliveryFee.form-control(name='deliveryFee' placeholder='Deleivery Fee' type='number' value=`${restaurant.deliveryFee}`)
+                  input#deliveryFee.form-control(name='deliveryFee' placeholder='Deleivery Fee' type='number' value=`${restaurant.deliveryFee}` required)
 
                 .position-relative.form-check
                     label.form-check-label(for='specialOffers')
-                        input#specialOffers.form-check-input(name='specialOffers' type='checkbox' checked)
+                        input#specialOffers.form-check-input(name='specialOffers' type='checkbox' value=`${restaurant.specialOffers}` checked=restaurant.specialOffers ? true : false)
                         | Special Offers
 
 
 
                 .d-flex.justify-content-end.pt-3
                     button.mt-1.mr-2.btn.btn-success Submit
-                    button.mt-1.btn.btn-danger Cancel
+                    a.mt-1.btn.btn-danger(href="/restaurants") Cancel

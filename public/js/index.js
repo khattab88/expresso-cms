@@ -7,7 +7,7 @@ import { updateAccount } from "./account";
 import { config } from "./config";
 
 // configure app variables (client-side)
-config();
+// config();
 
 // DOM ELEMENTS
 const loginForm = document.querySelector("#login-form");

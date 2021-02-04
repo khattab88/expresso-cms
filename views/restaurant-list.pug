@@ -6,9 +6,9 @@ block content
         .col
         
             .app-page-title.mb-0.py-2
-                .page-title-wrapper
-                    .page-title-heading
-                        h1= title
+                .page-title-wrapper.d-flex.justify-content-between
+                    h1= title
+                    a.btn.btn-lg.btn-success(href='/restaurants/new') Create New
 
     .row
         .col-lg-10
@@ -37,6 +37,9 @@ block content
                                     td.text-center.d-none.d-sm-table-cell= restaurant.deliveryFee
                                     td.text-center
                                         .row-manage
-                                            .row-manage__btn: a(href=`/restaurants/${restaurant.id}` data-restaurant-id=`${restaurant.id}`) Edit
+                                            .row-manage__btn: a(href=`/restaurants/${restaurant.id}` data-id=`${restaurant.id}`) Edit
                                             .row-manage__separator: span |
-                                            .row-manage__btn: a(href='#' data-restaurant-id=`${restaurant.id}`) Delete
+                                            .row-manage__btn: a.delete-btn.text-danger(data-type="restaurants" data-id=`${restaurant.id}`) Delete
+
+block append scripts
+    script(src='/js/delete-list-item.js')

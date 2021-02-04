@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 const { catchAsync, errorHandling } = require('expresso-utils');
-const { Tag, Country, City, Area, Restaurant, Branch } = require('expresso-models');
 const { countryRepository, cityRepository, areaRepository,
         tagRepository, restaurantRepository, branchRepository,
         userRepository } = require("expresso-repositories");
@@ -23,31 +22,7 @@ exports.getConfig = catchAsync(async (req, res, next) => {
 });
 
 
-/* Restaurants */
-exports.getRestaurantList = catchAsync(async (req, res, next) => {
-
-    const restaurants = await restaurantRepository.getAll();
-
-    res.status(200).render("restaurant-list", {
-        title: "Restaurants",
-        restaurants
-    });
-});
-
-exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
-
-    const restaurant = await restaurantRepository.getById(req.params.id);
-
-    if (!restaurant) {
-        return next(new AppError("There is no restaurant with that id!", 404));
-    }
-
-    res.status(200).render("restaurant-detail", {
-        title: restaurant.name,
-        restaurant
-    });
-});
-
+/* Menus */
 exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
 
     const restaurant = await restaurantRepository.getById(req.params.id);
@@ -57,6 +32,7 @@ exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
         restaurant
     });
 });
+
 
 /* Branches */
 exports.getBranchList = catchAsync(async (req, res, next) => {
