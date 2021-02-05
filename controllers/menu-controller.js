@@ -1,21 +1,21 @@
 /* eslint-disable prettier/prettier */
 const { catchAsync, errorHandling } = require('expresso-utils');
 const AppError = errorHandling.AppError;
-const { restaurantRepository, menuRepository, menuSectionRepository } = require("expresso-repositories");
+const { restaurantRepository, menuRepository, menuSectionRepository, menuItemRepository } = require("expresso-repositories");
 
 exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
     const restaurantId = req.params.id;
     const restaurant = await restaurantRepository.getById(restaurantId);
 
-    if(!restaurant) return next(new AppError("Restaurant not found!", 404));
+    if (!restaurant) return next(new AppError("Restaurant not found!", 404));
 
     const menu = await menuRepository.getByRestaurantId(restaurantId);
 
-    if(menu.menuSections.length > 0) {
+    if (menu.menuSections.length > 0) {
         const menuSectionPromises = menu.menuSections.map(async sectionId => { return await menuSectionRepository.getById(sectionId) });
         menu.menuSections = await Promise.all(menuSectionPromises);
     }
-    
+
     res.status(200).render("restaurant-menu", {
         title: `${restaurant.name} Menu`,
         menu
@@ -23,7 +23,7 @@ exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
 });
 
 exports.createOrUpdateMenuSection = catchAsync(async (req, res, next) => {
-    const menuId = req.body.id;
+    const menuId = req.body.menuId;
 
     const menu = await menuRepository.getById(menuId);
 
@@ -39,4 +39,56 @@ exports.createOrUpdateMenuSection = catchAsync(async (req, res, next) => {
     });
 
     res.redirect(`/restaurants/${menu.restaurant.id}/menu`);
+});
+
+exports.getMenuItemView = catchAsync(async (req, res, next) => {
+    const menuSectionId = req.params.sectionId;
+    const menuItemId = req.params.id;
+
+    const menuSection = await menuSectionRepository.getById(menuSectionId);
+
+    if (menuItemId === "new") {
+
+        const emptyMenuItem = {
+            id: 0,
+            name: "",
+            price: 0,
+            description: "",
+            menuSectionId: menuSectionId
+        };
+
+        res.status(200).render("menu-item", {
+            title: `${menuSection.name} / New Menu Item`,
+            menuItem: emptyMenuItem
+        });
+    } else {
+        const menuItem = await menuItemRepository.getById(menuItemId);
+
+        res.status(200).render("menu-item", {
+            title: `${menuSection.name} / ${menuItem.name}`,
+            menuItem
+        });
+    }
+});
+
+exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
+    const menuSectionId = req.body.menusectionId;
+    const menuItemId = req.body.id;
+
+    const menuSection = await menuSectionRepository.getById(menuSectionId);
+
+    if(menuItemId === "0") {
+        const data = {
+            name: req.body.name,
+            price: req.body.price,
+            description: req.body.description,
+            menuSection: menuSection._id
+        };
+
+        const newMenuItem = await menuItemRepository.create(data);
+
+        res.redirect(`/restaurants/${menuSection.menu.restaurant.id}/menu`);
+    } else {
+        //TODO: upadte existing menu item
+    }
 });

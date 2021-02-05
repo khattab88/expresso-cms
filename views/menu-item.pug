@@ -1,0 +1,31 @@
+extends base
+
+block content
+    .row
+        .col
+            .app-page-title.mb-0.py-2
+                .page-title-wrapper.d-lg-flex.justify-content-between
+                    .page-title-heading
+                        h1= `${title}`
+
+    .row
+        .col-lg-6
+            .main-card.mb-3.mt-3.card
+                .card-body
+                    form(method='POST' action="/menuItems")
+                        input#id(type='hidden' name='id' value=`${menuItem.id}`)
+                        input#menusectionId(type='hidden' name='menusectionId' value=`${menuItem.menuSectionId}`)
+                        .position-relative.form-group
+                            label(for='name') Name
+                            input#name.form-control(name='name' placeholder='Name' type='text' value=`${menuItem.name}`)
+                        .position-relative.form-group
+                            label(for='price') Price
+                            input#price.form-control(name='price' placeholder='Price' type='number' value=`${menuItem.price}`)
+                        .position-relative.form-group
+                            label(for='description') Description
+                            input#description.form-control(name='description' placeholder='Description' type='text' value=`${menuItem.description}`)
+
+
+                        .d-flex.justify-content-end.pt-3
+                            button.mt-1.mr-2.btn.btn-success Submit
+                            a.mt-1.btn.btn-danger(href="#") Cancel

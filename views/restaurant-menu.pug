@@ -3,9 +3,9 @@ extends base
 mixin menuSectionBox(section)
     .card.mt-2
         .card-header.d-flex.justify-content-between(id=`heading-${section.name}`)
-            button.text-left.m-0.p-0.btn.btn-link.btn-block(type='button' data-toggle='collapse' data-target=`#collapse-${section.name}` aria-expanded='true' aria-controls=`collapse-${section.name}`)
+            button.text-left.m-0.p-0.btn.btn-link.btn-block.d-flex.justify-content-between(type='button' data-toggle='collapse' data-target=`#collapse-${section.name}` aria-expanded='true' aria-controls=`collapse-${section.name}`)
                 h5.m-0.p-0= section.name
-            button.btn.btn-success.text-nowrap New Item
+                a.btn.btn-success.text-nowrap.d-inline-block(href=`/menusections/${section.id}/items/new`) New Item
         
         .collapse(id=`collapse-${section.name}` data-parent='#accordion' aria-labelledby=`heading-${section.name}`)
           .card-body
@@ -40,20 +40,27 @@ block content
                 #accordion.accordion-wrapper.mb-3
                   +menuSectionBox(menuSection)
 
+    
+    // storing current view state (menuId, activeSectionId, activeItemId)
+    input#menuId(type='hidden' value=`${menu.id}`)
+    input#activeSectionId(type='hidden')
+    input#activeItemId(type='hidden')
+
 
 block append modals
+
     // MENU SECTION MODAL
     #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', style='display: none;', aria-hidden='true')
         .modal-dialog(role='document')
           .modal-content
             .modal-header
-              h5#exampleModalLabel.modal-title New Menu Section
+              h5#exampleModalLabel.modal-title Edit Menu Section
               button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') &times;
             .modal-body
               p.mb-0
                 form(method='POST' action='/menuSections')
-                    input#id(type='hidden' name='id' value=`${menu.id}`)
+                    input#menuId(type='hidden' name='menuId' value=`${menu.id}`)
                     .position-relative.form-group
                         label(for='name') Name
                         input#name.form-control(name='name' placeholder='Name' type='text' required)
