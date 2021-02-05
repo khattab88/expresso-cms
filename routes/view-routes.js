@@ -11,6 +11,7 @@ const countryController = require('../controllers/country-controller');
 const cityController = require('../controllers/city-controller');
 const areaController = require('../controllers/area-controller');
 const restaurantController = require('../controllers/restaurant-controller');
+const menuController = require('../controllers/menu-controller');
 
 const router = express.Router();
 
@@ -48,7 +49,8 @@ router.get("/restaurants/:id", restaurantController.getRestaurantDetailView);
 router.post("/restaurants", restaurantController.createOrUpdateRestaurant);
 router.delete("/restaurants/:id", restaurantController.deleteRestaurant);
 
-router.get("/restaurants/:id/menu", viewController.getRestaurantMenuView);
+router.get("/restaurants/:id/menu", menuController.getRestaurantMenuView);
+router.post("/menuSections", menuController.createOrUpdateMenuSection);
 
 router.get("/branches", viewController.getBranchList);
 router.get("/branches/:id", viewController.getBranchDetailView);

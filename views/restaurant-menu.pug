@@ -32,30 +32,32 @@ block content
                 .page-title-wrapper.d-lg-flex.justify-content-between
                     .page-title-heading
                         h1= `${title}`
-                    button.mb-2.ml-2.btn.btn-success.btn-lg New Menu Section
+                    button.mb-2.ml-2.btn.btn-success.btn-lg(data-toggle='modal' data-target='#exampleModal') New Menu Section
 
-    each menuSection in restaurant.menu.menuSections
+    each menuSection in menu.menuSections
         .row
             .col
                 #accordion.accordion-wrapper.mb-3
                   +menuSectionBox(menuSection)
 
 
+block append modals
+    // MENU SECTION MODAL
+    #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', style='display: none;', aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title New Menu Section
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+              p.mb-0
+                form(method='POST' action='/menuSections')
+                    input#id(type='hidden' name='id' value=`${menu.id}`)
+                    .position-relative.form-group
+                        label(for='name') Name
+                        input#name.form-control(name='name' placeholder='Name' type='text' required)
 
-
-    //- .modal.fade.bd-example-modal-lg(tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' style='display: none;' aria-hidden='true')
-    //-     .modal-dialog.modal-lg
-    //-       .modal-content
-    //-         .modal-header
-    //-           h5#exampleModalLongTitle.modal-title Modal title
-    //-           button.close(type='button' data-dismiss='modal' aria-label='Close')
-    //-             span(aria-hidden='true') &times;
-    //-         .modal-body
-    //-           p
-    //-             | Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-    //-           p
-    //-             | Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-    //-         .modal-footer
-    //-           button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-    //-           button.btn.btn-primary(type='button') Save changes
-
+                    .modal-footer
+                      button.btn.btn-secondary(data-dismiss='modal') Close
+                      input.btn.btn-primary(type='submit' value='Save changes') 

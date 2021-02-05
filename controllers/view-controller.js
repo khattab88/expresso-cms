@@ -22,18 +22,6 @@ exports.getConfig = catchAsync(async (req, res, next) => {
 });
 
 
-/* Menus */
-exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
-
-    const restaurant = await restaurantRepository.getById(req.params.id);
-
-    res.status(200).render("restaurant-menu", {
-        title: `${restaurant.name} Menu`,
-        restaurant
-    });
-});
-
-
 /* Branches */
 exports.getBranchList = catchAsync(async (req, res, next) => {
 

@@ -6,9 +6,13 @@
     width: 125px !important;
 }
 
-.app-main .app-main__outer {
-    /* height: 91vh; */
+
+@media only screen and (max-width: 768px) {
+    .app-main .app-main__outer {
+      height: 91vh;
+    }
 }
+
 
 .app-logo-inverse {
     background: none;
@@ -18,4 +22,9 @@
     text-align: center;
     color: #FFF;
     margin-bottom: 30px;
+}
+
+.modal-footer {
+    background-color: #fff;
+    padding-bottom: 0;
 }
