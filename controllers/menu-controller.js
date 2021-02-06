@@ -11,9 +11,19 @@ exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
 
     const menu = await menuRepository.getByRestaurantId(restaurantId);
 
+    // populate menu sections
     if (menu.menuSections.length > 0) {
         const menuSectionPromises = menu.menuSections.map(async sectionId => { return await menuSectionRepository.getById(sectionId) });
         menu.menuSections = await Promise.all(menuSectionPromises);
+    }
+
+    // populate menu items for each section
+    for(const section of menu.menuSections) {
+        const menuItemPromises = section.menuItems.map(async menuItemId => {
+            return await menuItemRepository.getById(menuItemId);
+        });
+
+        section.menuItems = await Promise.all(menuItemPromises);
     }
 
     res.status(200).render("restaurant-menu", {
@@ -54,6 +64,7 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
             name: "",
             price: 0,
             description: "",
+            image: "item-0.jpg",
             menuSectionId: menuSectionId
         };
 
@@ -86,6 +97,12 @@ exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
         };
 
         const newMenuItem = await menuItemRepository.create(data);
+
+        menuSection.menuItems.push(newMenuItem.id);
+
+        await menuSectionRepository.update(menuSection.id, {
+            menuItems: menuSection.menuItems
+        });
 
         res.redirect(`/restaurants/${menuSection.menu.restaurant.id}/menu`);
     } else {
