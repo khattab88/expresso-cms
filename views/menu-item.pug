@@ -1,5 +1,43 @@
 extends base
 
+mixin optionBox(option)
+    .option-box
+        .card
+            .card-header(id=`heading-${option.id}`)
+                button.btn.btn-link.btn-block.text-left.p-0(type='button' data-toggle='collapse' data-target=`#collapse-${option.id}` aria-expanded='true' aria-controls=`collapse-${option.id}`)
+                    h6.m-0.p-0= option.name
+
+            .collapse(id=`collapse-${option.id}` data-parent='#accordion' aria-labelledby=`heading-${option.id}`)
+                .card-body
+                    .row
+                        .col-md-6
+                            input.optionId(type='hidden' name='optionId' value=`${option.id}`)
+
+                            .position-relative.form-group.mb-1
+                                .d-flex
+                                    label.font-weight-bold.mr-2(for='optionName') Name:
+                                    span.optionName.form-controlvalue=`${option.name}`
+                            .position-relative.form-group.mb-1
+                                .d-flex
+                                    label.font-weight-bold(for=`${option.name}-type`) Type:
+                                    fieldset.position-relative.form-check
+                                        label.form-check-label.mr-5
+                                            input.form-check-input(name=`${option.name}-type`, type='radio' checked=option.type=="Required")
+                                            | Required
+                                        label.form-check-label
+                                            input.form-check-input(name=`${option.name}-type`, type='radio' checked=option.type=="Optional")
+                                            | Optional
+                            .position-relative.form-group.mb-1
+                                label.font-weight-bold(for='optionItems') Option Items:
+                                ul
+                                    each optionItem in option.optionItems
+                                        li
+                                            div(dataset=`${optionItem.id}`) 
+                                                span.mr-2: i= optionItem.name
+                                                span= `(value: ${optionItem.value})`
+
+
+
 block content
     .row
         .col
@@ -12,9 +50,10 @@ block content
         .col-lg-6
             .main-card.mb-3.mt-3.card
                 .card-body
-                    form(method='POST' action="/menuItems")
+                    form(method='POST' action="/menuItems" enctype="multipart/form-data")
                         input#id(type='hidden' name='id' value=`${menuItem.id}`)
                         input#menusectionId(type='hidden' name='menusectionId' value=`${menuItem.menuSectionId}`)
+
                         .position-relative.form-group
                             label(for='name') Name
                             input#name.form-control(name='name' placeholder='Name' type='text' value=`${menuItem.name}`)
@@ -24,6 +63,22 @@ block content
                         .position-relative.form-group
                             label(for='description') Description
                             input#description.form-control(name='description' placeholder='Description' type='text' value=`${menuItem.description}`)
+
+                        .position-relative.form-group
+                            label(for='options') Options
+                            each option in menuItem.options
+                                #accordion.accordion-wrapper.mb-1
+                                    +optionBox(option)
+
+
+                        .position-relative.form-group
+                            .d-flex.justify.align-items-center
+                                label(for='image') Choose new image
+                                image.img-thumbnail.w-50.ml-3(src=`/img/uploads/${menuItem.image}` alt=`${menuItem.name}`)
+                            .col-sm-10
+                                input#image.form-control-file(name='image' type='file' accept='image/*')
+                                small.form-text.text-muted
+                                    | Image types supported (.jpg, .png, ...)
 
 
                         .d-flex.justify-content-end.pt-3

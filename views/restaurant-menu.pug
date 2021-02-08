@@ -13,7 +13,7 @@ mixin menuSectionBox(section)
                 each item in section.menuItems
                     .col-md-4
                         .main-card.mb-3.card
-                            img.card-img-top(width='100%' src=`/img/items/${item.image}` alt=`${item.name}`)
+                            img.card-img-top(width='100%' src=`/img/uploads/${item.image}` alt=`${item.name}`)
                             .card-body
                               h5.card-title= item.name
                               h6.card-subtitle Price: #{item.price}

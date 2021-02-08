@@ -53,3 +53,11 @@ tr:hover {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center; }
+
+/* line 67, public/css/style.scss */
+.option-box .card-header {
+  height: 3rem; }
+
+/* line 71, public/css/style.scss */
+.option-box .card-body {
+  padding: .75rem 1.25rem .5rem 1.5rem; }

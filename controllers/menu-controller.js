@@ -18,7 +18,7 @@ exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
     }
 
     // populate menu items for each section
-    for(const section of menu.menuSections) {
+    for (const section of menu.menuSections) {
         const menuItemPromises = section.menuItems.map(async menuItemId => {
             return await menuItemRepository.getById(menuItemId);
         });
@@ -65,6 +65,26 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
             price: 0,
             description: "",
             image: "item-0.jpg",
+            options: [
+                {
+                    id: "ddjdjdj",
+                    name: "bread type",
+                    type: "Required",
+                    optionItems: [
+                        { id: "jdjdj", name: "thick", value: 10 },
+                        { id: "jdjdj", name: "slim", value: 15 }
+                    ]
+                },
+                {
+                    id: "jfjfjfs",
+                    name: "extra cheese",
+                    type: "Optional",
+                    optionItems: [
+                        { id: "jdjdj", name: "yes", value: 10 },
+                        { id: "jdjdj", name: "no", value: 0 }
+                    ]
+                }
+            ],
             menuSectionId: menuSectionId
         };
 
@@ -88,14 +108,18 @@ exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
 
     const menuSection = await menuSectionRepository.getById(menuSectionId);
 
-    if(menuItemId === "0") {
-        const data = {
-            name: req.body.name,
-            price: req.body.price,
-            description: req.body.description,
-            menuSection: menuSection._id
-        };
+    const data = {
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        menuSection: menuSection._id
+    };
 
+    if (req.file) {
+        data.image = req.file.filename;
+    }
+
+    if (menuItemId === "0") {
         const newMenuItem = await menuItemRepository.create(data);
 
         menuSection.menuItems.push(newMenuItem.id);
