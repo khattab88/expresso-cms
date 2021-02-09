@@ -116,16 +116,54 @@ block append modals
                                 | Optional
                 .position-relative.form-group.mb-1
                     label.font-weight-bold(for='optionItems') Option Items:
-                    .d-flex.justify-content-between.align-items-center
+                    div#optionItemsInputs.d-flex.justify-content-between.align-items-center
                         .form-group.mb-2
                             label Name: 
-                            input.form-control(type='text')
+                            input#optionItemName.form-control(type='text')
                         .form-group.mb-2
                             label Value: 
-                            input.form-control(type='number')
-                        .btn.btn-success.btn-sm.mt-3 Add
+                            input#optionItemValue.form-control(type='number')
+                        a#addNewOptionItem.btn.btn-success.btn-sm.mt-3 Add
+                        div
+                    ul#optionItems
+                                
 
                     .modal-footer
                       button.btn.btn-secondary(data-dismiss='modal') Close
                       input.btn.btn-primary(type='submit' value='Save changes') 
 
+
+block scripts
+    script.
+        (function() {
+            document.querySelector("#addNewOptionItem").addEventListener("click", e => {
+                const optionItemsEl = document.querySelector("#optionItems");
+
+                const optionItemsInputs = e.target.closest("#optionItemsInputs");
+
+                const optionItemName = optionItemsInputs.querySelector("#optionItemName");
+                const optionItemValue = optionItemsInputs.querySelector("#optionItemValue");
+
+                // console.log(`${optionItemName} = ${optionItemValue}`);
+
+                const markup = `
+                    <div>
+                        <span>${optionItemName.value}</span>
+                        :
+                        <span>${optionItemValue.value}</span>
+                    </div>
+                `;
+
+                const li = document.createElement("li");
+                li.innerHTML = markup;
+
+                optionItemsEl.appendChild(li);
+
+                optionItemName.value = "";
+                optionItemValue.value = "";
+
+                optionItemName.focus();
+
+            });
+
+        })();
