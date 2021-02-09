@@ -13,10 +13,10 @@ mixin optionBox(option)
                         .col-md-6
                             input.optionId(type='hidden' name='optionId' value=`${option.id}`)
 
-                            .position-relative.form-group.mb-1
-                                .d-flex
+                            .position-relative.form-group.mb-2
+                                .d-flex.align-items-center
                                     label.font-weight-bold.mr-2(for='optionName') Name:
-                                    span.optionName.form-controlvalue=`${option.name}`
+                                    span.optionName.form-control= option.name
                             .position-relative.form-group.mb-1
                                 .d-flex
                                     label.font-weight-bold(for=`${option.name}-type`) Type:
@@ -50,7 +50,7 @@ block content
         .col-lg-6
             .main-card.mb-3.mt-3.card
                 .card-body
-                    form(method='POST' action="/menuItems" enctype="multipart/form-data")
+                    form#menuItemForm(method='POST' action="/menuItems" enctype="multipart/form-data")
                         input#id(type='hidden' name='id' value=`${menuItem.id}`)
                         input#menusectionId(type='hidden' name='menusectionId' value=`${menuItem.menuSectionId}`)
 
@@ -65,7 +65,9 @@ block content
                             input#description.form-control(name='description' placeholder='Description' type='text' value=`${menuItem.description}`)
 
                         .position-relative.form-group
-                            label(for='options') Options
+                            .d-flex.justify-content-between.mb-2
+                                label(for='options') Options
+                                a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(data-toggle='modal' data-target='#exampleModal') New Option Item
                             each option in menuItem.options
                                 #accordion.accordion-wrapper.mb-1
                                     +optionBox(option)
@@ -84,3 +86,46 @@ block content
                         .d-flex.justify-content-end.pt-3
                             button.mt-1.mr-2.btn.btn-success Submit
                             a.mt-1.btn.btn-danger(href="#") Cancel
+
+
+
+block append modals
+    #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', style='display: none;', aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Edit Menu Section
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+                input.optionId(type='hidden' name='optionId' value=`${menuItem.id}`)
+
+                .position-relative.form-group.mb-2
+                    .d-flex.align-items-center
+                        label.font-weight-bold.mr-2(for='optionName') Name:
+                        input.optionName.form-control(type='text')
+                .position-relative.form-group.mb-1
+                    .d-flex
+                        label.font-weight-bold(for='type') Type:
+                        fieldset.position-relative.form-check
+                            label.form-check-label.mr-5
+                                input.form-check-input(name='type', type='radio')
+                                | Required
+                            label.form-check-label
+                                input.form-check-input(name='type', type='radio')
+                                | Optional
+                .position-relative.form-group.mb-1
+                    label.font-weight-bold(for='optionItems') Option Items:
+                    .d-flex.justify-content-between.align-items-center
+                        .form-group.mb-2
+                            label Name: 
+                            input.form-control(type='text')
+                        .form-group.mb-2
+                            label Value: 
+                            input.form-control(type='number')
+                        .btn.btn-success.btn-sm.mt-3 Add
+
+                    .modal-footer
+                      button.btn.btn-secondary(data-dismiss='modal') Close
+                      input.btn.btn-primary(type='submit' value='Save changes') 
+

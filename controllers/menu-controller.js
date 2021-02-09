@@ -65,6 +65,7 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
             price: 0,
             description: "",
             image: "item-0.jpg",
+            // options: [],
             options: [
                 {
                     id: "ddjdjdj",
