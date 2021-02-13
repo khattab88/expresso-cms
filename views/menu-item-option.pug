@@ -24,10 +24,10 @@ block content
                                 label(for='type') Type:
                                 fieldset.position-relative.form-check
                                     label.form-check-label
-                                        input.form-check-input(name='type', type='radio')
+                                        input.form-check-input(name='type' type='radio' value='Required' checked=menuItemOption.type=="Required")
                                         | Required
                                     label.form-check-label.ml-5
-                                        input.form-check-input(name='type', type='radio')
+                                        input.form-check-input(name='type' type='radio' value='Optional' checked=menuItemOption.type=="Optional")
                                         | Optional
                         .position-relative.form-group.mb-1
                             label(for='optionItems') Option Items:

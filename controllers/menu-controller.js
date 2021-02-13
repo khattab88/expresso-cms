@@ -67,25 +67,25 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
             image: "item-0.jpg",
             options: [],
             // options: [
-                {
-                    id: "ddjdjdj",
-                    name: "bread type",
-                    type: "Required",
-                    optionItems: [
-                        { id: "jdjdj", name: "thick", value: 10 },
-                        { id: "jdjdj", name: "slim", value: 15 }
-                    ]
-                },
-                {
-                    id: "jfjfjfs",
-                    name: "extra cheese",
-                    type: "Optional",
-                    optionItems: [
-                        { id: "jdjdj", name: "yes", value: 10 },
-                        { id: "jdjdj", name: "no", value: 0 }
-                    ]
-                }
-            ],
+            //     {
+            //         id: "ddjdjdj",
+            //         name: "bread type",
+            //         type: "Required",
+            //         optionItems: [
+            //             { id: "jdjdj", name: "thick", value: 10 },
+            //             { id: "jdjdj", name: "slim", value: 15 }
+            //         ]
+            //     },
+            //     {
+            //         id: "jfjfjfs",
+            //         name: "extra cheese",
+            //         type: "Optional",
+            //         optionItems: [
+            //             { id: "jdjdj", name: "yes", value: 10 },
+            //             { id: "jdjdj", name: "no", value: 0 }
+            //         ]
+            //     }
+            // ],
             menuSectionId: menuSectionId
         };
 
@@ -140,12 +140,13 @@ exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
 
 exports.getMenuItemOption = catchAsync(async (req, res, next) => {
     const menuItemId = req.params.menuItemId;
+    const id = req.params.id;
 
-    if(req.params.id === "new") {
+    if(id === "new") {
         const emptyMenuItemOption = {
             id: 0,
             name: "",
-            type: "Required",
+            type: "Optional",
             options: []
         };
 
@@ -155,7 +156,13 @@ exports.getMenuItemOption = catchAsync(async (req, res, next) => {
             menuItemId
         });
     } else {
-        // TODO: update existing menu item option
+        const menuItemOption = await menuItemOptionRepository.getById(id);
+
+        res.render("menu-item-option", {
+            title: "Edit Menu Item Option",
+            menuItemOption: menuItemOption,
+            menuItemId
+        });
     }
 });
 
@@ -165,17 +172,18 @@ exports.createOrUpdateMenuItemOption = catchAsync(async (req, res, next) => {
 
     const data = {
         name: req.body.name,
-        type: req.body.type === "on" ?"Required" :"optional",
+        type: req.body.type,
         menuItem: menuItem._id
     };
 
     const id = req.body.id;
+    let option = null;
 
     if(id === "0") {  
-        const newOption = await menuItemOptionRepository.create(data);
-
-        res.redirect(`/menuItems/${menuItemId}/menuItemOptions/${newOption.id}`);
+        option = await menuItemOptionRepository.create(data);
     } else {
-        //TODO: update menu item option
+        option = await menuItemOptionRepository.update(id, data);
     }
+
+    res.redirect(`/menuItems/${menuItemId}/menuItemOptions/${option.id}`);
 });
