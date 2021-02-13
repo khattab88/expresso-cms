@@ -14,19 +14,74 @@ block content
                 .card-body
                     form#menuItemForm(method='POST' action="/menuItems" enctype="multipart/form-data")
                         input#id(type='hidden' name='id' value=`${menuItemOption.id}`)
-                        input#menusectionId(type='hidden' name='menuItemId' value=`${menuItemOption.menuSectionId}`)
+                        input#menuItemId(type='hidden' name='menuItemId' value=`${menuItemOption.menuItemId}`)
 
                         .position-relative.form-group
                             label(for='name') Name
                             input#name.form-control(name='name' placeholder='Name' type='text' value=`${menuItemOption.name}`)
-                        .position-relative.form-group
-                            label(for='description') Description
-                            input#description.form-control(name='description' placeholder='Description' type='text' value=`${menuItemOption.description}`)
+                        .position-relative.form-group.mb-1
+                            .d-flex
+                                label(for='type') Type:
+                                fieldset.position-relative.form-check
+                                    label.form-check-label
+                                        input.form-check-input(name='type', type='radio')
+                                        | Required
+                                    label.form-check-label.ml-5
+                                        input.form-check-input(name='type', type='radio')
+                                        | Optional
+                        .position-relative.form-group.mb-1
+                            label(for='optionItems') Option Items:
+                            div#optionItemsInputs.d-flex.justify-content-between.align-items-center
+                                .form-group.mb-2
+                                    label Name: 
+                                    input#optionItemName.form-control(type='text')
+                                .form-group.mb-2
+                                    label Value: 
+                                    input#optionItemValue.form-control(type='number')
+                                a#addNewOptionItem.btn.btn-success.btn-sm.mt-3.text-white.px-3 Add
+                                div
+                            ul#optionItems.list-group
+                
 
-                        .position-relative.form-group
-                            .d-flex.justify-content-between.mb-2
-                                label(for='options') Options
-                                a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(data-toggle='modal' data-target='#exampleModal') New Option Item
-                            each option in menuItem.options
-                                #accordion.accordion-wrapper.mb-1
-                                    +optionBox(option)
+block scripts
+    script.
+        
+        document.querySelector("#addNewOptionItem").addEventListener("click", e => {
+            const optionItemsEl = document.querySelector("#optionItems");
+            const optionItemsInputs = e.target.closest("#optionItemsInputs");
+            const optionItemName = optionItemsInputs.querySelector("#optionItemName");
+            const optionItemValue = optionItemsInputs.querySelector("#optionItemValue");
+            // console.log(`${optionItemName} = ${optionItemValue}`);
+
+            const markup = `
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex w-50 pt-2">
+                        <div>
+                            <label class="font-weight-bold">name:</label>
+                            <span>${optionItemName.value}</span>
+                        </div>
+                        <div class="ml-3">
+                            <label class="font-weight-bold">value:</label>
+                            <span>${optionItemName.value}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!--<button class="btn btn-primary">Edit</button>-->
+                        <a class="btn btn-danger text-white">Delete</a>
+                    </div>
+                </div>
+            `;
+
+            const li = document.createElement("li");
+            li.classList.add("list-group-item");
+            li.innerHTML = markup;
+
+            optionItemsEl.appendChild(li);
+            optionItemName.value = "";
+            optionItemValue.value = "";
+            optionItemName.focus();
+
+            });
+
+                

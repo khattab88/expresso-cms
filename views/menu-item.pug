@@ -68,7 +68,7 @@ block content
                             .d-flex.justify-content-between.mb-2
                                 label(for='options') Options
                                 //- a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(data-toggle='modal' data-target='#exampleModal') New Option Item
-                                a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(href=`/menuItems/${menuItem.id}/menuOptionItems/new`) New Option Item
+                                a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(href=`/menuItems/${menuItem.id}/menuItemOptions/new`) New Item Option
                             each option in menuItem.options
                                 #accordion.accordion-wrapper.mb-1
                                     +optionBox(option)
@@ -132,39 +132,3 @@ block append modals
                     .modal-footer
                       button.btn.btn-secondary(data-dismiss='modal') Close
                       input.btn.btn-primary(type='submit' value='Save changes') 
-
-
-block scripts
-    script.
-        (function() {
-            document.querySelector("#addNewOptionItem").addEventListener("click", e => {
-                const optionItemsEl = document.querySelector("#optionItems");
-
-                const optionItemsInputs = e.target.closest("#optionItemsInputs");
-
-                const optionItemName = optionItemsInputs.querySelector("#optionItemName");
-                const optionItemValue = optionItemsInputs.querySelector("#optionItemValue");
-
-                // console.log(`${optionItemName} = ${optionItemValue}`);
-
-                const markup = `
-                    <div>
-                        <span>${optionItemName.value}</span>
-                        :
-                        <span>${optionItemValue.value}</span>
-                    </div>
-                `;
-
-                const li = document.createElement("li");
-                li.innerHTML = markup;
-
-                optionItemsEl.appendChild(li);
-
-                optionItemName.value = "";
-                optionItemValue.value = "";
-
-                optionItemName.focus();
-
-            });
-
-        })();

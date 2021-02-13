@@ -139,6 +139,8 @@ exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
 });
 
 exports.getMenuItemOption = catchAsync(async (req, res, next) => {
+    const menuItemId = req.params.menuItemId;
+
     if(req.params.id === "new") {
         const emptyMenuItemOption = {
             id: 0,
@@ -149,7 +151,8 @@ exports.getMenuItemOption = catchAsync(async (req, res, next) => {
 
         res.render("menu-item-option", {
             title: "Edit Menu Item Option",
-            menuItemOption: emptyMenuItemOption
+            menuItemOption: emptyMenuItemOption,
+            menuItemId
         });
     } else {
         // TODO: update existing menu item option
