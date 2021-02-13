@@ -19,7 +19,7 @@ mixin menuSectionBox(section)
                               h6.card-subtitle Price: #{item.price}
                               p= item.description
                               .d-flex
-                                button.btn.btn-primary Edit
+                                a.btn.btn-primary(href=`/menusections/${section.id}/items/${item.id}`) Edit
                                 //-(data-toggle='modal' data-target='.bd-example-modal-lg') Edit
                                 button.btn.btn-danger.mx-1 Delete
  

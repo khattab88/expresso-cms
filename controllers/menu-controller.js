@@ -98,7 +98,8 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
 
         res.status(200).render("menu-item", {
             title: `${menuSection.name} / ${menuItem.name}`,
-            menuItem
+            menuItem,
+            menuSectionId: menuSectionId
         });
     }
 });
@@ -113,7 +114,7 @@ exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
         name: req.body.name,
         price: req.body.price,
         description: req.body.description,
-        menuSection: menuSection._id
+        menuSection: menuSection._id.toString()
     };
 
     if (req.file) {
@@ -131,6 +132,26 @@ exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
 
         res.redirect(`/restaurants/${menuSection.menu.restaurant.id}/menu`);
     } else {
-        //TODO: upadte existing menu item
+        const updatedMenuItem = await menuItemRepository.update(menuItemId, data);
+
+        res.redirect(`/restaurants/${menuSection.menu.restaurant.id}/menu`);
+    }
+});
+
+exports.getMenuItemOption = catchAsync(async (req, res, next) => {
+    if(req.params.id === "new") {
+        const emptyMenuItemOption = {
+            id: 0,
+            name: "",
+            type: "Required",
+            options: []
+        };
+
+        res.render("menu-item-option", {
+            title: "Edit Menu Item Option",
+            menuItemOption: emptyMenuItemOption
+        });
+    } else {
+        // TODO: update existing menu item option
     }
 });

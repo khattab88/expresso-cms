@@ -51,9 +51,9 @@ router.delete("/restaurants/:id", restaurantController.deleteRestaurant);
 
 router.get("/restaurants/:id/menu", menuController.getRestaurantMenuView);
 router.post("/menuSections", menuController.createOrUpdateMenuSection);
-
 router.get("/menusections/:sectionId/items/:id", menuController.getMenuItemView);
 router.post("/menuItems", uploadController.uploadImage, menuController.createOrUpdateMenuItem);
+router.get("/menuItems/:menuItemId/menuOptionItems/:id", menuController.getMenuItemOption);
 
 router.get("/branches", viewController.getBranchList);
 router.get("/branches/:id", viewController.getBranchDetailView);

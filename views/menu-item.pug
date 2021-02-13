@@ -52,7 +52,7 @@ block content
                 .card-body
                     form#menuItemForm(method='POST' action="/menuItems" enctype="multipart/form-data")
                         input#id(type='hidden' name='id' value=`${menuItem.id}`)
-                        input#menusectionId(type='hidden' name='menusectionId' value=`${menuItem.menuSectionId}`)
+                        input#menusectionId(type='hidden' name='menusectionId' value=`${menuSectionId}`)
 
                         .position-relative.form-group
                             label(for='name') Name
@@ -67,7 +67,8 @@ block content
                         .position-relative.form-group
                             .d-flex.justify-content-between.mb-2
                                 label(for='options') Options
-                                a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(data-toggle='modal' data-target='#exampleModal') New Option Item
+                                //- a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(data-toggle='modal' data-target='#exampleModal') New Option Item
+                                a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(href=`/menuItems/${menuItem.id}/menuOptionItems/new`) New Option Item
                             each option in menuItem.options
                                 #accordion.accordion-wrapper.mb-1
                                     +optionBox(option)

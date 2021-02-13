@@ -1,0 +1,32 @@
+extends base
+
+block content
+    .row
+        .col
+            .app-page-title.mb-0.py-2
+                .page-title-wrapper.d-lg-flex.justify-content-between
+                    .page-title-heading
+                        h1= `${title}`
+
+    .row
+        .col-lg-6
+            .main-card.mb-3.mt-3.card
+                .card-body
+                    form#menuItemForm(method='POST' action="/menuItems" enctype="multipart/form-data")
+                        input#id(type='hidden' name='id' value=`${menuItemOption.id}`)
+                        input#menusectionId(type='hidden' name='menuItemId' value=`${menuItemOption.menuSectionId}`)
+
+                        .position-relative.form-group
+                            label(for='name') Name
+                            input#name.form-control(name='name' placeholder='Name' type='text' value=`${menuItemOption.name}`)
+                        .position-relative.form-group
+                            label(for='description') Description
+                            input#description.form-control(name='description' placeholder='Description' type='text' value=`${menuItemOption.description}`)
+
+                        .position-relative.form-group
+                            .d-flex.justify-content-between.mb-2
+                                label(for='options') Options
+                                a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(data-toggle='modal' data-target='#exampleModal') New Option Item
+                            each option in menuItem.options
+                                #accordion.accordion-wrapper.mb-1
+                                    +optionBox(option)
