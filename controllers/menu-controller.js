@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 const { catchAsync, errorHandling } = require('expresso-utils');
 const AppError = errorHandling.AppError;
-const { restaurantRepository, menuRepository, menuSectionRepository, menuItemRepository } = require("expresso-repositories");
+const { restaurantRepository, menuRepository, menuSectionRepository, menuItemRepository, menuItemOptionRepository } = require("expresso-repositories");
 
 exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
     const restaurantId = req.params.id;
@@ -65,8 +65,8 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
             price: 0,
             description: "",
             image: "item-0.jpg",
-            // options: [],
-            options: [
+            options: [],
+            // options: [
                 {
                     id: "ddjdjdj",
                     name: "bread type",
@@ -156,5 +156,26 @@ exports.getMenuItemOption = catchAsync(async (req, res, next) => {
         });
     } else {
         // TODO: update existing menu item option
+    }
+});
+
+exports.createOrUpdateMenuItemOption = catchAsync(async (req, res, next) => {
+    const menuItemId = req.body.menuItemId;
+    const menuItem = await menuItemRepository.getById(menuItemId);
+
+    const data = {
+        name: req.body.name,
+        type: req.body.type === "on" ?"Required" :"optional",
+        menuItem: menuItem._id
+    };
+
+    const id = req.body.id;
+
+    if(id === "0") {  
+        const newOption = await menuItemOptionRepository.create(data);
+
+        res.redirect(`/menuItems/${menuItemId}/menuItemOptions/${newOption.id}`);
+    } else {
+        //TODO: update menu item option
     }
 });

@@ -12,9 +12,9 @@ block content
         .col-lg-6
             .main-card.mb-3.mt-3.card
                 .card-body
-                    form#menuItemForm(method='POST' action="/menuItems" enctype="multipart/form-data")
+                    form#menuItemForm(method='POST' action="/menuItemsOptions")
                         input#id(type='hidden' name='id' value=`${menuItemOption.id}`)
-                        input#menuItemId(type='hidden' name='menuItemId' value=`${menuItemOption.menuItemId}`)
+                        input#menuItemId(type='hidden' name='menuItemId' value=`${menuItemId}`)
 
                         .position-relative.form-group
                             label(for='name') Name
@@ -37,10 +37,14 @@ block content
                                     input#optionItemName.form-control(type='text')
                                 .form-group.mb-2
                                     label Value: 
-                                    input#optionItemValue.form-control(type='number')
+                                    input#optionItemValue.form-control(type='number' value='0')
                                 a#addNewOptionItem.btn.btn-success.btn-sm.mt-3.text-white.px-3 Add
                                 div
-                            ul#optionItems.list-group
+                            ul#optionItems.list-group.w-75
+
+                        .d-flex.justify-content-end.pt-3
+                            button.mt-1.mr-2.btn.btn-success Submit
+                            a.mt-1.btn.btn-danger(href="#") Cancel
                 
 
 block scripts
@@ -51,18 +55,18 @@ block scripts
             const optionItemsInputs = e.target.closest("#optionItemsInputs");
             const optionItemName = optionItemsInputs.querySelector("#optionItemName");
             const optionItemValue = optionItemsInputs.querySelector("#optionItemValue");
-            // console.log(`${optionItemName} = ${optionItemValue}`);
+            console.log(`${optionItemName.value} = ${optionItemValue.value}`);
 
             const markup = `
                 <div class="d-flex justify-content-between">
-                    <div class="d-flex w-50 pt-2">
+                    <div class="d-flex w-75 pt-2">
                         <div>
                             <label class="font-weight-bold">name:</label>
                             <span>${optionItemName.value}</span>
                         </div>
                         <div class="ml-3">
                             <label class="font-weight-bold">value:</label>
-                            <span>${optionItemName.value}</span>
+                            <span>${optionItemValue.value}</span>
                         </div>
                     </div>
 
