@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 const { catchAsync, errorHandling } = require('expresso-utils');
 const AppError = errorHandling.AppError;
-const { restaurantRepository, menuRepository, menuSectionRepository, menuItemRepository, menuItemOptionRepository } = require("expresso-repositories");
+const { restaurantRepository, menuRepository, menuSectionRepository,
+        menuItemRepository, menuItemOptionRepository, menuItemOptionItemRepository } = require("expresso-repositories");
 
 exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
     const restaurantId = req.params.id;
@@ -66,26 +67,6 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
             description: "",
             image: "item-0.jpg",
             options: [],
-            // options: [
-            //     {
-            //         id: "ddjdjdj",
-            //         name: "bread type",
-            //         type: "Required",
-            //         optionItems: [
-            //             { id: "jdjdj", name: "thick", value: 10 },
-            //             { id: "jdjdj", name: "slim", value: 15 }
-            //         ]
-            //     },
-            //     {
-            //         id: "jfjfjfs",
-            //         name: "extra cheese",
-            //         type: "Optional",
-            //         optionItems: [
-            //             { id: "jdjdj", name: "yes", value: 10 },
-            //             { id: "jdjdj", name: "no", value: 0 }
-            //         ]
-            //     }
-            // ],
             menuSectionId: menuSectionId
         };
 
@@ -95,6 +76,12 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
         });
     } else {
         const menuItem = await menuItemRepository.getById(menuItemId);
+
+        // populate menu item with options
+        const optionPromises = menuItem.options.map(async optionId => { 
+            return await menuItemOptionRepository.getById(optionId)
+        });
+        menuItem.options = await Promise.all(optionPromises);
 
         res.status(200).render("menu-item", {
             title: `${menuSection.name} / ${menuItem.name}`,
@@ -181,6 +168,11 @@ exports.createOrUpdateMenuItemOption = catchAsync(async (req, res, next) => {
 
     if(id === "0") {  
         option = await menuItemOptionRepository.create(data);
+
+        menuItem.options.push(option.id);
+        await menuItemRepository.update(menuItem.id, {
+            options: menuItem.options
+        });
     } else {
         option = await menuItemOptionRepository.update(id, data);
     }

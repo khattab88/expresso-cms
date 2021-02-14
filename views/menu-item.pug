@@ -27,14 +27,18 @@ mixin optionBox(option)
                                         label.form-check-label
                                             input.form-check-input(name=`${option.name}-type`, type='radio' checked=option.type=="Optional")
                                             | Optional
-                            .position-relative.form-group.mb-1
-                                label.font-weight-bold(for='optionItems') Option Items:
-                                ul
-                                    each optionItem in option.optionItems
-                                        li
-                                            div(dataset=`${optionItem.id}`) 
-                                                span.mr-2: i= optionItem.name
-                                                span= `(value: ${optionItem.value})`
+                        .col-md-6
+                            a(target="_blank" href=`/menuItems/f56b443e-0585-44bf-8323-85cd18b74110/menuItemOptions/${option.id}`) Edit
+
+                            //- .position-relative.form-group.mb-1
+                                //- label.font-weight-bold(for='optionItems') Option Items:
+                                //- ul
+                                    //- if option.optionItems
+                                        //- each optionItem in option.optionItems
+                                            //- li
+                                                //- div(dataset=`${optionItem.id}`) 
+                                                    //- span.mr-2: i= optionItem.name
+                                                    //- span= `(value: ${optionItem.value})`
 
 
 
