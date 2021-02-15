@@ -22,32 +22,6 @@ exports.getConfig = catchAsync(async (req, res, next) => {
 });
 
 
-/* Branches */
-exports.getBranchList = catchAsync(async (req, res, next) => {
-
-    const branches = await branchRepository.getAll();
-
-    res.status(200).render("branch-list", {
-        title: "Branches",
-        branches
-    });
-});
-
-exports.getBranchDetailView = catchAsync(async (req, res, next) => {
-
-    const branch = await branchRepository.getById(req.params.id);
-
-    if (!branch) {
-        return next(new AppError("There is no branch with that id!", 404));
-    }
-
-    res.status(200).render("branch-detail", {
-        title: branch.name,
-        branch
-    });
-});
-
-
 /* Login */
 exports.login = catchAsync(async (req, res, next) => {
     res.status(200).render("login", {

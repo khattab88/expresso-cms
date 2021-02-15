@@ -12,6 +12,7 @@ const cityController = require('../controllers/city-controller');
 const areaController = require('../controllers/area-controller');
 const restaurantController = require('../controllers/restaurant-controller');
 const menuController = require('../controllers/menu-controller');
+const branchController = require('../controllers/branch-controller');
 
 const router = express.Router();
 
@@ -55,9 +56,10 @@ router.get("/menusections/:sectionId/items/:id", menuController.getMenuItemView)
 router.post("/menuItems", uploadController.uploadImage, menuController.createOrUpdateMenuItem);
 router.get("/menuItems/:menuItemId/menuItemOptions/:id", menuController.getMenuItemOption);
 router.post("/menuItemsOptions", menuController.createOrUpdateMenuItemOption);
+router.post("/menuItemsOptionsItems", menuController.createOrUpdateMenuItemOptionItem);
 
-router.get("/branches", viewController.getBranchList);
-router.get("/branches/:id", viewController.getBranchDetailView);
+router.get("/branches", branchController.getBranchList);
+router.get("/branches/:id", branchController.getBranchDetailView);
 
 router.get("/me", authController.protect, viewController.getAccount);
 // router.post("/account-data", authController.protect, viewController.updateAccountData); // HTML FORM

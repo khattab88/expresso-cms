@@ -27,9 +27,13 @@ block content
                 .position-relative.form-group
                   label(for='restaurant') Restaurant
                   select#restaurant.mb-2.form-control
-                    option Mc'Donalds
-                    option KFC
-                    option Pizza Hut
+                    each restaurant in restaurantList
+                      option= restaurant.name
+                .position-relative.form-group
+                  label(for='area') Area
+                  select#area.mb-2.form-control
+                    each area in areaList
+                      option= area.name
                 .position-relative.form-group(style='height: 310px;')
                   label(for='location') Location
                   //- input#coords(type='hidden' value=`${branch.location.coordinates}`)

@@ -9,8 +9,9 @@ block content
                 .page-title-wrapper
                     .page-title-heading
                         h1= `Restaurant: ${title}`
-                
-                a.btn.btn-info.mx-5(target="_blank" href=`/restaurants/${restaurant.id}/menu`) Show Menu
+                .d-flex.ml-5
+                  a.btn.btn-info.mx-1(target="_blank" href=`/restaurants/${restaurant.id}/menu`) Show Menu
+                  a.btn.btn-warning.mx-1(target="_blank" href=`/branches?restaurantId=${restaurant.id}`) Show Branches
 
     .row
         .col-lg-6
