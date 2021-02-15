@@ -34,11 +34,11 @@ block content
                 .position-relative.form-group
                   label(for='city') City
                   select#city.mb-2.form-control(name='city')
-                    each item in cityList
-                      if(item.id === area.city.id)
-                        option(value=`${item.id}` data-country-id=`${item.country.id}` selected)= `${item.name} (${item.country.name})`
+                    each city in cityList
+                      if(city.id === area.city.id)
+                        option(value=`${city._id}` data-country-id=`${city.country.id}` selected)= `${city.name} (${city.country.name})`
                       else
-                         option(value=`${item.id}` data-country-id=`${item.country.id}`)= `${item.name} (${item.country.name})`
+                         option(value=`${city._id}` data-country-id=`${city.country.id}`)= `${city.name} (${city.country.name})`
                 
                 .d-flex.justify-content-end.pt-3
                     button.mt-1.mr-2.btn.btn-success Submit

@@ -16,9 +16,9 @@ exports.getAreaListView = catchAsync(async (req, res, next) => {
 exports.getAreaDetailView = catchAsync(async (req, res, next) => {
 
     const countryList = (await countryRepository.getAll())
-        .map(country => { return { id: country.id, name: country.name } });
+        .map(country => { return { _id: country._id, id: country.id, name: country.name } });
     const cityList = (await cityRepository.getAll())
-        .map(city => { return { id: city.id, name: city.name, country: city.country} });
+        .map(city => { return { _id: city._id, id: city.id, name: city.name, country: city.country} });
 
     if (req.params.id === "new") {
         const emptyArea = {
