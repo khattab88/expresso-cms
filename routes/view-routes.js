@@ -60,6 +60,8 @@ router.post("/menuItemsOptionsItems", menuController.createOrUpdateMenuItemOptio
 
 router.get("/branches", branchController.getBranchList);
 router.get("/branches/:id", branchController.getBranchDetailView);
+router.post("/branches", branchController.createOrUpdateBranch);
+router.delete("/branches/:id", branchController.deleteBranch);
 
 router.get("/me", authController.protect, viewController.getAccount);
 // router.post("/account-data", authController.protect, viewController.updateAccountData); // HTML FORM

@@ -20,23 +20,30 @@ block content
           .main-card.mb-3.mt-3.card
             .card-body
 
-              form(method='GET')
+              form(method='POST' action='/branches')
+                input#id(type='hidden' name='id' value=`${branch.id}`)
                 .position-relative.form-group
                   label(for='name') Name
                   input#name.form-control(name='name' placeholder='Name' type='text' value=`${branch.name}`)
                 .position-relative.form-group
                   label(for='restaurant') Restaurant
-                  select#restaurant.mb-2.form-control
+                  select#restaurant.mb-2.form-control(name='restaurant')
                     each restaurant in restaurantList
-                      option= restaurant.name
+                      if(branch.restaurant.id === restaurant.id)
+                        option(value=`${restaurant._id}` selected)= restaurant.name
+                      else
+                        option(value=`${restaurant._id}`)= restaurant.name
                 .position-relative.form-group
                   label(for='area') Area
-                  select#area.mb-2.form-control
+                  select#area.mb-2.form-control(name='area')
                     each area in areaList
-                      option= area.name
+                      if(branch.area.id === area.id)
+                        option(value=`${area.id}` selected)= area.name
+                      else
+                        option(value=`${area.id}`)= area.name
                 .position-relative.form-group(style='height: 310px;')
                   label(for='location') Location
-                  //- input#coords(type='hidden' value=`${branch.location.coordinates}`)
+                  input#coordinates(type='hidden' name='coordinates' value=`${branch.location.coordinates}`)
                   #map(data-location=`${branch.location.coordinates}` data-branch=`${branch.name}`)
 
                 .d-flex.justify-content-end.pt-3
