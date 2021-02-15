@@ -145,6 +145,12 @@ exports.getMenuItemOption = catchAsync(async (req, res, next) => {
     } else {
         const menuItemOption = await menuItemOptionRepository.getById(id);
 
+        // populate option items
+        const itemOptionPromises = menuItemOption.optionItems.map(async optionItemId => {
+            return await menuItemOptionItemRepository.getById(optionItemId);
+        });
+        menuItemOption.optionItems = await Promise.all(itemOptionPromises);
+
         res.render("menu-item-option", {
             title: "Edit Menu Item Option",
             menuItemOption: menuItemOption,
@@ -178,4 +184,28 @@ exports.createOrUpdateMenuItemOption = catchAsync(async (req, res, next) => {
     }
 
     res.redirect(`/menuItems/${menuItemId}/menuItemOptions/${option.id}`);
+});
+
+exports.createOrUpdateMenuItemOptionItem = catchAsync(async (req, res, next) => {
+    const { optionId ,name, value } = req.body;
+
+    const option = await menuItemOptionRepository.getById(optionId);
+
+    const optionItem = await menuItemOptionItemRepository.create({
+        name,
+        value,
+        option: option._id
+    });
+
+    option.optionItems.push(optionItem.id);
+    await menuItemOptionRepository.update(option.id, {
+        optionItems: option.optionItems
+    });
+
+    res.status(200).send({
+        status: "success",
+        data: {
+            optionItem
+        }
+    });
 });

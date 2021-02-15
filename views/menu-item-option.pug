@@ -34,13 +34,26 @@ block content
                             div#optionItemsInputs.d-flex.justify-content-between.align-items-center
                                 .form-group.mb-2
                                     label Name: 
-                                    input#optionItemName.form-control(type='text')
+                                    input#optionItemName.form-control(type='text' placeholder='Name')
                                 .form-group.mb-2
                                     label Value: 
                                     input#optionItemValue.form-control(type='number' value='0')
                                 a#addNewOptionItem.btn.btn-success.btn-sm.mt-3.text-white.px-3 Add
                                 div
                             ul#optionItems.list-group.w-75
+                                each optionItem in menuItemOption.optionItems
+                                    li.list-group-item(data-id=`${optionItem.id}`)
+                                        .d-flex.justify-content-between
+                                            .d-flex.w-75.pt-2
+                                              div
+                                                label.font-weight-bold name:
+                                                span= optionItem.name
+                                              .ml-3
+                                                label.font-weight-bold value:
+                                                span= optionItem.value
+                                            div
+                                              btn.btn.btn-danger.text-white(data-id=`${optionItem.id}`) Delete
+
 
                         .d-flex.justify-content-end.pt-3
                             button.mt-1.mr-2.btn.btn-success Submit
@@ -51,22 +64,43 @@ block scripts
     script.
         
         document.querySelector("#addNewOptionItem").addEventListener("click", e => {
+            const optionId = document.querySelector("#id").value;
+
             const optionItemsEl = document.querySelector("#optionItems");
             const optionItemsInputs = e.target.closest("#optionItemsInputs");
             const optionItemName = optionItemsInputs.querySelector("#optionItemName");
             const optionItemValue = optionItemsInputs.querySelector("#optionItemValue");
-            console.log(`${optionItemName.value} = ${optionItemValue.value}`);
+            // console.log(`${optionItemName.value} = ${optionItemValue.value}`);
 
-            const markup = `
-                <div class="d-flex justify-content-between">
+
+            //TODO: craete option item
+            fetch("/menuItemsOptionsItems", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    optionId,
+                    name: optionItemName.value,
+                    value: optionItemValue.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+
+                const optionItem = data.data.optionItem;
+
+                const markup = `
+                <div class="d-flex justify-content-between" >
                     <div class="d-flex w-75 pt-2">
                         <div>
                             <label class="font-weight-bold">name:</label>
-                            <span>${optionItemName.value}</span>
+                            <span>${optionItem.name}</span>
                         </div>
                         <div class="ml-3">
                             <label class="font-weight-bold">value:</label>
-                            <span>${optionItemValue.value}</span>
+                            <span>${optionItem.value}</span>
                         </div>
                     </div>
 
@@ -75,16 +109,21 @@ block scripts
                         <a class="btn btn-danger text-white">Delete</a>
                     </div>
                 </div>
-            `;
+                `;
 
-            const li = document.createElement("li");
-            li.classList.add("list-group-item");
-            li.innerHTML = markup;
+                const li = document.createElement("li");
+                li.setAttribute("data-id", optionItem.id);
+                li.classList.add("list-group-item");
+                li.innerHTML = markup;
 
-            optionItemsEl.appendChild(li);
-            optionItemName.value = "";
-            optionItemValue.value = "";
-            optionItemName.focus();
+                optionItemsEl.appendChild(li);
+                optionItemName.value = "";
+                optionItemValue.value = "";
+                optionItemName.focus();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
             });
 
