@@ -15,7 +15,11 @@ exports.getCityListView = catchAsync(async (req, res, next) => {
 
 exports.getCityDetailView = catchAsync(async (req, res, next) => {
     const countryList = (await countryRepository.getAll())
-                         .map(country => { return { id: country.id, name: country.name} });
+                         .map(country => { return {
+                            _id: country._id,
+                            id: country.id, 
+                            name: country.name 
+                        } });
 
     if (req.params.id === "new") {
         const emptyCity = {

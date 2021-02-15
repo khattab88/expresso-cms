@@ -24,11 +24,11 @@ block content
             .position-relative.form-group
               label(for='country') Country
               select#country.mb-2.form-control(name='country')
-                each item in countryList
-                  if(item.id === city.country.id)
-                    option(value=`${item.id}` selected)= item.name
+                each country in countryList
+                  if(country.id === city.country.id)
+                    option(value=`${country._id}` selected)= country.name
                   else
-                     option(value=`${item.id}`)= item.name
+                     option(value=`${country._id}`)= country.name
 
             .d-flex.justify-content-end.pt-3
               button.mt-1.mr-2.btn.btn-success Submit
