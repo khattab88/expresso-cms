@@ -31,7 +31,10 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 // Serving static files
-// app.use(express.static(`${__dirname}/public`));
+process.env.PWD = process.cwd();
+console.log(process.env.PWD);
+app.use(express.static(path.join(process.env.PWD, 'public')));
+
 app.use(express.static(path.join(__dirname, "public")));
 
 // Setting security HTTP headers
