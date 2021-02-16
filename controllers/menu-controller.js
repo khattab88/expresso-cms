@@ -134,7 +134,7 @@ exports.getMenuItemOption = catchAsync(async (req, res, next) => {
             id: 0,
             name: "",
             type: "Optional",
-            options: []
+            optionItems: []
         };
 
         res.render("menu-item-option", {

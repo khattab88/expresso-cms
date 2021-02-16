@@ -41,18 +41,19 @@ block content
                                 a#addNewOptionItem.btn.btn-success.btn-sm.mt-3.text-white.px-3 Add
                                 div
                             ul#optionItems.list-group.w-75
-                                each optionItem in menuItemOption.optionItems
-                                    li.list-group-item(data-id=`${optionItem.id}`)
-                                        .d-flex.justify-content-between
-                                            .d-flex.w-75.pt-2
-                                              div
-                                                label.font-weight-bold name:
-                                                span= optionItem.name
-                                              .ml-3
-                                                label.font-weight-bold value:
-                                                span= optionItem.value
-                                            div
-                                              btn.btn.btn-danger.text-white(data-id=`${optionItem.id}`) Delete
+                                if menuItemOption.optionItems.length > 0
+                                    each optionItem in menuItemOption.optionItems
+                                        li.list-group-item(data-id=`${optionItem.id}`)
+                                            .d-flex.justify-content-between
+                                                .d-flex.w-75.pt-2
+                                                  div
+                                                    label.font-weight-bold name:
+                                                    span= optionItem.name
+                                                  .ml-3
+                                                    label.font-weight-bold value:
+                                                    span= optionItem.value
+                                                div
+                                                  btn.btn.btn-danger.text-white(data-id=`${optionItem.id}`) Delete
 
 
                         .d-flex.justify-content-end.pt-3
