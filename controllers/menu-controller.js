@@ -83,10 +83,11 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
         });
         menuItem.options = await Promise.all(optionPromises);
 
+        menuItem.menuSectionId = menuSection._id.toString();
+
         res.status(200).render("menu-item", {
             title: `${menuSection.name} / ${menuItem.name}`,
-            menuItem,
-            menuSectionId: menuSectionId
+            menuItem
         });
     }
 });
