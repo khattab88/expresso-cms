@@ -52,7 +52,7 @@ exports.createOrUpdateRestaurant = catchAsync(async (req, res, next) => {
             slogan: req.body.slogan,
             deliveryTime: req.body.deliveryTime,
             deliveryFee: req.body.deliveryFee,
-            specialOffers: req.body.specialOffers
+            specialOffers: req.body.specialOffers === "on" ?true :false
         });
 
         const newMenu = await menuRepository.create({
