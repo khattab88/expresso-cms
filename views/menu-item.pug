@@ -56,7 +56,7 @@ block content
                 .card-body
                     form#menuItemForm(method='POST' action="/menuItems" enctype="multipart/form-data")
                         input#id(type='hidden' name='id' value=`${menuItem.id}`)
-                        input#menusectionId(type='hidden' name='menusectionId' value=`${menuSectionId}`)
+                        input#menusectionId(type='hidden' name='menusectionId' value=`${menuItem.menuSectionId}`)
 
                         .position-relative.form-group
                             label(for='name') Name

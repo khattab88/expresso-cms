@@ -67,7 +67,7 @@ exports.getMenuItemView = catchAsync(async (req, res, next) => {
             description: "",
             image: "item-0.jpg",
             options: [],
-            menuSectionId: menuSectionId
+            menuSectionId: menuSection._id.toString(),
         };
 
         res.status(200).render("menu-item", {
@@ -95,7 +95,7 @@ exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
     const menuSectionId = req.body.menusectionId;
     const menuItemId = req.body.id;
 
-    const menuSection = await menuSectionRepository.getById(menuSectionId);
+    const menuSection = await menuSectionRepository.model.findOne({ _id: menuSectionId });
 
     const data = {
         name: req.body.name,
