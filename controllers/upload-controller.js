@@ -17,7 +17,7 @@ const multerStorage = multer.diskStorage({
     }
 });
 
-/// USE THIS ONLY IF USING RESIZE IMAGE MIDDLEWARE 
+/// USE THIS ONLY IF USING RESIZE IMAGE MIDDLEWARE
 // const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, callback) => {
@@ -28,12 +28,14 @@ const multerFilter = (req, file, callback) => {
     }
 };
 
-const upload = multer({ 
+const upload = multer({
     storage: multerStorage,
     fileFilter: multerFilter
 });
 
-exports.uploadImage = upload.single("image");
+// exports.uploadImage = upload.single("image");
+exports.uploadImage = upload.any();
+
 
 exports.resizeImage = (req, res, next) => {
     if(!req.file) return next();

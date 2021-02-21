@@ -46,14 +46,23 @@ exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
 exports.createOrUpdateRestaurant = catchAsync(async (req, res, next) => {
     const id = req.body.id;
 
+    const data = {
+        name: req.body.name,
+        slogan: req.body.slogan,
+        deliveryTime: req.body.deliveryTime,
+        deliveryFee: req.body.deliveryFee,
+        specialOffers: req.body.specialOffers === "on" ?true :false
+    };
+
+    if(req.files) {
+        for(let i=0; i<req.files.length; i++) {
+            const file  = req.files[i];
+            data[file.fieldname] = file.filename;
+        }
+    }
+
     if (id === "0") {
-        const newRestaurant = await restaurantRepository.create({
-            name: req.body.name,
-            slogan: req.body.slogan,
-            deliveryTime: req.body.deliveryTime,
-            deliveryFee: req.body.deliveryFee,
-            specialOffers: req.body.specialOffers === "on" ?true :false
-        });
+        const newRestaurant = await restaurantRepository.create(data);
 
         const newMenu = await menuRepository.create({
             restaurant: newRestaurant._id
@@ -61,13 +70,7 @@ exports.createOrUpdateRestaurant = catchAsync(async (req, res, next) => {
 
         res.redirect(`/restaurants`);
     } else {
-        const updatedRestaurant = await restaurantRepository.update(id, {
-            name: req.body.name,
-            slogan: req.body.slogan,
-            deliveryTime: req.body.deliveryTime,
-            deliveryFee: req.body.deliveryFee,
-            specialOffers: req.body.specialOffers === "on" ?true :false
-        });
+        const updatedRestaurant = await restaurantRepository.update(id, data);
 
         res.redirect(`/restaurants/${id}`);
     }

@@ -19,7 +19,7 @@ block content
           .main-card.mb-3.mt-3.card
             .card-body
 
-              form(method='POST' action='/restaurants')
+              form(method='POST' action='/restaurants' enctype='multipart/form-data')
                 input#id(type='hidden' name='id' value=`${restaurant.id}`)
 
                 .position-relative.form-group
@@ -42,6 +42,22 @@ block content
                     label.form-check-label(for='specialOffers')
                         input#specialOffers.form-check-input(name='specialOffers' type='checkbox' checked=restaurant.specialOffers ? true : false)
                         | Special Offers
+                
+                .position-relative.form-group.mt-3
+                  label(for='image') Choose new image
+                  image.img-thumbnail(src=`/img/uploads/${restaurant.image}` alt=`${restaurant.name}`)
+                  .col-sm-10
+                    input#image.form-control-file(name='image' type='file' accept='image/*')
+                    small.form-text.text-muted
+                      | Image types supported (.jpg, .png, ...)
+
+                .position-relative.form-group
+                  label(for='logo') Choose new logo
+                  image.img-thumbnail(src=`/img/uploads/${restaurant.logo}` alt=`${restaurant.name}`)
+                  .col-sm-10
+                    input#logo.form-control-file(name='logo' type='file' accept='image/*')
+                    small.form-text.text-muted
+                      | Image types supported (.jpg, .png, ...)
 
 
                 .d-flex.justify-content-end.pt-3

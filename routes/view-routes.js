@@ -47,7 +47,8 @@ router.delete("/tags/:id", tagController.deleteTag);
 
 router.get("/restaurants", restaurantController.getRestaurantList);
 router.get("/restaurants/:id", restaurantController.getRestaurantDetailView);
-router.post("/restaurants", restaurantController.createOrUpdateRestaurant);
+router.post("/restaurants", uploadController.uploadImage,
+                            restaurantController.createOrUpdateRestaurant);
 router.delete("/restaurants/:id", restaurantController.deleteRestaurant);
 
 router.get("/restaurants/:id/menu", menuController.getRestaurantMenuView);
