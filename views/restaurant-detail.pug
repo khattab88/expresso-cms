@@ -44,6 +44,12 @@ block content
                         | Special Offers
                 
                 .position-relative.form-group.mt-3
+                  label(for='country') Category
+                  select#category.mb-2.form-control(name='category')
+                    each category in categoryList
+                      option(value=`${category._id}`)= category.name
+
+                .position-relative.form-group.mt-3
                   label(for='image') Choose new image
                   image.img-thumbnail(src=`/img/uploads/${restaurant.image}` alt=`${restaurant.name}`)
                   .col-sm-10
