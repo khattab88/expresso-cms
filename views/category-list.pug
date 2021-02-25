@@ -1,0 +1,37 @@
+extends base
+
+block content
+    
+    .row
+        .col
+
+            .app-page-title.mb-0.py-2
+                .page-title-wrapper.d-flex.justify-content-between
+                    h1= title
+                    a.btn.btn-lg.btn-success(href='/categories/new') Create New
+
+    .row
+        .col-lg-8
+
+            .main-card.mb-3.card.mt-3
+                .card-body
+                    table.mb-0.mt-0.table.table-striped.table-hover
+                        thead
+                            tr
+                                th #
+                                th Name
+                                th 
+                        tbody
+                            - var x = 0
+                            each category in categories
+                                tr
+                                    th(scope='row') #{++x}
+                                    td= category.name
+                                    td.text-center
+                                        .row-manage
+                                            .row-manage__btn: a(href=`/categories/${category.id}` data-id=`${category.id}`) Edit
+                                            .row-manage__separator: span |
+                                            .row-manage__btn: a.delete-btn.text-danger(data-type="categories" data-id=`${category.id}`) Delete
+
+block append scripts
+    script(src='/js/delete-list-item.js')

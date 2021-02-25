@@ -13,6 +13,7 @@ const areaController = require('../controllers/area-controller');
 const restaurantController = require('../controllers/restaurant-controller');
 const menuController = require('../controllers/menu-controller');
 const branchController = require('../controllers/branch-controller');
+const categoryController = require('../controllers/category-controller');
 
 const router = express.Router();
 
@@ -44,6 +45,11 @@ router.get("/tags", tagController.getTagListView);
 router.get("/tags/:id", tagController.getTagDetailView);
 router.post("/tags", tagController.createOrUpdateTag);
 router.delete("/tags/:id", tagController.deleteTag);
+
+router.get("/categories", categoryController.getCategoryListView);
+router.get("/categories/:id", categoryController.getCategoryDetailView);
+router.post("/categories", categoryController.createOrUpdateCategory);
+router.delete("/categories/:id", categoryController.deleteCategory);
 
 router.get("/restaurants", restaurantController.getRestaurantList);
 router.get("/restaurants/:id", restaurantController.getRestaurantDetailView);
