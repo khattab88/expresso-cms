@@ -12,31 +12,43 @@ class ImageHandler {
     }
 
     async saveImageAsBase64(fileName) {
-        const ext = fileName.split(".")[1];
-        const imgSrc = `${this.folderName}${fileName}`;
+        try {
+            const ext = fileName.split(".")[1];
+            const imgSrc = `${this.folderName}${fileName}`;
 
-        let imgDataUrl = await imageToBase64(imgSrc);
-        imgDataUrl = `data:image/${ext};base64,${imgDataUrl}`;
+            let imgDataUrl = await imageToBase64(imgSrc);
+            imgDataUrl = `data:image/${ext};base64,${imgDataUrl}`;
 
-        return imgDataUrl;
+            return imgDataUrl;
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     deleteImage(fileName) {
-        const file = `${this.folderName}${fileName}`;
+        try {
+            const file = `${this.folderName}${fileName}`;
 
-        fs.unlink(file, (err) => {
-            if (err) throw err;
+            fs.unlink(file, (err) => {
+                if (err) throw err;
 
-            // console.log(`${fileName} was deleted`);
-        });
+                // console.log(`${fileName} was deleted`);
+            });
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     deleteAllImages() {
-        const dir = fs.readdir(this.folderName, (err, files) => {
-            files.forEach(file => {
-                this.deleteImage(file);
+        try {
+            const dir = fs.readdir(this.folderName, (err, files) => {
+                files.forEach(file => {
+                    this.deleteImage(file);
+                });
             });
-        });
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
 
