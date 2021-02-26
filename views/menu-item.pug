@@ -1,6 +1,6 @@
 extends base
 
-mixin optionBox(option)
+mixin optionBox(menuItemId, option)
     .option-box
         .card
             .card-header(id=`heading-${option.id}`)
@@ -28,7 +28,7 @@ mixin optionBox(option)
                                             input.form-check-input(name=`${option.name}-type`, type='radio' checked=option.type=="Optional")
                                             | Optional
                         .col-md-6
-                            a(target="_blank" href=`/menuItems/f56b443e-0585-44bf-8323-85cd18b74110/menuItemOptions/${option.id}`) Edit
+                            a(target="_blank" href=`/menuItems/${menuItemId}/menuItemOptions/${option.id}`) Edit
 
                             //- .position-relative.form-group.mb-1
                                 //- label.font-weight-bold(for='optionItems') Option Items:
@@ -75,13 +75,13 @@ block content
                                 a.addNewOptionItemBtn.btn.btn-primary.text-white.float-right(href=`/menuItems/${menuItem.id}/menuItemOptions/new`) New Item Option
                             each option in menuItem.options
                                 #accordion.accordion-wrapper.mb-1
-                                    +optionBox(option)
+                                    +optionBox(menuItem.id ,option)
 
 
                         .position-relative.form-group
                             .d-flex.justify.align-items-center
                                 label(for='image') Choose new image
-                                image.img-thumbnail.w-50.ml-3(src=`/img/uploads/${menuItem.image}` alt=`${menuItem.name}`)
+                                image.img-thumbnail.w-50.ml-3(src=`${menuItem.image}` alt=`${menuItem.name}`)
                             .col-sm-10
                                 input#image.form-control-file(name='image' type='file' accept='image/*')
                                 small.form-text.text-muted

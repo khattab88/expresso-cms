@@ -34,7 +34,7 @@ block content
                        option= item
             .position-relative.form-group
               label(for='image') Choose new image
-              image.img-thumbnail(src=`/img/uploads/${country.image}` alt=`${country.name}`)
+              image.img-thumbnail(src=`${country.image}` alt=`${country.name}`)
               .col-sm-10
                 input#image.form-control-file(name='image' type='file' accept='image/*')
                 small.form-text.text-muted

@@ -4,6 +4,9 @@ const AppError = errorHandling.AppError;
 const { restaurantRepository, menuRepository, menuSectionRepository,
         menuItemRepository, menuItemOptionRepository, menuItemOptionItemRepository } = require("expresso-repositories");
 
+const imageHandler = require('../utils/image');
+
+
 exports.getRestaurantMenuView = catchAsync(async (req, res, next) => {
     const restaurantId = req.params.id;
     const restaurant = await restaurantRepository.getById(restaurantId);
@@ -105,8 +108,13 @@ exports.createOrUpdateMenuItem = catchAsync(async (req, res, next) => {
         menuSection: menuSection._id.toString()
     };
 
-    if (req.file) {
-        data.image = req.file.filename;
+    if (req.files[0]) {
+        const fileName = req.files[0].filename;
+        //encode image to base64
+        data.image = await imageHandler.saveImageAsBase64(fileName);
+
+        // delete image from uploads folder
+        imageHandler.deleteImage(fileName);
     }
 
     if (menuItemId === "0") {

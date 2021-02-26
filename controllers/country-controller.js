@@ -3,6 +3,9 @@ const { catchAsync, errorHandling } = require('expresso-utils');
 const AppError = errorHandling.AppError;
 const { countryRepository } = require("expresso-repositories");
 
+const imageHandler = require('../utils/image');
+
+
 exports.getCountryListView = catchAsync(async (req, res, next) => {
 
     const countries = await countryRepository.getAll();
@@ -49,9 +52,17 @@ exports.createOrUpdateCountry = catchAsync(async (req, res, next) => {
         currency: req.body.currency
     };
 
-    if (req.file) {
-        data.image = req.file.filename;
+    if (req.files[0]) {
+        const fileName = req.files[0].filename;
+
+        //encode image to base64
+        data.image = await imageHandler.saveImageAsBase64(fileName);
+
+        // delete image from uploads folder
+        imageHandler.deleteImage(fileName);
     }
+
+
 
     if (id === "0") {
         const newCountry = await countryRepository.create(data);

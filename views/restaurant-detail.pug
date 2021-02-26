@@ -51,7 +51,7 @@ block content
 
                 .position-relative.form-group.mt-3
                   label(for='image') Choose new image
-                  image.img-thumbnail(src=`/img/uploads/${restaurant.image}` alt=`${restaurant.name}`)
+                  image.img-thumbnail(src=`${restaurant.image}` alt=`${restaurant.name}`)
                   .col-sm-10
                     input#image.form-control-file(name='image' type='file' accept='image/*')
                     small.form-text.text-muted
@@ -59,7 +59,7 @@ block content
 
                 .position-relative.form-group
                   label(for='logo') Choose new logo
-                  image.img-thumbnail(src=`/img/uploads/${restaurant.logo}` alt=`${restaurant.name}`)
+                  image.img-thumbnail(src=`${restaurant.logo}` alt=`${restaurant.name}`)
                   .col-sm-10
                     input#logo.form-control-file(name='logo' type='file' accept='image/*')
                     small.form-text.text-muted

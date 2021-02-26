@@ -3,6 +3,8 @@ const { catchAsync, errorHandling } = require('expresso-utils');
 const AppError = errorHandling.AppError;
 const { categoryRepository, restaurantRepository, menuRepository } = require("expresso-repositories");
 
+const imageHandler = require('../utils/image');
+
 
 exports.getRestaurantList = catchAsync(async (req, res, next) => {
 
@@ -16,13 +18,13 @@ exports.getRestaurantList = catchAsync(async (req, res, next) => {
 
 exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
     const categoryList = (await categoryRepository.getAll())
-                            .map(category => {
-                                return {
-                                    id: category.id,
-                                    _id: category._id,
-                                    name: category.name
-                                };
-                            });
+        .map(category => {
+            return {
+                id: category.id,
+                _id: category._id,
+                name: category.name
+            };
+        });
 
     if (req.params.id === "new") {
         const emptyRestaurant = {
@@ -62,14 +64,19 @@ exports.createOrUpdateRestaurant = catchAsync(async (req, res, next) => {
         slogan: req.body.slogan,
         deliveryTime: req.body.deliveryTime,
         deliveryFee: req.body.deliveryFee,
-        specialOffers: req.body.specialOffers === "on" ?true :false,
+        specialOffers: req.body.specialOffers === "on" ? true : false,
         category: req.body.category
     };
 
-    if(req.files) {
-        for(let i=0; i<req.files.length; i++) {
-            const file  = req.files[i];
-            data[file.fieldname] = file.filename;
+    if (req.files) {
+        for (let i = 0; i < req.files.length; i++) {
+            const file = req.files[i];
+             
+            //encode image to base64
+            data[file.fieldname] = await imageHandler.saveImageAsBase64(file.filename);
+
+            // delete image from uploads folder
+            imageHandler.deleteImage(file.filename);
         }
     }
 

@@ -50,3 +50,7 @@ exports.resizeImage = (req, res, next) => {
 
     next();
 };
+
+exports.deleteImage = (req, res, next) => {
+    
+};
