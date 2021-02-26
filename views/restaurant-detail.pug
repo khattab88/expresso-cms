@@ -50,6 +50,16 @@ block content
                       option(value=`${category._id}`)= category.name
 
                 .position-relative.form-group.mt-3
+                  label(for='country') Tags
+                  input(id="tags" type='hidden' name='tags' value='')
+                  #tag-list.border.p-2.overflow-scroll
+                    each tag in tagList
+                      if tag.selected == true
+                        span.tag.tag--selected.badge.rounded-pill.bg-light.text-dark.m-1(data-id=`${tag.id}` data-name=`${tag.name}` data-selected="true")= tag.name
+                      else 
+                        span.tag.badge.rounded-pill.bg-light.text-dark.m-1(data-id=`${tag.id}` data-name=`${tag.name}`)= tag.name
+
+                .position-relative.form-group.mt-3
                   label(for='image') Choose new image
                   image.img-thumbnail(src=`${restaurant.image}` alt=`${restaurant.name}`)
                   .col-sm-10
@@ -69,3 +79,42 @@ block content
                 .d-flex.justify-content-end.pt-3
                     button.mt-1.mr-2.btn.btn-success Submit
                     a.mt-1.btn.btn-danger(href="/restaurants") Cancel
+
+block append scripts
+  script.
+    const tagListEl = document.querySelector("#tag-list");
+
+    function getSelected() {
+      const  selected = Array.from(tagListEl.querySelectorAll(".tag--selected"))
+                  .map(el => el.dataset["id"]);
+
+      // console.log(selected);
+
+      return selected;
+    }
+
+    function setSelected() {
+      const selectedStr = getSelected().join(",");
+
+      // console.log(selectedStr);
+
+      document.querySelector("#tags").value = selectedStr;
+    }
+
+    tagListEl.addEventListener("click", e => {
+      if(e.target.classList.contains("tag")) {
+        const tagEl = e.target;
+
+        const tag = {};
+        tag.id = tagEl.dataset["id"];
+        tag.name = tagEl.dataset["name"];
+
+        tagEl.classList.toggle("tag--selected");
+
+        setSelected();
+      };
+
+    });
+
+    // getSelected();
+    setSelected();

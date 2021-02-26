@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 const { catchAsync, errorHandling } = require('expresso-utils');
 const AppError = errorHandling.AppError;
-const { categoryRepository, restaurantRepository, menuRepository } = require("expresso-repositories");
+const { tagRepository, categoryRepository, restaurantRepository, menuRepository } = require("expresso-repositories");
 
 const imageHandler = require('../utils/image');
 
@@ -26,6 +26,14 @@ exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
             };
         });
 
+    let tagList = (await tagRepository.getAll())
+        .map(tag => {
+            return {
+                id: tag.id,
+                name: tag.name
+            };
+        })
+
     if (req.params.id === "new") {
         const emptyRestaurant = {
             id: 0,
@@ -39,6 +47,7 @@ exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
         res.status(200).render("restaurant-detail", {
             title: "New",
             categoryList,
+            tagList,
             restaurant: emptyRestaurant
         });
     } else {
@@ -48,9 +57,16 @@ exports.getRestaurantDetailView = catchAsync(async (req, res, next) => {
             return next(new AppError("There is no restaurant with that id!", 404));
         }
 
+        tagList.forEach(tag => {
+            if(Array.from(restaurant.tags).includes(tag.id)) {
+                tag.selected = true;
+            }
+        });
+
         res.status(200).render("restaurant-detail", {
             title: restaurant.name,
             categoryList,
+            tagList,
             restaurant
         });
     }
@@ -65,7 +81,8 @@ exports.createOrUpdateRestaurant = catchAsync(async (req, res, next) => {
         deliveryTime: req.body.deliveryTime,
         deliveryFee: req.body.deliveryFee,
         specialOffers: req.body.specialOffers === "on" ? true : false,
-        category: req.body.category
+        category: req.body.category,
+        tags: req.body.tags.split(",")
     };
 
     if (req.files) {

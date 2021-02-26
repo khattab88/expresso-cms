@@ -61,3 +61,11 @@ tr:hover {
 /* line 71, public/css/style.scss */
 .option-box .card-body {
   padding: .75rem 1.25rem .5rem 1.5rem; }
+
+/* line 79, public/css/style.scss */
+#tag-list .tag {
+  cursor: pointer; }
+  /* line 82, public/css/style.scss */
+  #tag-list .tag--selected {
+    background-color: #27F0AC !important;
+    color: #fff !important; }

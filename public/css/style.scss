@@ -72,3 +72,16 @@ tr:hover {
         padding: .75rem 1.25rem .5rem 1.5rem;
     }
 }
+
+#tag-list {
+    // display: flex;
+
+    .tag {
+        cursor: pointer;
+
+        &--selected {
+            background-color: #27F0AC !important;
+            color: #fff !important; 
+        }
+    }
+}
