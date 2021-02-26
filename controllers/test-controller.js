@@ -30,7 +30,7 @@ exports.test = catchAsync(async (req, res, next) => {
     // const dir = await imageHandler.deleteImage("1614284211786.png");
 
     /// DELETE ALL IMAGES (in uploads folder)
-    imageHandler.deleteAllImages();
+    //imageHandler.deleteAllImages();
 
     res.status(200).render("test", {
         // imgDataUrl

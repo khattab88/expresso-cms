@@ -58,6 +58,7 @@ exports.createOrUpdateCountry = catchAsync(async (req, res, next) => {
         //encode image to base64
         data.image = await imageHandler.saveImageAsBase64(fileName);
 
+        
         // delete image from uploads folder
         imageHandler.deleteImage(fileName);
     }
