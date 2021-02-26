@@ -34,7 +34,7 @@ block content
                                     td.d-none.d-md-table-cell.text-center= country.alias
                                     td.d-none.d-md-table-cell.text-center= country.slug
                                     td.text-center= country.currency
-                                    td.text-center: img.w-25(src=`/img/uploads/${country.image}`, alt=`${country.name}`)
+                                    td.text-center: img.w-25(src=`${country.image}`, alt=`${country.name}`)
                                     td.text-center
                                         .row-manage
                                             .row-manage__btn: a(href=`/countries/${country.id}` data-id=`${country.id}`) Edit

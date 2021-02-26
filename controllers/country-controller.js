@@ -55,9 +55,10 @@ exports.createOrUpdateCountry = catchAsync(async (req, res, next) => {
     if (req.files[0]) {
         const fileName = req.files[0].filename;
 
+        console.log(imageHandler.folderName);
+
         //encode image to base64
         data.image = await imageHandler.saveImageAsBase64(fileName);
-
         
         // delete image from uploads folder
         imageHandler.deleteImage(fileName);

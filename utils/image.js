@@ -27,7 +27,7 @@ class ImageHandler {
         fs.unlink(file, (err) => {
             if (err) throw err;
 
-            console.log(`${fileName} was deleted`);
+            // console.log(`${fileName} was deleted`);
         });
     }
 
