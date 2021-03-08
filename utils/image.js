@@ -13,7 +13,11 @@ class ImageHandler {
 
     async saveImageAsBase64(fileName) {
         try {
-            const ext = fileName.split(".")[1];
+            let ext = fileName.split(".")[1];
+
+            /// if svg image (.svg+xml), remove {+xml} part
+            ext = ext.replace("+xml", "");
+
             const imgSrc = `${this.folderName}${fileName}`;
 
             let imgDataUrl = await imageToBase64(imgSrc);

@@ -16,13 +16,22 @@ block content
           .main-card.mb-3.mt-3.card
             .card-body
 
-              form(method='POST', action='/categories')
+              form(method='POST', action='/categories' enctype='multipart/form-data')
                 input#id(type='hidden' name='id' value=`${category.id}`)
                 
                 .position-relative.form-group
                   label(for='name') Name
                   input#name.form-control(name='name' placeholder='Name' type='text' value=`${category.name}` required)
 
+                .position-relative.form-group
+                  label.mr-2(for='image') Choose new image
+                  image.img-thumbnail(src=`${category.image}` alt=`${category.name}` style='width:100px; height:100px; background-color: #009a9a;')
+                  //- .col-sm-10
+                  //-   input#image.form-control-file(name='image' type='file' accept='image/*')
+                  //-   small.form-text.text-muted
+                  //-     | Image types supported (.jpg, .png, ...)
+
+
                 .d-flex.justify-content-end.pt-3
                     button.mt-1.mr-2.btn.btn-success Submit
-                    a.mt-1.btn.btn-danger(href="/categories") Cancel
+                    a.mt-1.btn.btn-danger(href="/categories" enctype='multipart/form-data') Cancel

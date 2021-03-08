@@ -48,7 +48,7 @@ router.delete("/tags/:id", tagController.deleteTag);
 
 router.get("/categories", categoryController.getCategoryListView);
 router.get("/categories/:id", categoryController.getCategoryDetailView);
-router.post("/categories", categoryController.createOrUpdateCategory);
+router.post("/categories", uploadController.uploadImage, categoryController.createOrUpdateCategory);
 router.delete("/categories/:id", categoryController.deleteCategory);
 
 router.get("/restaurants", restaurantController.getRestaurantList);

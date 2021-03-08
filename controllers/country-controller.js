@@ -64,8 +64,7 @@ exports.createOrUpdateCountry = catchAsync(async (req, res, next) => {
         imageHandler.deleteImage(fileName);
     }
 
-
-
+    
     if (id === "0") {
         const newCountry = await countryRepository.create(data);
 
