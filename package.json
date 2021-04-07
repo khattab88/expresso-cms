@@ -31,7 +31,7 @@
     "express": "^4.17.1",
     "express-mongo-sanitize": "^2.0.0",
     "express-rate-limit": "^5.1.3",
-    "expresso-repositories": "^2.7.0",
+    "expresso-repositories": "^2.7.1",
     "expresso-services": "^2.1.0",
     "expresso-utils": "^1.2.0",
     "helmet": "^4.1.0",
